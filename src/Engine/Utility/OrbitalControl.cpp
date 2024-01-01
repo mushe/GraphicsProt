@@ -32,3 +32,10 @@ void OrbitalControl::Update(Camera& camera)
     );
     camera.transform_.rotation = -camera.transform_.position;
 }
+
+void OrbitalControl::SetOrbit(float theta, float phi, float radius)
+{
+	orbitalTheta = theta;
+	orbitalPhi = phi;
+	orbitalRadius = radius;
+}

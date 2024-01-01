@@ -4,4 +4,5 @@
 namespace OrbitalControl
 {
     void Update(Camera& camera);
+    void SetOrbit(float theta, float phi, float radius);
 }
