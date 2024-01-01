@@ -17,6 +17,52 @@ GraphicsProt is a simple and straightforward graphics prototyping(programming) f
 
 C++(19), [Vulkan](https://www.vulkan.org/), [GLFW](https://github.com/glfw/glfw), [ImGUI](https://github.com/ocornut/imgui), [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h), [glm](https://github.com/g-truc/glm)
 
+# Samples
+
+## Minimum Code
+![image](https://github.com/mushe/GraphicsProt/assets/26865534/af7f4c0c-8673-47ce-8c76-0b11312417b2)
+minimum code to draw .obj
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/01_Minimum
+- 3D model credit
+"Steven Universe House" by Zypheos : https://sketchfab.com/3d-models/steven-universe-house-ea77c49785fc4802b697bde0f7cfda8f
+
+---
+
+## Gerstner Waves
+
+![GIF 1-1-2024 11-32-54 PM](https://github.com/mushe/GraphicsProt/assets/26865534/a2ceeaff-14d0-46bf-90ce-20f1a58a5a45)
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/02_GerstnerWaves
+- Demo : https://www.youtube.com/watch?v=WFtOAE4n0-w
+
+Gerstner Waves is a famous algorithm that draws pseudo ocean
+
+- References
+
+(1) GPU Gems Chapter 1. Effective Water Simulation from Physical Models
+
+https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models
+
+(2) 【ポケットモンスター スカーレット・バイオレット】 パルデア地方を描き出す――見た目の仕組みを徹底解説！
+
+https://cedec.cesa.or.jp/2023/session/detail/s64242ce14adbf
+
+---
+
+## Post Process (Grayscale)
+![image](https://github.com/mushe/GraphicsProt/assets/26865534/56326ed8-e1cf-43c0-abee-7f4968bb7182)
+
+simple grayscale post process implementation
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/03_GrayScale
+
+- References
+
+(1) Grayscale - Wikipedia
+
+https://en.wikipedia.org/wiki/Grayscale
+
+
 # Usage Examples
 
 ## minimum code
@@ -151,48 +197,3 @@ float wheelVel = Input::MouseWheelDelta();
 Camera camera;
 OrbitalControl::Update(camera);
 ```
-
-# Samples
-
-## Minimum Code
-![image](https://github.com/mushe/GraphicsProt/assets/26865534/af7f4c0c-8673-47ce-8c76-0b11312417b2)
-minimum code to draw .obj
-- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/01_Minimum
-- 3D model credit
-"Steven Universe House" by Zypheos : https://sketchfab.com/3d-models/steven-universe-house-ea77c49785fc4802b697bde0f7cfda8f
-
----
-
-## Gerstner Waves
-
-![GIF 1-1-2024 11-32-54 PM](https://github.com/mushe/GraphicsProt/assets/26865534/a2ceeaff-14d0-46bf-90ce-20f1a58a5a45)
-
-- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/02_GerstnerWaves
-- Demo :
-
-Gerstner Waves is a famous algorithm that draws pseudo ocean
-
-- References
-
-(1) GPU Gems Chapter 1. Effective Water Simulation from Physical Models
-
-https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models
-
-(2) 【ポケットモンスター スカーレット・バイオレット】 パルデア地方を描き出す――見た目の仕組みを徹底解説！
-
-https://cedec.cesa.or.jp/2023/session/detail/s64242ce14adbf
-
----
-
-## Post Process (Grayscale)
-![image](https://github.com/mushe/GraphicsProt/assets/26865534/56326ed8-e1cf-43c0-abee-7f4968bb7182)
-
-simple grayscale post process implementation
-
-- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/03_GrayScale
-
-- References
-
-(1) Grayscale - Wikipedia
-
-https://en.wikipedia.org/wiki/Grayscale
