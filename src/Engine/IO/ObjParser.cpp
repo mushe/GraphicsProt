@@ -72,12 +72,6 @@ ObjData ObjParser::Parse(std::string objPath, int face)
                 iss2 >> p2; iss2.ignore(1); iss2 >> t2; iss2.ignore(1); iss2 >> n2;
                 iss3 >> p3; iss3.ignore(1); iss3 >> t3; iss3.ignore(1); iss3 >> n3;
 
-
-                if (positions[p1 - 1].y < 0.1f)
-                {
-                    continue;
-                }
-
                 indices.push_back(i);
                 indices.push_back(i + 1);
                 indices.push_back(i + 2);
@@ -109,13 +103,6 @@ ObjData ObjParser::Parse(std::string objPath, int face)
                 iss2 >> p2; iss2.ignore(1); iss2 >> t2; iss2.ignore(1); iss2 >> n2;
                 iss3 >> p3; iss3.ignore(1); iss3 >> t3; iss3.ignore(1); iss3 >> n3;
                 iss4 >> p4; iss4.ignore(1); iss4 >> t4; iss4.ignore(1); iss4 >> n4;
-
-
-                if (positions[p1 - 1].y < 0.1f)
-                {
-                    continue;
-                }
-
 
                 indices.push_back(i);
                 indices.push_back(i+1);

@@ -23,9 +23,9 @@ layout(location = 3) in vec4 inWorldPosition;
 
 layout(location = 0) out vec4 outColor;
 
-
 void main()
 {
     vec4 tex = texture(inSampler, vec2(inTexCoord.x, 1.0 - inTexCoord.y));
+    if(tex.a < 0.001) discard;
     outColor = tex;
 }
