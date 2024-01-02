@@ -60,7 +60,7 @@ ObjData ObjParser::Parse(std::string objPath, int face)
         {
             std::string v1, v2, v3;
             uint32_t p1, p2, p3;
-            uint32_t n1, n2, n3;
+            uint32_t n1 = 1, n2 = 1, n3 = 1;
             uint32_t t1, t2, t3;
             if (iss >> token >> v1 >> v2 >> v3)
             {
@@ -90,7 +90,7 @@ ObjData ObjParser::Parse(std::string objPath, int face)
         {
             std::string v1, v2, v3, v4;
 			uint32_t p1, p2, p3, p4;
-			uint32_t n1, n2, n3, n4;
+            uint32_t n1 = 1, n2 = 1, n3 = 1, n4 = 1;
 			uint32_t t1, t2, t3, t4;
             if (iss >> token >> v1 >> v2 >> v3 >> v4)
             {
