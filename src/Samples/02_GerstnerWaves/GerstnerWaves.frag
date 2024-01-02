@@ -73,7 +73,6 @@ void main()
 {
     // diffuse
     float diffuse = (dot(normalize(inNormal), normalize(ubo.lightDirection)) + 1.0) / 2.0;
-    diffuse = ( diffuse + 1.0 ) / 2.0;
 
     // specular
     vec3 reflection = -normalize(ubo.lightDirection + 2.0 * dot(inNormal, ubo.lightDirection) * inNormal);

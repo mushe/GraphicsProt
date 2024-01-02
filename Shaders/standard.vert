@@ -3,7 +3,7 @@
 layout(binding = 0)
 uniform UniformBufferObject
 {
-    float time;
+    float dummy;
 } ubo;
 
 layout(binding = 1)
@@ -37,8 +37,20 @@ void main()
     gl_Position = commonUBO.WVP * vec4(inPosition, 1.0);
     outPosition = gl_Position;
 
+    vec4 world = (commonUBO.W * vec4(inPosition, 1.0));
+    outWorldPosition = world / world.w;
+
     outTexCoord = inTexCoord;
-    outNormal = inNormal;
-    outTangent = inTangent;
-    outBiTangent = inBiTangent;
+
+    vec4 normal = commonUBO.W * vec4(inNormal, 1.0);
+    normal = normalize(normal / normal.w);
+    outNormal = normal.xyz;
+
+    vec4 tangent = commonUBO.W * vec4(inTangent, 1.0);
+    tangent = normalize(tangent / tangent.w);
+    outTangent = tangent.xyz;
+
+    vec4 bitangent = commonUBO.W * vec4(inBiTangent, 1.0);
+    bitangent = normalize(bitangent / bitangent.w);
+    outBiTangent = bitangent.xyz;
 }
