@@ -11,7 +11,7 @@ namespace OrbitalControl
 }
 
 // camera orbital control
-void OrbitalControl::Update(Camera& camera)
+void OrbitalControl::Update(Camera& camera,float thetaOffs, float phiOffs)
 {
     auto rightMouseDrag = Input::LeftMouseDrag();
     rightMouseVel += rightMouseDrag * 0.005f;
@@ -20,9 +20,9 @@ void OrbitalControl::Update(Camera& camera)
     wheelVel += -Input::MouseWheelDelta() * 0.2f;
     wheelVel *= 0.85f;
 
-    orbitalTheta += -rightMouseVel.y * 0.1f;
+    orbitalTheta += -rightMouseVel.y * 0.1f + thetaOffs;
     orbitalTheta = glm::clamp(orbitalTheta, 0.01f, 3.14f);
-    orbitalPhi += rightMouseVel.x * 0.1f;
+    orbitalPhi += rightMouseVel.x * 0.1f + phiOffs;
     orbitalRadius += wheelVel;
     camera.transform_.position = glm::vec3
     (
