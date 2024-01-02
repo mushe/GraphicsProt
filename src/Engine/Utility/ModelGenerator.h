@@ -11,7 +11,6 @@ struct ModelGeneratorData
 class ModelGenerator
 {
 public:
-    static ModelGeneratorData GenerateCube();
     static ModelGeneratorData GeneratePlane(int division = 1);
     static ModelGeneratorData GenerateDisplayQuad();
 };

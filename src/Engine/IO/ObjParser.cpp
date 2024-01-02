@@ -77,9 +77,34 @@ ObjData ObjParser::Parse(std::string objPath, int face)
                 indices.push_back(i + 2);
                 i += 3;
 
-                VertexData vertex1{ positions[p1 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n1 - 1], texCoords[t1 - 1] };
-                VertexData vertex2{ positions[p2 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n2 - 1], texCoords[t2 - 1] };
-                VertexData vertex3{ positions[p3 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n3 - 1], texCoords[t3 - 1] };
+                // pos, color, normal, tangent, bitangent, texCoord
+                VertexData vertex1
+                { 
+                    positions[p1 - 1], 
+                    glm::vec3(0.0, 0.0, 0.0), 
+                    normals[n1 - 1], 
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t1 - 1] 
+                };
+                VertexData vertex2
+                { 
+                    positions[p2 - 1], 
+                    glm::vec3(0.0, 0.0, 0.0), 
+                    normals[n2 - 1], 
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t2 - 1] 
+                };
+                VertexData vertex3
+                { 
+                    positions[p3 - 1], 
+                    glm::vec3(0.0, 0.0, 0.0), 
+                    normals[n3 - 1], 
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t3 - 1]
+                };
                 vertices.push_back(vertex1);
                 vertices.push_back(vertex2);
                 vertices.push_back(vertex3);
@@ -113,10 +138,43 @@ ObjData ObjParser::Parse(std::string objPath, int face)
                 indices.push_back(i+3);
                 i += 4;
 
-                VertexData vertex1{ positions[p1 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n1 - 1], texCoords[t1 - 1]};
-                VertexData vertex2{ positions[p2 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n2 - 1], texCoords[t2 - 1]};
-                VertexData vertex3{ positions[p3 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n3 - 1], texCoords[t3 - 1]};
-                VertexData vertex4{ positions[p4 - 1], glm::vec3(0.0, 0.0, 0.0), normals[n4 - 1], texCoords[t4 - 1]};
+                // pos, color, normal, tangent, bitangent, texCoord
+                VertexData vertex1
+                {
+                    positions[p1 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    normals[n1 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t1 - 1]
+                };
+                VertexData vertex2
+                {
+                    positions[p2 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    normals[n2 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t2 - 1]
+                };
+                VertexData vertex3
+                {
+                    positions[p3 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    normals[n3 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t3 - 1]
+                };
+                VertexData vertex4
+                {
+                    positions[p4 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    normals[n4 - 1],
+                    glm::vec3(0.0, 0.0, 0.0),
+                    glm::vec3(0.0, 0.0, 0.0),
+                    texCoords[t4 - 1]
+                };
                 vertices.push_back(vertex1);
                 vertices.push_back(vertex2);
                 vertices.push_back(vertex3);

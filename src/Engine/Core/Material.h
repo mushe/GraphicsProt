@@ -14,6 +14,10 @@ struct UniformBufferBase
 struct CommonUniformBuffer
 {
 	glm::mat4 WVP;
+	glm::mat4 VP;
+	glm::mat4 W;
+	glm::mat4 V;
+	glm::mat4 P;
 	float time;
 };
 
@@ -22,6 +26,8 @@ struct VertexData
 	glm::vec3 pos;
 	glm::vec3 color;
 	glm::vec3 normal;
+	glm::vec3 tangent;
+	glm::vec3 bitangent;
 	glm::vec2 texCoord;
 };
 

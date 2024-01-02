@@ -10,6 +10,10 @@ layout(binding = 1)
 uniform CommonUniformBufferObject
 {
     mat4 WVP;
+    mat4 VP;
+    mat4 W;
+    mat4 V;
+    mat4 P;
     float time;
 } commonUBO;
 

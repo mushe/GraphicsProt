@@ -247,7 +247,7 @@ void Material::CreateGraphicsPipeline()
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
 
-    std::array<VkVertexInputAttributeDescription, 4> attributeDescriptions{};
+    std::array<VkVertexInputAttributeDescription, 6> attributeDescriptions{};
     attributeDescriptions[0].binding = 0;
     attributeDescriptions[0].location = 0;
     attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
@@ -262,8 +262,16 @@ void Material::CreateGraphicsPipeline()
     attributeDescriptions[2].offset = offsetof(VertexData, normal);
     attributeDescriptions[3].binding = 0;
     attributeDescriptions[3].location = 3;
-    attributeDescriptions[3].format = VK_FORMAT_R32G32_SFLOAT;
-    attributeDescriptions[3].offset = offsetof(VertexData, texCoord);
+    attributeDescriptions[3].format = VK_FORMAT_R32G32B32_SFLOAT;
+    attributeDescriptions[3].offset = offsetof(VertexData, tangent);
+    attributeDescriptions[4].binding = 0;
+    attributeDescriptions[4].location = 4;
+    attributeDescriptions[4].format = VK_FORMAT_R32G32B32_SFLOAT;
+    attributeDescriptions[4].offset = offsetof(VertexData, bitangent);
+    attributeDescriptions[5].binding = 0;
+    attributeDescriptions[5].location = 5;
+    attributeDescriptions[5].format = VK_FORMAT_R32G32_SFLOAT;
+    attributeDescriptions[5].offset = offsetof(VertexData, texCoord);
 
     VkVertexInputBindingDescription bindingDescription{};
     bindingDescription.binding = 0;

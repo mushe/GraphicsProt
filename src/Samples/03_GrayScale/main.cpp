@@ -24,7 +24,7 @@ int main()
     (
         "renderToScreen.vert", "PP_GrayScale.frag",
         sizeof(PostProcessUBO),
-        { rt->GetColorTexture()}
+        { rt->GetColorTexture() }
     );
     PostProcessUBO ubo{};
     postProcessMat->SetUniformBufferData(&ubo);

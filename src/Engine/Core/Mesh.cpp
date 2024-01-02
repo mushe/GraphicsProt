@@ -105,6 +105,10 @@ void Mesh::Draw(const Camera& camera)
     time_ += 0.01f;
     material_->commonUBO_.time = time_;
     material_->commonUBO_.WVP = proj * view * world;
+    material_->commonUBO_.VP = proj * view;
+    material_->commonUBO_.W = world;
+    material_->commonUBO_.V = view;
+    material_->commonUBO_.P = proj;
 
     vkMapMemory(VulkanCore::GetDevice(), material_->commonUniformBufferMemory_, 0, sizeof(CommonUniformBuffer), 0, &material_->commonUniformBufferMapped_);
     memcpy(material_->commonUniformBufferMapped_, &material_->commonUBO_, sizeof(CommonUniformBuffer));
