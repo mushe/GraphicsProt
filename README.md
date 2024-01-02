@@ -81,6 +81,14 @@ floor texture is created at Test Grid Generator : https://wahooney.itch.io/textu
 
 https://github.com/mushe/UnrealVFXCollection/tree/main/Content/VFXCollections/Grass
 
+----
+
+## Normal Mapping from Texture (diffuse and specular)
+![image](https://github.com/mushe/GraphicsProt/assets/26865534/61cc17e5-70c7-4061-841d-36ff009bacf0)
+
+normal map texture is generated at https://cpetry.github.io/NormalMap-Online/
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/05_NormalMapping
 
 # Usage Examples
 
