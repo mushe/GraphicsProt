@@ -16,7 +16,7 @@ void VulkanCore::CallInit()
     InitCommandBuffers();
 }
 
-void VulkanCore::InitVulkanInstance()
+void VulkanCore::InitVulkanInstance(bool enableValidation)
 {
     VkInstanceCreateInfo createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -31,13 +31,11 @@ void VulkanCore::InitVulkanInstance()
     createInfo.ppEnabledExtensionNames = extensions.data();
 
     // validation layers
-    createInfo.enabledLayerCount = 0;
-    // todo enable validation layers
-    //const std::vector<const char*> validationLayers = {
-    //    "VK_LAYER_KHRONOS_validation"
-    //};
-    //createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-    //createInfo.ppEnabledLayerNames = validationLayers.data();
+    const std::vector<const char*> validationLayers = {
+        "VK_LAYER_KHRONOS_validation"
+    };
+    createInfo.enabledLayerCount = enableValidation  ? static_cast<uint32_t>(validationLayers.size()) : 0;
+    createInfo.ppEnabledLayerNames = enableValidation ? validationLayers.data() : nullptr;
 
     createInfo.pNext = nullptr;
     createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;

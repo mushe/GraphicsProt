@@ -93,7 +93,7 @@ private:
     ~VulkanCore(){}
     VulkanCore(const VulkanCore& other) {}
 
-    void InitVulkanInstance();
+    void InitVulkanInstance(bool enableValidation = false);
     void InitPhysicalDevice();
     void InitLogicalDevice();
     void InitRenderPass();
