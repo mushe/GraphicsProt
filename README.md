@@ -90,6 +90,14 @@ normal map texture is generated at https://cpetry.github.io/NormalMap-Online/
 
 - Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/05_NormalMapping
 
+----
+
+## Instancing
+![image](https://github.com/mushe/GraphicsProt/assets/26865534/15319254-48e9-4305-8828-32e25a306b94)
+
+Instancing is a standard technique for drawing many objects
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/06_Instancing
+
 # Usage Examples
 
 ## minimum code
