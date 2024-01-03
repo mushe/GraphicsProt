@@ -83,7 +83,7 @@ int main()
     bgMesh->SetRotation(glm::vec3(-1.57f, 0.0f, 0.0f));
     bgMesh->SetScale(glm::vec3(7.14f, 1.0f, 1.56f));
     auto tex = Texture::FromPNG("../Textures/ocean.png");
-    auto bgMat = Material::Create("standard.vert", "unlitTexture.frag", { tex });
+    auto bgMat = Material::Create("Standard.vert", "UnlitTexture.frag", { tex });
     bgMesh->SetMaterial(bgMat);
 
     Camera camera;

@@ -15,7 +15,7 @@ int main()
     auto tex = Texture::FromPNG("../Models/StevenUNiverseRoom/StevenUNiverseRoom.png");
 
     // create material by shader and texture
-    auto mat = Material::Create("standard.vert", "unlitTexture.frag", { tex });
+    auto mat = Material::Create("Standard.vert", "UnlitTexture.frag", { tex });
 
     // set material to mesh
     mesh->SetMaterial(mat);

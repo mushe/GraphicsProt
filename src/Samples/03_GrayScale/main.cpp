@@ -15,7 +15,7 @@ int main()
     mesh->SetRotation(glm::vec3(0));
     mesh->SetScale(glm::vec3(0.1f));
     auto tex = Texture::FromPNG("../Models/StevenUNiverseRoom/StevenUNiverseRoom.png");
-    auto mat = Material::Create("standard.vert", "unlitTexture.frag", { tex });
+    auto mat = Material::Create("Standard.vert", "UnlitTexture.frag", { tex });
     mesh->SetMaterial(mat);
 
     // post process

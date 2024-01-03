@@ -19,7 +19,7 @@ int main()
     floorMesh->SetRotation(glm::vec3(0, 0, 0));
     floorMesh->SetScale(glm::vec3(10.0f));
     auto floorTex = Texture::FromPNG("../Textures/grid.png");
-    auto floorMat = Material::Create("standard.vert", "unlitTexture.frag", { floorTex });
+    auto floorMat = Material::Create("Standard.vert", "UnlitTexture.frag", { floorTex });
     floorMesh->SetMaterial(floorMat);
 
 

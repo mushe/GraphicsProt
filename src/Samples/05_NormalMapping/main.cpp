@@ -28,7 +28,7 @@ int main()
     auto floorTex = Texture::FromPNG("../Textures/NormalMap.png");
     auto floorMat = Material::Create
     (
-        "standard.vert", "normalMap.frag", 
+        "Standard.vert", "NormalMap.frag", 
         sizeof(NormalMapUBO),
         { floorTex }
     );
