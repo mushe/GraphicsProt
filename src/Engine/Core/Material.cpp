@@ -8,6 +8,9 @@ void Material::Init()
     if(customUboBufferSize_ > 0)
         VulkanUtil::CreateBuffer(customUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, uniformBuffer_, uniformBufferMemory_);
 
+    if(instancingUboBufferSize_ > 0)
+        VulkanUtil::CreateBuffer(instancingUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, instancingUniformBuffer_, instancingUniformBufferMemory_);
+
     VulkanUtil::CreateBuffer(sizeof(CommonUniformBuffer), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, commonUniformBuffer_, commonUniformBufferMemory_);
 
     CreateDescriptorSetLayout();
@@ -20,6 +23,7 @@ shared_ptr<Material> Material::Create(MaterialInfo materialInfo)
 {
 	auto material = std::make_shared<Material>();
 	material->customUboBufferSize_ = materialInfo.customUiformBufferSize;
+    material->instancingUboBufferSize_ = materialInfo.instancingUiformBufferSize;
 
 	material->LoadShaders(materialInfo.vertShaderPath, materialInfo.fragShaderPath);
 

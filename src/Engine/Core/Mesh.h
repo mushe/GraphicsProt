@@ -36,7 +36,7 @@ public:
     }
 
 
-    void Draw(const Camera& camera);
+    void Draw(const Camera& camera, const int instanceCount = 1);
 
 
     static std::shared_ptr<Mesh> LoadFromObjFile(std::string filePath)

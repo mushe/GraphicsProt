@@ -23,8 +23,6 @@ struct CommonUniformBuffer
 
 struct InstancingUniformBufferBase
 {
-	glm::vec2 pos;
-	glm::vec2 scale;
 };
 
 struct VertexData
@@ -87,7 +85,9 @@ public:
 	void SetUniformBufferData(UniformBufferBase* ubo){ ubo_ = ubo; }
 	UniformBufferBase* GetUniformBuffer() { return ubo_; }
 	
-	void SetInstancingUboBufferSize(int size) { instancingUboBufferSize_ = size; }
+	int GetInstancingUboBufferSize() { return instancingUboBufferSize_; }
+	void SetInstancingUniformBuffer(InstancingUniformBufferBase* ubo) { instancingUboBase_ = ubo; }
+	InstancingUniformBufferBase* GetInstancingUniformBuffer() { return instancingUboBase_; }
 
 public:
 	VkBuffer uniformBuffer_;
@@ -116,6 +116,7 @@ private:
 	std::vector<std::shared_ptr<Texture>> textures_;
 	int maxFrames_ = 2;
 	UniformBufferBase* ubo_;
+	InstancingUniformBufferBase* instancingUboBase_;
 
 	VkShaderModule vertShaderModule_;
 	VkShaderModule fragShaderModule_;

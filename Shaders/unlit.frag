@@ -30,5 +30,5 @@ layout(location = 0) out vec4 outColor;
 
 void main()
 {
-    outColor = vec4(1,1,1,1);
+    outColor = vec4(inTexCoord.x, inTexCoord.y, 0, 1);
 }

@@ -77,13 +77,14 @@ void Mesh::CreateIndexBuffer()
     vkFreeMemory(VulkanCore::GetDevice(), tempBufferMemory, nullptr);
 }
 
-void Mesh::Draw(const Camera& camera)
+void Mesh::Draw(const Camera& camera, const int instanceCount)
 {
     VkCommandBuffer commandBuffer = VulkanCore::GetCurrentCommandBuffer();
 
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, material_->pipeline_);
 
 
+    // Update uniform buffer
     VkDeviceSize bufferSize = material_->GetUboBufferSize();
     if (bufferSize > 0)
     {
@@ -93,6 +94,7 @@ void Mesh::Draw(const Camera& camera)
     }
 
 
+    // Update common uniform buffer
     glm::mat4x4 view = glm::lookAt(camera.transform_.position, camera.transform_.position + camera.transform_.rotation, glm::vec3(0.0, 1.0, 0.0));
     glm::mat4x4 proj = glm::perspective(glm::radians(camera.fov_), camera.aspectRatio_, camera.near_, camera.far_);
     proj[1][1] *= -1;
@@ -115,6 +117,16 @@ void Mesh::Draw(const Camera& camera)
     vkUnmapMemory(VulkanCore::GetDevice(), material_->commonUniformBufferMemory_);
 
 
+    // Update instancing uniform buffer
+    bufferSize = material_->GetInstancingUboBufferSize();
+    if (bufferSize > 0)
+    {
+        vkMapMemory(VulkanCore::GetDevice(), material_->instancingUniformBufferMemory_, 0, bufferSize, 0, &material_->instancingUniformBufferMapped_);
+        memcpy(material_->instancingUniformBufferMapped_, material_->GetInstancingUniformBuffer(), bufferSize);
+        vkUnmapMemory(VulkanCore::GetDevice(), material_->instancingUniformBufferMemory_);
+    }
+
+
     // Draw
     VkBuffer vertexBuffers[] = { vertexBuffer_ };
     VkDeviceSize offsets[] = { 0 };
@@ -124,7 +136,7 @@ void Mesh::Draw(const Camera& camera)
 
     vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, material_->pipelineLayout_, 0, 1, &material_->descriptorSets_[VulkanCore::GetFrameIndex()], 0, nullptr);
 
-    vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices_.size()), 1, 0, 0, 0);
+    vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices_.size()), instanceCount, 0, 0, 0);
 }
 
 
