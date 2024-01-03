@@ -174,6 +174,11 @@ void Material::CreateDescriptorPool()
     commonPoolSize.descriptorCount = static_cast<uint32_t>(maxFrames_);
     poolSizes.push_back(commonPoolSize);
 
+    VkDescriptorPoolSize instancingPoolSize{};
+    instancingPoolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    instancingPoolSize.descriptorCount = static_cast<uint32_t>(maxFrames_);
+    poolSizes.push_back(instancingPoolSize);
+
     for (auto dummy : textures_)
     {
         VkDescriptorPoolSize imagePoolSize{};
