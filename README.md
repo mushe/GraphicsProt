@@ -15,7 +15,7 @@ GraphicsProt is a simple and straightforward graphics prototyping(programming) f
 
 # Dependencies
 
-C++(20), [Vulkan](https://www.vulkan.org/), [GLFW](https://github.com/glfw/glfw), [ImGUI](https://github.com/ocornut/imgui), [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h), [glm](https://github.com/g-truc/glm)
+C++(17), [Vulkan](https://www.vulkan.org/), [GLFW](https://github.com/glfw/glfw), [ImGUI](https://github.com/ocornut/imgui), [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h), [glm](https://github.com/g-truc/glm)
 
 # Samples
 
