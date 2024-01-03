@@ -13,8 +13,8 @@ class VulkanCore : public Singleton<VulkanCore>
 public:
     friend class Singleton<VulkanCore>;
     
-    static void Init();
-    void CallInit();
+    static void Init(bool enableValidation = false);
+    void CallInit(bool enableValidation = false);
     
     static VkInstance GetVulkanInstance()
 	{

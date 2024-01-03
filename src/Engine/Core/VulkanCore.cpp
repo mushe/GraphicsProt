@@ -1,13 +1,13 @@
 #include "VulkanCore.h"
 
-void VulkanCore::Init()
+void VulkanCore::Init(bool enableValidation)
 {
-	GetInstance()->CallInit();
+	GetInstance()->CallInit(enableValidation);
 }
 
-void VulkanCore::CallInit()
+void VulkanCore::CallInit(bool enableValidation)
 {
-	InitVulkanInstance();
+	InitVulkanInstance(enableValidation);
     InitPhysicalDevice();
     InitLogicalDevice();
 
@@ -25,7 +25,7 @@ void VulkanCore::InitVulkanInstance(bool enableValidation)
     const char** glfwExtensions;
     glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
     std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
-    extensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
+    extensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME); // comment out when using renderdoc
 
     createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
     createInfo.ppEnabledExtensionNames = extensions.data();
@@ -38,7 +38,7 @@ void VulkanCore::InitVulkanInstance(bool enableValidation)
     createInfo.ppEnabledLayerNames = enableValidation ? validationLayers.data() : nullptr;
 
     createInfo.pNext = nullptr;
-    createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+    createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR; // comment out when using renderdoc
 
     assert(vkCreateInstance(&createInfo, nullptr, &vulkanInstance_) == VK_SUCCESS);
 }

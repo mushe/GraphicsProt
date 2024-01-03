@@ -9,7 +9,7 @@ void Material::Init()
         VulkanUtil::CreateBuffer(customUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, uniformBuffer_, uniformBufferMemory_);
 
     if(instancingUboBufferSize_ > 0)
-        VulkanUtil::CreateBuffer(instancingUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, instancingUniformBuffer_, instancingUniformBufferMemory_);
+        VulkanUtil::CreateBuffer(instancingUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, instancingUniformBuffer_, instancingUniformBufferMemory_);
 
     VulkanUtil::CreateBuffer(sizeof(CommonUniformBuffer), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, commonUniformBuffer_, commonUniformBufferMemory_);
 
