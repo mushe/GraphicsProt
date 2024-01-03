@@ -57,7 +57,7 @@ public:
     }
 
     static shared_ptr<Engine> Create() { return std::make_shared<Engine>(); }
-    static shared_ptr<Engine> Init();
+    static shared_ptr<Engine> Init(const int windowWidth = 1920, const int windowHeight = 1080, const int windowPosX = 0, const int windowPosY = 50);
     void Run();
 
     float ElapsedTimeSeconds(){return 0.0;}
@@ -85,7 +85,7 @@ public:
 
     void BlitToRenderTarget(shared_ptr<Material> material, shared_ptr<RenderTarget> dest);
     void BlitToScreen(shared_ptr<Material> material);
-
+    void SetWindowPosition(const int windowPosx = 0, const int windowPosY = 50);
 
 // core
 private:
@@ -114,6 +114,8 @@ public:
 
     int windowWidth_ = 1920;
     int windowHeight_ = 1080;
+    int windowPosX_ = 0;
+    int windowPosY_ = 50;
     const int maxFrames_ = 2;
 
     GLFWwindow* window_;

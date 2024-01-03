@@ -2,9 +2,13 @@
 #include <cassert>
 #include <thread>
 
-shared_ptr<Engine> Engine::Init()
+shared_ptr<Engine> Engine::Init(const int windowWidth, const int windowHeight, const int windowPosX, const int windowPosY)
 {
     auto engine = Engine::Create();
+    engine->windowWidth_ = windowWidth;
+    engine->windowHeight_ = windowHeight;
+    engine->windowPosX_ = windowPosX;
+    engine->windowPosY_ = windowPosY;
     engine->Run();
     return engine;
 }
@@ -35,8 +39,7 @@ void Engine::InitWindow()
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     window_ = glfwCreateWindow(windowWidth_, windowHeight_, "GraphicsProt", nullptr, nullptr);
-    glfwSetWindowPos(window_, 100, 100);
-    glfwSetWindowPos(window_, 1300, 500);
+    glfwSetWindowPos(window_, windowPosX_, windowPosY_);
     glfwSetWindowUserPointer(window_, this);
     glfwSetFramebufferSizeCallback(window_, FrameBufferSizeCallback);
     glfwSetScrollCallback(window_, Input::MouseScrollCallback);
@@ -469,4 +472,9 @@ void Engine::BlitToScreen(shared_ptr<Material> material)
     quadMesh_->SetMaterial(material);
     quadMesh_->Draw(dummyCamera_);
     EndRenderToScreen();
+}
+
+void Engine::SetWindowPosition(const int windowPosx, const int windowPosY)
+{
+	glfwSetWindowPos(window_, windowPosx, windowPosY);
 }
