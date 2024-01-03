@@ -21,6 +21,12 @@ struct CommonUniformBuffer
 	float time;
 };
 
+struct InstancingUniformBufferBase
+{
+	glm::vec2 pos;
+	glm::vec2 scale;
+};
+
 struct VertexData
 {
 	glm::vec3 pos;
@@ -37,6 +43,7 @@ struct MaterialInfo
 	std::string vertShaderPath;
 	std::string fragShaderPath;
 	int customUiformBufferSize;
+	int instancingUiformBufferSize;
 	std::vector<shared_ptr<Texture>> textures;
 };
 
@@ -56,7 +63,12 @@ public:
 		shaderStages_{},
 		vertShaderModule_(VK_NULL_HANDLE),
 		fragShaderModule_(VK_NULL_HANDLE),
-		customUboBufferSize_(0)
+		customUboBufferSize_(0),
+		instancingUBO_(),
+		instancingUniformBuffer_(VK_NULL_HANDLE),
+		instancingUniformBufferMapped_(VK_NULL_HANDLE),
+		instancingUniformBufferMemory_(VK_NULL_HANDLE),
+		instancingUboBufferSize_(0)
 	{}
 	~Material() 
 	{
@@ -66,6 +78,7 @@ public:
 
 	static shared_ptr<Material> Create(MaterialInfo materialInfo);
 	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, std::vector<shared_ptr<Texture>> textures);
+	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, int instancingUniformBufferSize,  std::vector<shared_ptr<Texture>> textures);
 	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, std::vector<shared_ptr<Texture>> textures);
 	
 	int GetUboBufferSize() { return customUboBufferSize_; }
@@ -73,6 +86,8 @@ public:
 	std::vector<std::shared_ptr<Texture>> GetTextures() { return textures_; }
 	void SetUniformBufferData(UniformBufferBase* ubo){ ubo_ = ubo; }
 	UniformBufferBase* GetUniformBuffer() { return ubo_; }
+	
+	void SetInstancingUboBufferSize(int size) { instancingUboBufferSize_ = size; }
 
 public:
 	VkBuffer uniformBuffer_;
@@ -89,8 +104,14 @@ public:
 	VkDeviceMemory commonUniformBufferMemory_;
 	void* commonUniformBufferMapped_;
 
+	InstancingUniformBufferBase instancingUBO_;
+	VkBuffer instancingUniformBuffer_;
+	VkDeviceMemory instancingUniformBufferMemory_;
+	void* instancingUniformBufferMapped_;
+
 private:
 	int customUboBufferSize_;
+	int instancingUboBufferSize_;
 	VkPipelineShaderStageCreateInfo shaderStages_[2];
 	std::vector<std::shared_ptr<Texture>> textures_;
 	int maxFrames_ = 2;

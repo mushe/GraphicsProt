@@ -39,8 +39,20 @@ shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fr
     materialInfo.vertShaderPath = vertShaderPath;
     materialInfo.fragShaderPath = fragShaderPath;
     materialInfo.customUiformBufferSize = uiformBufferSize;
+    materialInfo.instancingUiformBufferSize = 0;
     materialInfo.textures = textures;
     return Create(materialInfo);
+}
+
+shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, int instancingUniformBufferSize, std::vector<shared_ptr<Texture>> textures)
+{
+	MaterialInfo materialInfo;
+	materialInfo.vertShaderPath = vertShaderPath;
+	materialInfo.fragShaderPath = fragShaderPath;
+	materialInfo.customUiformBufferSize = uiformBufferSize;
+	materialInfo.instancingUiformBufferSize = instancingUniformBufferSize;
+	materialInfo.textures = textures;
+	return Create(materialInfo);
 }
 
 shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fragShaderPath, std::vector<shared_ptr<Texture>> textures)
@@ -49,6 +61,7 @@ shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fr
     materialInfo.vertShaderPath = vertShaderPath;
     materialInfo.fragShaderPath = fragShaderPath;
     materialInfo.customUiformBufferSize = 0;
+    materialInfo.instancingUiformBufferSize = 0;
     materialInfo.textures = textures;
     return Create(materialInfo);
 }
@@ -116,10 +129,18 @@ void Material::CreateDescriptorSetLayout()
     commonUboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
     bindings.push_back(commonUboLayoutBinding);
 
+    VkDescriptorSetLayoutBinding instancingUboLayoutBinding{};
+    instancingUboLayoutBinding.binding = 2;
+    instancingUboLayoutBinding.descriptorCount = 1;
+    instancingUboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    instancingUboLayoutBinding.pImmutableSamplers = nullptr;
+    instancingUboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
+    bindings.push_back(instancingUboLayoutBinding);
+
     for (int i = 0; i < textures_.size(); i++)
     {
         VkDescriptorSetLayoutBinding samplerLayoutBinding{};
-        samplerLayoutBinding.binding = 2 + i;
+        samplerLayoutBinding.binding = 3 + i;
         samplerLayoutBinding.descriptorCount = 1;
         samplerLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
         samplerLayoutBinding.pImmutableSamplers = nullptr;
@@ -213,6 +234,23 @@ void Material::CreateDescriptorSets()
         commonUboDescriptorWrite.pBufferInfo = &commonBufferInfo;
         descriptorWrites.push_back(commonUboDescriptorWrite);
 
+        if (instancingUboBufferSize_ > 0)
+        {
+            VkDescriptorBufferInfo bufferInfo{};
+            bufferInfo.buffer = instancingUniformBuffer_;
+            bufferInfo.offset = 0;
+            bufferInfo.range = instancingUboBufferSize_;
+            VkWriteDescriptorSet uboDescriptorWrite{};
+            uboDescriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            uboDescriptorWrite.dstSet = descriptorSets_[i];
+            uboDescriptorWrite.dstBinding = 2;
+            uboDescriptorWrite.dstArrayElement = 0;
+            uboDescriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            uboDescriptorWrite.descriptorCount = 1;
+            uboDescriptorWrite.pBufferInfo = &bufferInfo;
+            descriptorWrites.push_back(uboDescriptorWrite);
+        }
+
         std::vector<VkDescriptorImageInfo> imageInfos;
         for (int j = 0; j < textures_.size(); j++)
         {
@@ -228,7 +266,7 @@ void Material::CreateDescriptorSets()
             VkWriteDescriptorSet textureDescriptorWrite{};
             textureDescriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
             textureDescriptorWrite.dstSet = descriptorSets_[i];
-            textureDescriptorWrite.dstBinding = j + 2;
+            textureDescriptorWrite.dstBinding = j + 3;
             textureDescriptorWrite.dstArrayElement = 0;
             textureDescriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
             textureDescriptorWrite.descriptorCount = 1;

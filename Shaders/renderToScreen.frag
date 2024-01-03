@@ -17,7 +17,7 @@ uniform CommonUniformBufferObject
     float time;
 } commonUBO;
 
-layout(binding = 2) uniform sampler2D inSampler;
+layout(binding = 3) uniform sampler2D inSampler;
 
 layout(location = 0) in vec2 inTexCoord;
 
