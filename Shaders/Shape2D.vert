@@ -26,7 +26,7 @@ struct InstancingParameter
 layout(binding = 2)
 uniform InstancingUniformBufferObject
 {
-    InstancingParameter params[];
+    InstancingParameter params[1];
 } instancingUBO;
 
 

@@ -30,6 +30,7 @@
 #include "Utility/Singleton.h"
 #include "Utility/ModelGenerator.h"
 #include "Utility/OrbitalControl.h"
+#include "Utility/ShapeDrawer.h"
 
 class Engine
 {
@@ -47,7 +48,8 @@ public:
         depthImageMemory_(VK_NULL_HANDLE),
         depthImageView_(VK_NULL_HANDLE),
         renderTextureFrameBuffer_(VK_NULL_HANDLE),
-        imGuiWrapper(ImGuiWrapper())
+        imGuiWrapper(ImGuiWrapper()),
+        elapsedTimeSeconds_(0.0f)
     {
     }
 
@@ -60,7 +62,7 @@ public:
     static shared_ptr<Engine> Init(const int windowWidth = 1920, const int windowHeight = 1080, const int windowPosX = 0, const int windowPosY = 50);
     void Run();
 
-    float ElapsedTimeSeconds(){return 0.0;}
+    float ElapsedTimeSeconds(){return elapsedTimeSeconds_;}
     float FPS(){return 0.0;}
     void WaitForFrame(float fps){}
     void Blit(RenderTexture *dest, RenderTexture *src, Material *material){}
@@ -158,4 +160,6 @@ public:
     // quad mesh for screen rendering
     std::shared_ptr<Mesh> quadMesh_;
     Camera dummyCamera_;
+
+    float elapsedTimeSeconds_ = 0.0f;
 };

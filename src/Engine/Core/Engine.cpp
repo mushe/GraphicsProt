@@ -32,6 +32,8 @@ void Engine::Run()
 
     InitRenderTexture();
     InitQuadMesh();
+
+    ShapeDrawer::Init();
 }
 
 void Engine::InitWindow()
@@ -116,6 +118,7 @@ void Engine::FixFPS(const int waitFPS)
     const std::chrono::milliseconds FRAME_DURATION(1000 / waitFPS);
 
     endTime_ = std::chrono::system_clock::now();
+    
     auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime_ - startTime_);
 
     while (frameTime < FRAME_DURATION) 
@@ -168,10 +171,14 @@ void Engine::BeginRenderToScreen()
     scissor.offset = { 0, 0 };
     scissor.extent = swapChainExtent_;
     vkCmdSetScissor(VulkanCore::GetCurrentCommandBuffer(), 0, 1, &scissor);
+
+    ShapeDrawer::OnBeginRenderToScreen();
 }
 
 void Engine::EndRenderToScreen()
 {
+    ShapeDrawer::OnEndRenderToScreen();
+
     vkCmdEndRenderPass(VulkanCore::GetCurrentCommandBuffer());
 }
 
