@@ -1,8 +1,7 @@
 #pragma once
-#include <vulkan/vulkan.hpp>
 #include <vector>
-#include <glm/glm.hpp>
 
+#include "Core/Common.h"
 #include "Core/VulkanCore.h"
 #include "Core/Texture.h"
 
@@ -27,12 +26,12 @@ struct InstancingUniformBufferBase
 
 struct VertexData
 {
-	glm::vec3 pos;
-	glm::vec3 color;
-	glm::vec3 normal;
-	glm::vec3 tangent;
-	glm::vec3 bitangent;
-	glm::vec2 texCoord;
+	Vec3 pos;
+	Vec3 color;
+	Vec3 normal;
+	Vec3 tangent;
+	Vec3 bitangent;
+	Vec2 texCoord;
 };
 
 

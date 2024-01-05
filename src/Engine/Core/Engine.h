@@ -1,17 +1,12 @@
 #pragma once
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-
 #include <stdio.h>
 #include <cassert>
 #include <functional>
 #include <chrono>
 #include <thread>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/euler_angles.hpp>
 
+#include "Core/Common.h"
 #include "Core/Camera.h"
 #include "Core/Mesh.h"
 #include "Core/Material.h"

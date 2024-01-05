@@ -14,19 +14,19 @@ void GUI::FloatSlider(float& value, string label, float min, float max)
 	GUI::GetInstance()->parameters_[label] = value;
 }
 
-void GUI::Vector(glm::vec2& v, const string label, float speed)
+void GUI::Vector(Vec2& v, const string label, float speed)
 {
 	ImGui::DragFloat2(label.c_str(), (float*)&v, speed);
 	GUI::GetInstance()->parameters_[label] = v;
 }
 
-void GUI::Vector(glm::vec3& v, const string label, float speed)
+void GUI::Vector(Vec3& v, const string label, float speed)
 {
 	ImGui::DragFloat3(label.c_str(), (float*)&v, speed);
 	GUI::GetInstance()->parameters_[label] = v;
 }
 
-void GUI::VectorSlider(glm::vec3& v, const string label, float min, float max)
+void GUI::VectorSlider(Vec3& v, const string label, float min, float max)
 {
 	ImGui::SliderFloat3(label.c_str(), (float*)&v, min, max);
 	GUI::GetInstance()->parameters_[label] = v;
@@ -37,13 +37,13 @@ void GUI::Label(string text)
 	ImGui::Text(text.c_str());
 }
 
-void GUI::Color(const glm::vec3& color, const string label)
+void GUI::Color(const Vec3& color, const string label)
 {
 	ImGui::ColorEdit4(label.c_str(), (float*)&color);
 	GUI::GetInstance()->parameters_[label] = color;
 }
 
-void GUI::Color(const glm::vec4& color, const string label)
+void GUI::Color(const Vec4& color, const string label)
 {
 	ImGui::ColorEdit4(label.c_str(), (float*)&color);
 	GUI::GetInstance()->parameters_[label] = color;
@@ -95,17 +95,17 @@ void GUI::CallPrintParameters()
 			{
 				Debug::Log("float " + p.first + " = " + std::to_string(arg) + ";");
 			}
-			else if constexpr (std::is_same_v<T, glm::vec2>)
+			else if constexpr (std::is_same_v<T, Vec2>)
 			{
-				Debug::Log("glm::vec2 " + p.first + " = glm::vec2(" + std::to_string(arg.x) + "," + std::to_string(arg.y) + ");");
+				Debug::Log("Vec2 " + p.first + " = Vec2(" + std::to_string(arg.x) + "," + std::to_string(arg.y) + ");");
 			}
-			else if constexpr (std::is_same_v<T, glm::vec3>)
+			else if constexpr (std::is_same_v<T, Vec3>)
 			{
-				Debug::Log("glm::vec3 " + p.first + " = glm::vec3(" + std::to_string(arg.x) + "," + std::to_string(arg.y) + "," + std::to_string(arg.z) + ");");
+				Debug::Log("Vec3 " + p.first + " = Vec3(" + std::to_string(arg.x) + "," + std::to_string(arg.y) + "," + std::to_string(arg.z) + ");");
 			}
-			else if constexpr (std::is_same_v<T, glm::vec4>)
+			else if constexpr (std::is_same_v<T, Vec4>)
 			{
-				Debug::Log("glm::vec4 " + p.first + " = glm::vec4(" + std::to_string(arg.x) + "," + std::to_string(arg.y) + "," + std::to_string(arg.z) + "," + std::to_string(arg.w) + ");");
+				Debug::Log("Vec4 " + p.first + " = Vec4(" + std::to_string(arg.x) + "," + std::to_string(arg.y) + "," + std::to_string(arg.z) + "," + std::to_string(arg.w) + ");");
 			}
 		}, p.second);
 

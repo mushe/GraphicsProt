@@ -2,10 +2,10 @@
 
 ModelGeneratorData ModelGenerator::GeneratePlane(int division)
 {
-    glm::vec3 color = { 0.0f, 0.0f, 0.0f };
-    glm::vec3 normal = { 0.0f, 1.0f, 0.0f };
-    glm::vec3 tangent = { 1.0f, 0.0f, 0.0f };
-    glm::vec3 bitangent = { 0.0f, 0.0f, 1.0f };
+    Vec3 color = { 0.0f, 0.0f, 0.0f };
+    Vec3 normal = { 0.0f, 1.0f, 0.0f };
+    Vec3 tangent = { 1.0f, 0.0f, 0.0f };
+    Vec3 bitangent = { 0.0f, 0.0f, 1.0f };
 
     float gridScale = 1.0f / (float)division;
     std::vector<VertexData> vertices;

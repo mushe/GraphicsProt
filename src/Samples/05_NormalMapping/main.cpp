@@ -2,13 +2,13 @@
 
 struct NormalMapUBO :public UniformBufferBase
 {
-    glm::vec3 lightDir = glm::vec3(0.85f, 2.2f, 3.67f);
+    Vec3 lightDir = Vec3(0.85f, 2.2f, 3.67f);
     float diffuseIntensity = 0.12f;
 
-    glm::vec3 baseColor = glm::vec3(0.0f, 0.0f, 0.0f);
+    Vec3 baseColor = Vec3(0.0f, 0.0f, 0.0f);
     float diffusePower = 1.0f;
 
-    glm::vec3 cameraPos = glm::vec3(0.0f, 0.0, 0.0);
+    Vec3 cameraPos = Vec3(0.0f, 0.0, 0.0);
     float specularIntensity = 0.48f;
   
     float specularPower = 5.6f;
@@ -23,8 +23,8 @@ int main()
     floorMesh->SetIndices(plane.indices);
     floorMesh->SetVertices(plane.vertices);
     floorMesh->Init();
-    floorMesh->SetRotation(glm::vec3(0, 0, 0));
-    floorMesh->SetScale(glm::vec3(10.0f));
+    floorMesh->SetRotation(Vec3(0, 0, 0));
+    floorMesh->SetScale(Vec3(10.0f));
     auto floorTex = Texture::FromPNG("../Textures/NormalMap.png");
     auto floorMat = Material::Create
     (
@@ -39,7 +39,7 @@ int main()
     Camera camera;
     OrbitalControl::Update(camera);
 
-    glm::vec3 meshRotation = glm::vec3(0, 0, 0);
+    Vec3 meshRotation = Vec3(0, 0, 0);
 
     while (engine->Running())
     {

@@ -95,7 +95,7 @@ void Mesh::Draw(const Camera& camera, const int instanceCount)
 
 
     // Update common uniform buffer
-    glm::mat4x4 view = glm::lookAt(camera.transform_.position, camera.transform_.position + camera.transform_.rotation, glm::vec3(0.0, 1.0, 0.0));
+    glm::mat4x4 view = glm::lookAt(camera.transform_.position, camera.transform_.position + camera.transform_.rotation, Vec3(0.0, 1.0, 0.0));
     glm::mat4x4 proj = glm::perspective(glm::radians(camera.fov_), camera.aspectRatio_, camera.near_, camera.far_);
     proj[1][1] *= -1;
 

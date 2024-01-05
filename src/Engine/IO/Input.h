@@ -1,10 +1,6 @@
 #pragma once
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-
-#include <glm/glm.hpp>
-
+#include "Core/Common.h"
 #include "Utility/Singleton.h"
 #include "Utility/Debug.h"
 
@@ -31,8 +27,8 @@ class Input : public Singleton<Input>
 private:
     GLFWwindow* window_;
     float wheelDelta_ = 0.0f;
-    glm::vec2 mousePosition_ = glm::vec2(0.0f, 0.0f);
-    glm::vec2 mousePositionDelta_ = glm::vec2(0.0f, 0.0f);
+    Vec2 mousePosition_ = Vec2(0.0f, 0.0f);
+    Vec2 mousePositionDelta_ = Vec2(0.0f, 0.0f);
     bool rightMouseDown_ = false;
     bool leftMouseDown_ = false;
 
@@ -67,13 +63,13 @@ public:
             GetInstance()->leftMouseDown_ = false;
     }
 
-    static glm::vec2 RightMouseDrag();
-    static glm::vec2 LeftMouseDrag();
+    static Vec2 RightMouseDrag();
+    static Vec2 LeftMouseDrag();
 
     static void MouseCursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
     {
-        Input::GetInstance()->mousePositionDelta_ = glm::vec2((float)xpos, (float)ypos) - Input::GetInstance()->mousePosition_;
-        Input::GetInstance()->mousePosition_ = glm::vec2((float)xpos, (float)ypos);
+        Input::GetInstance()->mousePositionDelta_ = Vec2((float)xpos, (float)ypos) - Input::GetInstance()->mousePosition_;
+        Input::GetInstance()->mousePosition_ = Vec2((float)xpos, (float)ypos);
     }
 
 

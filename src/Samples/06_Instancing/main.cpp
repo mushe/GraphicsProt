@@ -7,7 +7,7 @@ struct CustomUBO :public UniformBufferBase
 
 struct InstancingBuffer : InstancingUniformBufferBase
 {
-    glm::vec3 pos = glm::vec3(0);
+    Vec3 pos = Vec3(0);
     float scale = 1.0f;
 };
 
@@ -36,7 +36,7 @@ int main()
     float scaleMax = 0.2f;
     for (int i = 0; i < instanceCount; ++i)
     {
-        instancingBuffer[i].pos = glm::vec3
+        instancingBuffer[i].pos = Vec3
         (
             Random::Range(-posRange, posRange),
             Random::Range(-posRange, posRange),

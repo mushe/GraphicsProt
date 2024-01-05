@@ -11,9 +11,9 @@ int main()
 
     // mesh
     auto mesh = Mesh::FromOBJ("../Models/StevenUNiverseRoom/StevenUNiverseRoom.obj");
-    mesh->SetPosition(glm::vec3(0, -1.0f, 0));
-    mesh->SetRotation(glm::vec3(0));
-    mesh->SetScale(glm::vec3(0.1f));
+    mesh->SetPosition(Vec3(0, -1.0f, 0));
+    mesh->SetRotation(Vec3(0));
+    mesh->SetScale(Vec3(0.1f));
     auto tex = Texture::FromPNG("../Models/StevenUNiverseRoom/StevenUNiverseRoom.png");
     auto mat = Material::Create("Standard.vert", "UnlitTexture.frag", { tex });
     mesh->SetMaterial(mat);

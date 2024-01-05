@@ -2,16 +2,16 @@
 
 struct GerstnerWaveUBO :public UniformBufferBase
 {
-    glm::vec3 waveColor = glm::vec3(0.016f, 0.027f, 0.067f);
+    Vec3 waveColor = Vec3(0.016f, 0.027f, 0.067f);
     float diffusePower = 1.0f;
 
-    glm::vec3 lightDirection = glm::vec3(3.93f, 0.96f, -0.37f);
+    Vec3 lightDirection = Vec3(3.93f, 0.96f, -0.37f);
     float diffuseMultiply = 0.068f;
 
-    glm::vec3 lightColor = glm::vec3(1.0f, 0.74f, 0.22f);
+    Vec3 lightColor = Vec3(1.0f, 0.74f, 0.22f);
     float specularPower = 30.29f;
 
-    glm::vec3 cameraPos = glm::vec3(1);
+    Vec3 cameraPos = Vec3(1);
     float specularMultiply = 0.118f;
 
     float sunSpread = 0.14f;
@@ -19,7 +19,7 @@ struct GerstnerWaveUBO :public UniformBufferBase
     float dummy1 = 1.0f;
     float dummy2 = 1.0f;
 
-    glm::vec3 sunColor = glm::vec3(0.60f, 0.32f, 0.0f);
+    Vec3 sunColor = Vec3(0.60f, 0.32f, 0.0f);
     float sunIntensity = 16.0f;
 
     float waveHeight_1 = 0.001f;
@@ -42,11 +42,11 @@ struct GerstnerWaveUBO :public UniformBufferBase
     float waveSpeed_5 = 3.24f;
     float dummy = 1.0f;
 
-    glm::vec2 waveDirection_1 = glm::vec2(1.0f, 0.24f);
-    glm::vec2 waveDirection_2 = glm::vec2(0.82f, 0.97f);
-    glm::vec2 waveDirection_3 = glm::vec2(1.0f, -1.62f);
-    glm::vec2 waveDirection_4 = glm::vec2(1.23f, 3.52f);
-    glm::vec2 waveDirection_5 = glm::vec2(3.13f, 2.80f);
+    Vec2 waveDirection_1 = Vec2(1.0f, 0.24f);
+    Vec2 waveDirection_2 = Vec2(0.82f, 0.97f);
+    Vec2 waveDirection_3 = Vec2(1.0f, -1.62f);
+    Vec2 waveDirection_4 = Vec2(1.23f, 3.52f);
+    Vec2 waveDirection_5 = Vec2(3.13f, 2.80f);
 };
 
 int main()
@@ -60,9 +60,9 @@ int main()
     waveMesh->SetIndices(wavePlane.indices);
     waveMesh->SetVertices(wavePlane.vertices);
     waveMesh->Init();
-    waveMesh->SetPosition(glm::vec3(-0.2f, 0.45f, 0.0f));
-    waveMesh->SetRotation(glm::vec3(0.285f, 0.0f, 0.0f));
-    waveMesh->SetScale(glm::vec3(4.22f, 1.0f, 4.28f));
+    waveMesh->SetPosition(Vec3(-0.2f, 0.45f, 0.0f));
+    waveMesh->SetRotation(Vec3(0.285f, 0.0f, 0.0f));
+    waveMesh->SetScale(Vec3(4.22f, 1.0f, 4.28f));
     auto waveMat = Material::Create
     (
         "GerstnerWaves.vert", "GerstnerWaves.frag",
@@ -79,16 +79,16 @@ int main()
     bgMesh->SetIndices(bgPlane.indices);
     bgMesh->SetVertices(bgPlane.vertices);
     bgMesh->Init();
-    bgMesh->SetPosition(glm::vec3(0.20f, 1.53f, -1.46f));
-    bgMesh->SetRotation(glm::vec3(-1.57f, 0.0f, 0.0f));
-    bgMesh->SetScale(glm::vec3(7.14f, 1.0f, 1.56f));
+    bgMesh->SetPosition(Vec3(0.20f, 1.53f, -1.46f));
+    bgMesh->SetRotation(Vec3(-1.57f, 0.0f, 0.0f));
+    bgMesh->SetScale(Vec3(7.14f, 1.0f, 1.56f));
     auto tex = Texture::FromPNG("../Textures/ocean.png");
     auto bgMat = Material::Create("Standard.vert", "UnlitTexture.frag", { tex });
     bgMesh->SetMaterial(bgMat);
 
     Camera camera;
-    camera.transform_.position = glm::vec3(0.0f, 0.0f, 1.91f);
-    camera.transform_.rotation = glm::vec3(0.0f, 0.0f, -1.0f);
+    camera.transform_.position = Vec3(0.0f, 0.0f, 1.91f);
+    camera.transform_.rotation = Vec3(0.0f, 0.0f, -1.0f);
 
     while (engine->Running())
     {

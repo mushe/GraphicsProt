@@ -10,7 +10,7 @@ void Input::Init(GLFWwindow* window)
 void Input::Update()
 {
 	wheelDelta_ = 0.0f;
-	mousePositionDelta_ = glm::vec2(0.0f);
+	mousePositionDelta_ = Vec2(0.0f);
 }
 
 bool Input::KeyDown(KeyCode keyCode)
@@ -31,12 +31,12 @@ float Input::MouseWheelDelta_Call()
 	return wheelDelta_;
 }
 
-glm::vec2 Input::RightMouseDrag()
+Vec2 Input::RightMouseDrag()
 {
-	return GetInstance()->rightMouseDown_ ? GetInstance()->mousePositionDelta_ : glm::vec2(0.0f);
+	return GetInstance()->rightMouseDown_ ? GetInstance()->mousePositionDelta_ : Vec2(0.0f);
 }
 
-glm::vec2 Input::LeftMouseDrag()
+Vec2 Input::LeftMouseDrag()
 {
-    return GetInstance()->leftMouseDown_ ? GetInstance()->mousePositionDelta_ : glm::vec2(0.0f);
+    return GetInstance()->leftMouseDown_ ? GetInstance()->mousePositionDelta_ : Vec2(0.0f);
 }

@@ -16,8 +16,8 @@ int main()
     floorMesh->SetIndices(plane.indices);
     floorMesh->SetVertices(plane.vertices);
     floorMesh->Init();
-    floorMesh->SetRotation(glm::vec3(0, 0, 0));
-    floorMesh->SetScale(glm::vec3(10.0f));
+    floorMesh->SetRotation(Vec3(0, 0, 0));
+    floorMesh->SetScale(Vec3(10.0f));
     auto floorTex = Texture::FromPNG("../Textures/grid.png");
     auto floorMat = Material::Create("Standard.vert", "UnlitTexture.frag", { floorTex });
     floorMesh->SetMaterial(floorMat);
@@ -31,9 +31,9 @@ int main()
     for (int i = 0; i < 200; i++)
     {
         auto mesh = Mesh::FromOBJ("../Models/Grass/Grass.obj", 4);
-        mesh->SetPosition(glm::vec3(Random::Range(-posRange, posRange), 0.0, Random::Range(-posRange, posRange)));
-        mesh->SetRotation(glm::vec3(0, Random::Range(0.0f, 2.0f * 3.1415f),0));
-        mesh->SetScale(glm::vec3(1.0f));
+        mesh->SetPosition(Vec3(Random::Range(-posRange, posRange), 0.0, Random::Range(-posRange, posRange)));
+        mesh->SetRotation(Vec3(0, Random::Range(0.0f, 2.0f * 3.1415f),0));
+        mesh->SetScale(Vec3(1.0f));
         auto tex = Texture::FromPNG("../Models/Grass/Grass.png");
         auto mat = Material::Create("Grass.vert", "unlitTextureAlphaMasked.frag", sizeof(GrassUBO), { tex });
 

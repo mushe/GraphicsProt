@@ -16,9 +16,9 @@ ObjData ObjParser::Parse(std::string objPath, int face)
     std::vector<VertexData> vertices;
     std::vector<uint32_t> indices;
 
-    std::vector<glm::vec3> positions;
-    std::vector<glm::vec3> normals;
-    std::vector<glm::vec2> texCoords;
+    std::vector<Vec3> positions;
+    std::vector<Vec3> normals;
+    std::vector<Vec2> texCoords;
 
     int i = 0;
 
@@ -33,7 +33,7 @@ ObjData ObjParser::Parse(std::string objPath, int face)
             float x, y, z;
             if (iss >> token >> x >> y >> z) 
             {
-                glm::vec3 pos(x, y, z);
+                Vec3 pos(x, y, z);
                 positions.push_back(pos);
             }
         }
@@ -43,7 +43,7 @@ ObjData ObjParser::Parse(std::string objPath, int face)
 			float x, y, z;
 			if (iss >> token >> x >> y >> z) 
 			{
-				normals.push_back(glm::vec3(x, y, z));
+				normals.push_back(Vec3(x, y, z));
 			}
 		}
         // vt
@@ -52,7 +52,7 @@ ObjData ObjParser::Parse(std::string objPath, int face)
 			float x, y;
 			if (iss >> token >> x >> y)
 			{
-				texCoords.push_back(glm::vec2(x, y));
+				texCoords.push_back(Vec2(x, y));
 			}
         }
         // f
@@ -81,28 +81,28 @@ ObjData ObjParser::Parse(std::string objPath, int face)
                 VertexData vertex1
                 { 
                     positions[p1 - 1], 
-                    glm::vec3(0.0, 0.0, 0.0), 
+                    Vec3(0.0, 0.0, 0.0), 
                     normals[n1 - 1], 
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t1 - 1] 
                 };
                 VertexData vertex2
                 { 
                     positions[p2 - 1], 
-                    glm::vec3(0.0, 0.0, 0.0), 
+                    Vec3(0.0, 0.0, 0.0), 
                     normals[n2 - 1], 
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t2 - 1] 
                 };
                 VertexData vertex3
                 { 
                     positions[p3 - 1], 
-                    glm::vec3(0.0, 0.0, 0.0), 
+                    Vec3(0.0, 0.0, 0.0), 
                     normals[n3 - 1], 
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t3 - 1]
                 };
                 vertices.push_back(vertex1);
@@ -142,37 +142,37 @@ ObjData ObjParser::Parse(std::string objPath, int face)
                 VertexData vertex1
                 {
                     positions[p1 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     normals[n1 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t1 - 1]
                 };
                 VertexData vertex2
                 {
                     positions[p2 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     normals[n2 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t2 - 1]
                 };
                 VertexData vertex3
                 {
                     positions[p3 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     normals[n3 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t3 - 1]
                 };
                 VertexData vertex4
                 {
                     positions[p4 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     normals[n4 - 1],
-                    glm::vec3(0.0, 0.0, 0.0),
-                    glm::vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
+                    Vec3(0.0, 0.0, 0.0),
                     texCoords[t4 - 1]
                 };
                 vertices.push_back(vertex1);

@@ -18,7 +18,7 @@ private:
 
 public:
     Mesh() :
-        transform_({glm::vec3(0), glm::vec3(0,1,0), glm::vec3(1)}),
+        transform_({Vec3(0), Vec3(0,1,0), Vec3(1)}),
         vertexBuffer_(VK_NULL_HANDLE),
         vertexBufferMemory_(VK_NULL_HANDLE),
         indexBuffer_(VK_NULL_HANDLE),
@@ -52,9 +52,9 @@ public:
 
     void Init();
 
-    void SetPosition(glm::vec3 position) { transform_.position = position; }
-    void SetRotation(glm::vec3 rotation) { transform_.rotation = rotation; }
-    void SetScale(glm::vec3 scale) { transform_.scale = scale; }
+    void SetPosition(Vec3 position) { transform_.position = position; }
+    void SetRotation(Vec3 rotation) { transform_.rotation = rotation; }
+    void SetScale(Vec3 scale) { transform_.scale = scale; }
     Transform transform_;
 
 

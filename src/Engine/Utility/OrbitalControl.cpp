@@ -4,7 +4,7 @@
 namespace OrbitalControl
 {
     float wheelVel = 0.0f;
-    glm::vec2 rightMouseVel = glm::vec2(0.0f);
+    Vec2 rightMouseVel = Vec2(0.0f);
     float orbitalTheta = 1.0f;
     float orbitalPhi = 7.16f;
     float orbitalRadius = 15.5f;
@@ -24,7 +24,7 @@ void OrbitalControl::Update(Camera& camera,float thetaOffs, float phiOffs)
     orbitalTheta = glm::clamp(orbitalTheta, 0.01f, 3.14f);
     orbitalPhi += rightMouseVel.x * 0.1f + phiOffs;
     orbitalRadius += wheelVel;
-    camera.transform_.position = glm::vec3
+    camera.transform_.position = Vec3
     (
         orbitalRadius * sin(orbitalTheta) * cos(orbitalPhi),
         orbitalRadius * cos(orbitalTheta),

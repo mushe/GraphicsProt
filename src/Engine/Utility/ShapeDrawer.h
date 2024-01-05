@@ -1,16 +1,16 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include "Core/Common.h"
 
 namespace ShapeDrawer
 {
 	void Init();
 	void OnBeginRenderToScreen();
 	void OnEndRenderToScreen();
-	void Rect(glm::vec2 position, glm::vec2 scale, glm::vec4 color = glm::vec4(1));
-	void Circle(glm::vec2 position, glm::vec2 scale, glm::vec4 color = glm::vec4(1));
-	void Line(glm::vec2 start, glm::vec2 end, float width = 1.0f, glm::vec4 color = glm::vec4(1));
-	void Triangle(glm::vec2 position, glm::vec2 direction, glm::vec2 scale, glm::vec4 color = glm::vec4(1));
+	void Rect(Vec2 position, Vec2 scale, Vec4 color = Vec4(1));
+	void Circle(Vec2 position, Vec2 scale, Vec4 color = Vec4(1));
+	void Line(Vec2 start, Vec2 end, float width = 1.0f, Vec4 color = Vec4(1));
+	void Triangle(Vec2 position, Vec2 direction, Vec2 scale, Vec4 color = Vec4(1));
 
 	bool IsLimit(int count);
 };
