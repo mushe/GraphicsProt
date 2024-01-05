@@ -98,7 +98,7 @@ void Engine::BeginFrame()
     BeginCommandBuffer();
 }
 
-void Engine::EndFrame(float waitFPS)
+void Engine::EndFrame(const int waitFPS)
 {
     EndCommandBuffer();
 

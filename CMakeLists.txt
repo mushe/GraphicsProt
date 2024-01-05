@@ -8,7 +8,7 @@ project(${Application})
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # ==============================================================
-FILE(GLOB_RECURSE engineSources src/Engine/*.cpp src/Engine/*.h)
+FILE(GLOB_RECURSE engineSources src/Engine/*.cpp src/Engine/*.h  Shaders/*.frag Shaders/*.vert)
 source_group(TREE ${CMAKE_CURRENT_LIST_DIR} FILES ${engineSources})
 add_library(Engine
 ${engineSources}
@@ -41,7 +41,7 @@ foreach(SUBDIRECTORY ${SUBDIRECTORIES})
         get_filename_component(LAST_ELEMENT ${SUBDIRECTORY} NAME)
         message("processing : ${LAST_ELEMENT}")
 
-        FILE(GLOB_RECURSE sample1_sources ${SUBDIRECTORY}/*.cpp ${SUBDIRECTORY}/*.h)
+        FILE(GLOB_RECURSE sample1_sources ${SUBDIRECTORY}/*.cpp ${SUBDIRECTORY}/*.h  ${SUBDIRECTORY}/*.frag  ${SUBDIRECTORY}/*.vert)
 		add_executable(${LAST_ELEMENT} 
 		${sample1_sources} 
 		${ImGUISources}

@@ -6,7 +6,7 @@ namespace OrbitalControl
     float wheelVel = 0.0f;
     glm::vec2 rightMouseVel = glm::vec2(0.0f);
     float orbitalTheta = 1.0f;
-    float orbitalPhi = 7.16;
+    float orbitalPhi = 7.16f;
     float orbitalRadius = 15.5f;
 }
 

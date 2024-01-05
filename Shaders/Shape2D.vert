@@ -1,4 +1,5 @@
 #version 450
+#define PI 3.1415926538
 
 layout(binding = 0)
 uniform UniformBufferObject
@@ -19,11 +20,14 @@ uniform CommonUniformBufferObject
 
 struct InstancingParameter
 {
-    vec2 position;
-    vec2 scale;
+    vec3 position;
+    int shapeType;
+    vec3 scale;
+    float directionTheta;
+    vec4 color;
 };
 
-layout(binding = 2)
+layout(std140, binding = 2)
 uniform InstancingUniformBufferObject
 {
     InstancingParameter params[1];
@@ -45,22 +49,55 @@ layout(location = 2) out int outShapeType;
 void main()
 {
     int id = gl_InstanceIndex;
-    int x = id % 10;
-    int y = id / 10;
+    vec2 pos = instancingUBO.params[id].position.xy;
+    vec2 scale = instancingUBO.params[id].scale.xy;
+    vec2 texCoord = inTexCoord;
+    
+    // rect, circle, triangle
+    if(instancingUBO.params[id].shapeType == 0 || instancingUBO.params[id].shapeType == 1)
+    {
+        // 0 -> 1 to -1 -> 1
+        pos = pos * 2.0 - 1.0;
+        gl_Position = vec4(vec3(inPosition.x * scale.x, inPosition.y * scale.y, 0) + vec3(pos.x, pos.y ,0), 1.0);
+    }
+    // line
+    else if (instancingUBO.params[id].shapeType == 2)
+    {
+        vec2 startPos = pos;
+        vec2 endPos = scale; // for memory saving
+        vec2 centerPos = (startPos + endPos) - 1.0;
 
-    vec2 pos = vec2(0.1 * x + 0.05, 0.1 * y + 0.05);
-    vec2 scale = vec2(1.0, 1.0) * 0.09;
+        float width = instancingUBO.params[id].scale.z; // for memory saving
+        vec2 diff = endPos - startPos;
+        float height = length(diff);
 
-    pos = instancingUBO.params[id].position;
-    scale = instancingUBO.params[id].scale;
+        float theta = atan(diff.y, diff.x) - PI/2.0;
+        float x = inPosition.x * width;
+        float y = inPosition.y * height;
+        float xRotated = x * cos(theta) - y * sin(theta);
+        float yRotated = x * sin(theta) + y * cos(theta);
 
+        gl_Position = vec4(vec3(xRotated, yRotated, 0) + vec3(centerPos.x, centerPos.y ,0), 1.0);
+    }
+    // triangle
+    else if(instancingUBO.params[id].shapeType == 3)
+    {
+        vec3 vertexPos = inPosition;
+        if(gl_VertexIndex == 0) vertexPos = vec3(-0.6, -1.0, 0.0);
+        if(gl_VertexIndex == 1) vertexPos = vec3(0.6, -1.0, 0.0);
+        if(gl_VertexIndex == 2) vertexPos = vec3(0.0, 1.0, 0.0);
+        if(gl_VertexIndex == 3) vertexPos = vec3(0.0, 1.0, 0.0);
+        float x = vertexPos.x * scale.x;
+        float y = vertexPos.y * scale.y;
+        float xRotated = x * cos(instancingUBO.params[id].directionTheta) - y * sin(instancingUBO.params[id].directionTheta);
+        float yRotated = x * sin(instancingUBO.params[id].directionTheta) + y * cos(instancingUBO.params[id].directionTheta);
 
-    // 0 -> 1 to -1 -> 1
-    pos = pos * 2.0 - 1.0;
+        // 0 -> 1 to -1 -> 1
+        pos = pos * 2.0 - 1.0;
+        gl_Position = vec4(vec3(xRotated, yRotated, 0) + vec3(pos.x, pos.y ,0), 1.0);
+    }
 
-    gl_Position = vec4(vec3(inPosition.x * scale.x, inPosition.y * scale.y, 0) + vec3(pos.x, pos.y ,0), 1.0);
-
-    outColor = vec4(0.0, 0.3, 0.4, 1);
-    outTexCoord = inTexCoord;
-    outShapeType = 0;
+    outColor = instancingUBO.params[id].color;
+    outTexCoord = texCoord;
+    outShapeType = instancingUBO.params[id].shapeType;
 }

@@ -28,8 +28,8 @@ void main()
 {
     vec4 color = vec4(0);
     
-    // quad
-    if(inShapeType == 0)
+    // quad or triangle
+    if(inShapeType == 0 || inShapeType == 3)
     {
         color = inColor;
     }
@@ -39,8 +39,15 @@ void main()
         float l = length(inTexCoord - vec2(0.5, 0.5));
         if(l < 0.5)
 		{
-			color = vec4(inTexCoord.x, inTexCoord.y, 0, 1);
+			color = inColor;
 		}
+        else
+			discard;
+	}
+    // line
+	else if(inShapeType == 2)
+	{
+        color = inColor;
 	}
     
     outColor = color;

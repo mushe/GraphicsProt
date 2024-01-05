@@ -68,7 +68,7 @@ public:
     void Blit(RenderTexture *dest, RenderTexture *src, Material *material){}
     
     void BeginFrame();
-    void EndFrame(float waitFPS = 60.0f);
+    void EndFrame(const int waitFPS = 60.0f);
 
     void BeginRenderToScreen();
     void EndRenderToScreen();
