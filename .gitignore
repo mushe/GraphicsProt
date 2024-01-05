@@ -35,7 +35,10 @@
 # *.spv
 
 # glm
+!Libraries/glfw-3.3.8.bin.WIN64/lib-vc2015/glfw3.lib
 !Libraries/glfw-3.3.8.bin.WIN64/lib-vc2017/glfw3.lib
+!Libraries/glfw-3.3.8.bin.WIN64/lib-vc2019/glfw3.lib
+!Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022/glfw3.lib
 Windows_VS2022
 
 !Models/StevenUNiverseRoom/StevenUNiverseRoom.obj
