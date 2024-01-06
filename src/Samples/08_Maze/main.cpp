@@ -103,14 +103,25 @@ int main()
 
         engine->BeginRenderToScreen();
 
+        // draw grids
+        float oddScaleX = GridScaleX * 1.79f;
+        float oddScaleY = GridScaleY * 1.82f;
+        float evenScaleX = GridScaleX * 0.25f;
+        float evenScaleY = GridScaleY * 0.25f;
+
         for (int y = 0; y < GridY; y++)
         {
             for (int x = 0; x < GridX; x++)
             {
                 int grid = grids[y][x];
-                float scaleX = y % 2 == 0 ? GridScaleX * 1.0f : GridScaleX * 0.5f;
-                Vec2 gridPos = Vec2(x * GridScaleX, y * GridScaleY) + Vec2(GridScaleX, GridScaleY) * 0.5f;
-                ShapeDrawer::Rect(gridPos, Vec2(GridScaleX, GridScaleY) * 0.9f, Vec4(grid));
+
+                float scaleX = x % 2 == 0 ? evenScaleX : oddScaleX;
+                float scaleY = y % 2 == 0 ? evenScaleY : oddScaleY;
+                float posX = x / 2 * oddScaleX + (x+1) / 2 * evenScaleX;
+                float posY = y / 2 * oddScaleY + (y+1) / 2 * evenScaleY;
+
+                Vec2 gridPos = Vec2(posX, posY) + Vec2(scaleX, scaleY) * 0.5f;
+                ShapeDrawer::Rect(gridPos, Vec2(scaleX, scaleY) * 1.0f, Vec4(grid));
             }
         }
 
