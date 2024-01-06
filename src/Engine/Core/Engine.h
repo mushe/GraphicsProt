@@ -26,6 +26,7 @@
 #include "Utility/ModelGenerator.h"
 #include "Utility/OrbitalControl.h"
 #include "Utility/ShapeDrawer.h"
+#include "Utility/Algorithm.h"
 
 class Engine
 {
