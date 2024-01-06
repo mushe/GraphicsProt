@@ -66,7 +66,7 @@ int main()
 {
     const int windowWidth = 1920;
     const int windowHeight = 1080;
-    auto engine = Engine::Init(windowWidth, windowHeight, 1200, 500);
+    auto engine = Engine::Init(windowWidth, windowHeight, 0, 50);
 
     // generate maze
     int GridX = 41;
