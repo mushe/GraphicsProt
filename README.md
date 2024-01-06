@@ -103,7 +103,7 @@ Instancing is a standard technique for drawing many objects
 ## Drawing Basic 2D Shape (Instancing)
 ![GIF 1-6-2024 7-26-12 AM](https://github.com/mushe/GraphicsProt/assets/26865534/b8816ae3-ef0e-43bb-99b5-486023ac4842)
 
-easy drawing API
+drawing shapes(rect, circle, triangle, line) with a handy API
 
 ```cpp
 engine->BeginRenderToScreen();
