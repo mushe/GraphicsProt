@@ -103,8 +103,35 @@ Instancing is a standard technique for drawing many objects
 ## Drawing Basic 2D Shape (Instancing)
 ![GIF 1-6-2024 7-26-12 AM](https://github.com/mushe/GraphicsProt/assets/26865534/b8816ae3-ef0e-43bb-99b5-486023ac4842)
 
-Instancing is a standard technique for drawing many objects
-- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/06_Instancing
+easy drawing API
+
+```cpp
+engine->BeginRenderToScreen();
+
+// call between BeginRenderToScreen and EndRenderToScreen
+ShapeDrawer::Rect(Vec2(0.25), Vec2(0.25)); // position, scale, (color)
+ShapeDrawer::Circle(Vec2(0.75), Vec2(0.25), Vec4(1)); // position, scale, (color)
+ShapeDrawer::Line(Vec2(0.625, 0.125), Vec2(0.875, 0.375)); // start, end, (width), (color)
+ShapeDrawer::Triangle(Vec2(0.25, 0.75), Vec2(0.25), Vec2(0.25)); // position, direction, scale, (color)
+
+engine->EndRenderToScreen();
+```
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/07_Shape
+
+----
+
+## Maze Generation
+![image](https://github.com/mushe/GraphicsProt/assets/26865534/94fcb486-5c3f-4458-9cbd-cc37efe8a66f)
+
+procedurally generated maze
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/08_Maze
+
+- References
+
+(1) 自動生成迷路
+
+https://www5d.biglobe.ne.jp/~stssk/maze/make.html
 
 # Usage Examples
 
