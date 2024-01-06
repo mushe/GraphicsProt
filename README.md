@@ -121,7 +121,7 @@ engine->EndRenderToScreen();
 
 ----
 
-## Maze Generation
+## Maze
 ![image](https://github.com/mushe/GraphicsProt/assets/26865534/94fcb486-5c3f-4458-9cbd-cc37efe8a66f)
 
 procedurally generated maze
