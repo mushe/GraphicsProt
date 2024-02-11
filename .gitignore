@@ -41,5 +41,5 @@
 !Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022/glfw3.lib
 Windows_VS2022
 
-!Models/StevenUNiverseRoom/StevenUNiverseRoom.obj
+!Models/*/*.obj
 *.xcuserstate
