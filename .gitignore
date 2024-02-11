@@ -43,3 +43,5 @@ Windows_VS2022
 
 !Models/*/*.obj
 *.xcuserstate
+*.DS_Store
+build
