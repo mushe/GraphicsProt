@@ -39,3 +39,8 @@ void OrbitalControl::SetOrbit(float theta, float phi, float radius)
 	orbitalPhi = phi;
 	orbitalRadius = radius;
 }
+
+void OrbitalControl::LogOrbit()
+{
+   Debug::Log(to_string(orbitalTheta) + " " + to_string(orbitalPhi) + " " + to_string(orbitalRadius));
+}
