@@ -15,23 +15,32 @@ ${engineSources}
 ${ImGUISources}
 )
 
-target_include_directories(Engine PRIVATE 
-$ENV{VK_SDK_PATH}/Include
-Libraries/glfw-3.3.8.bin.WIN64/include
-Libraries/glm
-Libraries/stb_image
-src/Engine
-)
+message("VK_SDK_PATH : $ENV{VK_SDK_PATH}")
 
-target_link_directories(Engine PRIVATE 
-$ENV{VK_SDK_PATH}/Lib
-Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022
-)
+if(APPLE)
+	target_include_directories(Engine PRIVATE 
+	$ENV{VK_SDK_PATH}/include
+	$ENV{GLFW_PATH}/include
+	Libraries/glm
+	Libraries/stb_image
+	src/Engine
+	)
 
-target_link_libraries(Engine
-vulkan-1
-glfw3
-)
+	target_link_directories(Engine PRIVATE 
+	$ENV{VK_SDK_PATH}/Lib
+	$ENV{GLFW_PATH}/Lib
+	)
+
+	target_link_libraries(Engine
+	vulkan.1
+	glfw
+	)
+else()
+	target_link_libraries(Engine
+	vulkan.1
+	glfw3
+	)
+endif()
 
 # ==============================================================
 FILE(GLOB SUBDIRECTORIES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/src/Samples/*)
@@ -47,25 +56,33 @@ foreach(SUBDIRECTORY ${SUBDIRECTORIES})
 		${ImGUISources}
 		)
 
-		target_include_directories(${LAST_ELEMENT} PRIVATE 
-		$ENV{VK_SDK_PATH}/Include
-		Libraries/glfw-3.3.8.bin.WIN64/include
-		Libraries/glm
-		Libraries/stb_image
-		src/Engine
-		)
+		if(APPLE)
+			target_include_directories(${LAST_ELEMENT} PRIVATE 
+			$ENV{VK_SDK_PATH}/include
+			$ENV{GLFW_PATH}/include
+			Libraries/glm
+			Libraries/stb_image
+			src/Engine
+			)
 
-		target_link_directories(${LAST_ELEMENT} PRIVATE 
-		$ENV{VK_SDK_PATH}/Lib
-		Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022
-		Windows_VS2022/Debug
-		)
+			target_link_directories(${LAST_ELEMENT} PRIVATE 
+			$ENV{VK_SDK_PATH}/Lib
+			$ENV{GLFW_PATH}/Lib
+			)
 
-		target_link_libraries(${LAST_ELEMENT} 
-		vulkan-1
-		glfw3
-		Engine
-		)
+			target_link_libraries(${LAST_ELEMENT} 
+			vulkan.1
+			glfw
+			Engine
+			)
+
+		else()
+			target_link_libraries(${LAST_ELEMENT} 
+			vulkan.1
+			glfw.3
+			Engine
+			)
+		endif()
     endif()
 endforeach()
 # ==============================================================
