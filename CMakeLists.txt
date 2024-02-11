@@ -36,8 +36,21 @@ if(APPLE)
 	glfw
 	)
 else()
+	target_include_directories(Engine PRIVATE 
+	$ENV{VK_SDK_PATH}/Include
+	Libraries/glfw-3.3.8.bin.WIN64/include
+	Libraries/glm
+	Libraries/stb_image
+	src/Engine
+	)
+
+	target_link_directories(Engine PRIVATE 
+	$ENV{VK_SDK_PATH}/Lib
+	Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022
+	)
+
 	target_link_libraries(Engine
-	vulkan.1
+	vulkan-1
 	glfw3
 	)
 endif()
@@ -77,9 +90,23 @@ foreach(SUBDIRECTORY ${SUBDIRECTORIES})
 			)
 
 		else()
+			target_include_directories(${LAST_ELEMENT} PRIVATE 
+			$ENV{VK_SDK_PATH}/Include
+			Libraries/glfw-3.3.8.bin.WIN64/include
+			Libraries/glm
+			Libraries/stb_image
+			src/Engine
+			)
+
+			target_link_directories(${LAST_ELEMENT} PRIVATE 
+			$ENV{VK_SDK_PATH}/Lib
+			Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022
+			Windows_VS2022/Debug
+			)
+
 			target_link_libraries(${LAST_ELEMENT} 
-			vulkan.1
-			glfw.3
+			vulkan-1
+			glfw3
 			Engine
 			)
 		endif()
