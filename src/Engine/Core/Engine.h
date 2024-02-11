@@ -44,7 +44,7 @@ public:
         depthImageMemory_(VK_NULL_HANDLE),
         depthImageView_(VK_NULL_HANDLE),
         renderTextureFrameBuffer_(VK_NULL_HANDLE),
-        imGuiWrapper(ImGuiWrapper()),
+        imGuiWrapper_(ImGuiWrapper()),
         elapsedTimeSeconds_(0.0f)
     {
     }
@@ -108,7 +108,7 @@ private:
     void InitRenderTexture();
 
 public:
-    ImGuiWrapper imGuiWrapper;
+    ImGuiWrapper imGuiWrapper_;
 
     int windowWidth_ = 1920;
     int windowHeight_ = 1080;

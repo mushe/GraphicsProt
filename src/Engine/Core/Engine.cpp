@@ -26,8 +26,8 @@ void Engine::Run()
     PrepareSwapChain();
     InitFenceAndSemaphores();
 
-    imGuiWrapper.Init(window_, VulkanCore::GetVulkanInstance(), VulkanCore::GetDevice(), VulkanCore::GetPhysicalDevice(), VulkanCore::GetRenderPass(), VulkanCore::GetQueue(), VulkanCore::GetCommandPool());
-    GUI::GetInstance()->Init(&imGuiWrapper);
+    imGuiWrapper_.Init(window_, VulkanCore::GetVulkanInstance(), VulkanCore::GetDevice(), VulkanCore::GetPhysicalDevice(), VulkanCore::GetRenderPass(), VulkanCore::GetQueue(), VulkanCore::GetCommandPool());
+    GUI::GetInstance()->Init(&imGuiWrapper_);
     Input::GetInstance()->Init(window_);
 
     InitRenderTexture();
@@ -281,7 +281,7 @@ bool Engine::Running()
 
 void Engine::OnGUI(std::function<void()> callback)
 {
-    imGuiWrapper.BeginFrame("Resolution : " + std::to_string(windowWidth_) + " x " + std::to_string(windowHeight_));
+    imGuiWrapper_.BeginFrame("Resolution : " + std::to_string(windowWidth_) + " x " + std::to_string(windowHeight_));
     {
         GUI::GetInstance()->parameters_.clear();
 
@@ -294,7 +294,7 @@ void Engine::OnGUI(std::function<void()> callback)
         if (ImGui::Button("Print GUI Parameters"))
             GUI::PrintParameters();
     }
-    imGuiWrapper.EndFrame(VulkanCore::GetCurrentCommandBuffer());
+    imGuiWrapper_.EndFrame(VulkanCore::GetCurrentCommandBuffer());
 }
 
 void Engine::InitWindowSurface()
