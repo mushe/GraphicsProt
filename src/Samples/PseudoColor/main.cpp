@@ -60,11 +60,6 @@ int main()
         colorMesh->Draw(camera);
         grayMesh->Draw(camera);
 
-        engine->OnGUI([&]()
-        {
-            GUI::Float(ubo.colorLerp, "colorLerp", 1.0f);
-        });
-
         engine->EndRenderToScreen();
         engine->EndFrame();
     }
