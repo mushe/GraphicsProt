@@ -11,7 +11,7 @@ GraphicsProt is a simple and straightforward graphics prototyping(programming) f
 # Installation
 
 - Windows : CMake and shader compilation by executing Generate_Windows_VS2022.bat (more details later)
-- Mac : more details later
+- Mac : CMake and Visual Studio Code (more details later)
 
 # Dependencies
 
