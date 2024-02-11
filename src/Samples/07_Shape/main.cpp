@@ -58,11 +58,13 @@ int main()
 			}
 		}
 
-        engine->EndRenderToScreen();
 
         engine->OnGUI([&]()
         {
         });
+
+        engine->EndRenderToScreen();
+
         engine->EndFrame();
     }
 

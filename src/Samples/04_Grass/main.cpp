@@ -65,8 +65,6 @@ int main()
 
         for(auto m : meshes) 
             m->Draw(camera);
-        
-        engine->EndRenderToScreen();
 
         engine->OnGUI([&]()
         {
@@ -79,6 +77,9 @@ int main()
 				ubo->noiseScale = noiseScale;
 			}
         });
+
+        engine->EndRenderToScreen();
+
 
         engine->EndFrame();
     }

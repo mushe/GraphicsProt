@@ -49,7 +49,6 @@ int main()
 
         engine->BeginRenderToScreen();
         floorMesh->Draw(camera);
-        engine->EndRenderToScreen();
 
         ubo.cameraPos = camera.transform_.position;
 
@@ -66,6 +65,7 @@ int main()
             floorMesh->SetRotation(meshRotation);
         });
 
+        engine->EndRenderToScreen();
         engine->EndFrame();
     }
 

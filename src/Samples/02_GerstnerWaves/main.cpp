@@ -100,7 +100,6 @@ int main()
         engine->BeginRenderToScreen();
         waveMesh->Draw(camera);
         bgMesh->Draw(camera);
-        engine->EndRenderToScreen();
 
         engine->OnGUI([&]()
         {
@@ -151,6 +150,8 @@ int main()
             GUI::Float(waveUBO.sunSpread, "sunSpread", 0.01f);
             GUI::Float(waveUBO.sunRefrectionThreshold, "sunRefrectionThreshold", 0.01f);
 		});
+
+        engine->EndRenderToScreen();
 
         engine->EndFrame();
     }

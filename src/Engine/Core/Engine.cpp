@@ -475,10 +475,8 @@ void Engine::BlitToRenderTarget(shared_ptr<Material> material, shared_ptr<Render
 
 void Engine::BlitToScreen(shared_ptr<Material> material)
 {
-    BeginRenderToScreen();
     quadMesh_->SetMaterial(material);
     quadMesh_->Draw(dummyCamera_);
-    EndRenderToScreen();
 }
 
 void Engine::SetWindowPosition(const int windowPosx, const int windowPosY)

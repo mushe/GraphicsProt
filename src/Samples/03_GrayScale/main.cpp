@@ -43,12 +43,15 @@ int main()
         mesh->Draw(camera);
         rt->EndRenderToTexture();
 
+        // post process rendering to screen
+        engine->BeginRenderToScreen();
         engine->BlitToScreen(postProcessMat);
 
         engine->OnGUI([&]()
         {
             GUI::FloatSlider(ubo.postProcessLerp, "postProcessLerp", 0.0f, 1.0f);
 		});
+        engine->EndRenderToScreen();
 
         engine->EndFrame();
     }

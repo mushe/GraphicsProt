@@ -65,12 +65,12 @@ int main()
 
         engine->BeginRenderToScreen();
         mesh->Draw(camera, instanceCount);
-        engine->EndRenderToScreen();
 
         engine->OnGUI([&]()
         {
             GUI::Float(ubo.scale, "scale", 0.01f);
         });
+        engine->EndRenderToScreen();
 
         engine->EndFrame();
     }
