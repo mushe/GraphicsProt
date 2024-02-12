@@ -133,6 +133,66 @@ procedurally generated maze
 
 https://www5d.biglobe.ne.jp/~stssk/maze/make.html
 
+## Pi estimation by Monte Carlo Method
+![3C1DC5BA-B8A7-4251-A990-367E2AF38716_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/5e997b68-fe96-4fe3-860c-408e2ca8b0d8)
+
+Plot points at random against some location in the circle circumscribed by the square. Then the number of points in the circle / number of points in the square = π / 4, which gets closer as the number of points increases. Using this logic, we can approximate pi.
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/PiCalculation
+
+## Chromatic Aberration (post process)
+![53912266-41D9-457A-951F-80BC759CF54B_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/1109b4c8-858f-42dc-8a7c-143c5b926fe8)
+
+Shift the RGB color pick position for each RGB individually
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/ChromaticAberration
+
+## Halftone by probability (post process)
+![8D3490EC-AF7E-4953-9B3B-20749E7EBAC4_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/687f1656-f789-4a39-85f0-7c3fee9b3462)
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/HalfTone
+- References
+
+(1) コンピュータグラフィックス編集委員会, "コンピュータグラフィックス", 画像情報教育振興協会, 2008, p199.
+
+## Posterization (post process)
+![3D6C996B-6BF7-42A2-AC2E-6D304BEA0B64_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/fe6b0a2e-e37d-4cbb-bc5c-730d2cf209de)
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Posterization
+- Image Credit : https://pixabay.com/photos/mountain-nature-landscape-picture-646389/
+- References
+
+(1) コンピュータグラフィックス編集委員会, "コンピュータグラフィックス", 画像情報教育振興協会, 2008, p221.
+
+## Pseudo Color (post process)
+![9068EB43-1FC8-4C3A-85E7-133C2074DFC9_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/8b336eeb-0b55-4cce-9522-9c17f9762631)
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/PseudoColor
+- Image Credit : https://en.wikipedia.org/wiki/File:Milwaukee_City_Hall_Old_Public_Domain_Photo.jpg
+- References
+
+(1) コンピュータグラフィックス編集委員会, "コンピュータグラフィックス", 画像情報教育振興協会, 2008, p224.
+
+## Sepia (post process)
+![3B0E17EB-0AC4-488A-9198-3F420D76CFA0_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/da8e9544-5fed-40fb-96e3-5d6d069763e6)
+
+nostalgic post process
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Sepia
+- References
+
+(1) How to convert a color image into sepia image - Image Processing Project - dyclassroom
+
+https://dyclassroom.com/image-processing-project/how-to-convert-a-color-image-into-sepia-image
+
+## Text Rendering (instancing)
+![0A78F898-67FA-47FE-B343-FCB74D8D192C_4_5005_c](https://github.com/mushe/GraphicsProt/assets/26865534/0651942e-f5fd-4ce5-86c5-9bae6370f23e)
+
+handy text rendering API
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/TextRender
+- Font Credit :  https://levien.com/type/myfonts/inconsolata.html
+
 # Usage Examples
 
 ## minimum code
@@ -267,6 +327,12 @@ float wheelVel = Input::MouseWheelDelta();
 ```cpp
 Camera camera;
 OrbitalControl::Update(camera);
+```
+
+## text drawing
+```cpp
+// text, position, scale, color
+Text("ABC", Vec2(0.5f, 0.5f), 1.0f, Vec4(1,1,1,1));
 ```
 
 ## 2d shape drawing
