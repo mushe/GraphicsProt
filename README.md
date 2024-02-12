@@ -51,7 +51,7 @@ https://cedec.cesa.or.jp/2023/session/detail/s64242ce14adbf
 
 ----
 
-## Post Process (Grayscale)
+## Grayscale (post process)
 ![image](https://github.com/mushe/GraphicsProt/assets/26865534/56326ed8-e1cf-43c0-abee-7f4968bb7182)
 
 simple grayscale post process implementation
