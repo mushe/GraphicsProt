@@ -12,6 +12,11 @@ namespace ShapeDrawer
         Vec3 scale = Vec3(0);
         float directionTheta = 0;
         Vec4 color = Vec4(1);
+
+        float ascii = 0;
+        float dummy1 = 0;
+        float dummy2 = 0;
+        float dummy3 = 0;
 	};
 
     shared_ptr<Material> mat_;
@@ -32,12 +37,14 @@ void ShapeDrawer::Init()
     mesh_->SetIndices(quad.indices);
     mesh_->SetVertices(quad.vertices);
     mesh_->Init();
+
+    auto tex = Texture::FromPNG("../Textures/font_inconsolata.png");
     
     mat_ = Material::Create(
         "Shape2D.vert", "Shape2D.frag",
         0,
         sizeof(InstancingBuffer) * instanceCount_,
-        {}
+        {tex}
     );
 
     mat_->SetInstancingUniformBuffer(instancingBuffer_.data());
@@ -114,4 +121,36 @@ bool ShapeDrawer::IsLimit(int count)
         return true;
     }
     return false;
+}
+
+
+void Text(std::string str, Vec2 position, float scale, Vec4 color)
+{
+    ShapeDrawer::Text(str, position, scale, color);
+}
+
+void ShapeDrawer::Text(std::string str, Vec2 position, float scale, Vec4 color)
+{
+    scale = scale * 0.03;
+    float xScale = scale * 0.5;
+    for(int i = 0; i < str.size(); i++)
+        Char(str[i], position + Vec2(xScale * i, 0.0), Vec2(xScale, scale), color);    
+}
+
+void ShapeDrawer::Char(char c, Vec2 position, Vec2 scale, Vec4 color)
+{
+    if(IsLimit(currentFrameDrawCount_)) return;
+
+    int ascii = static_cast<int>(c);
+    ascii = clamp(ascii, 0, 127);
+
+    std::string s(1, c);
+
+    instancingBuffer_[currentFrameDrawCount_].position = Vec3(position.x, position.y, 0);
+    instancingBuffer_[currentFrameDrawCount_].scale = Vec3(scale.x, scale.y, 0);
+    instancingBuffer_[currentFrameDrawCount_].shapeType = 4;
+    instancingBuffer_[currentFrameDrawCount_].color = color;
+    instancingBuffer_[currentFrameDrawCount_].ascii = (float)ascii;
+
+    currentFrameDrawCount_++;
 }

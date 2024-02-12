@@ -65,6 +65,8 @@ int main()
 
         float estimatePi = CalculatePiByPoints(points);
 
+        Text("Estimate PI = " + to_string(estimatePi), Vec2(0.2f, 0.5f), 2.0f);
+
         engine->OnGUI([&]()
         {
             GUI::Label("Estimate Pi: " + to_string(estimatePi));

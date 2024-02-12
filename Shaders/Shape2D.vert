@@ -25,6 +25,10 @@ struct InstancingParameter
     vec3 scale;
     float directionTheta;
     vec4 color;
+    float ascii;
+    float dummy1;
+    float dummy2;
+    float dummy3;
 };
 
 layout(std140, binding = 2)
@@ -44,6 +48,7 @@ layout(location = 5) in vec2 inTexCoord;
 layout(location = 0) out vec2 outTexCoord;
 layout(location = 1) out vec4 outColor;
 layout(location = 2) out int outShapeType;
+layout(location = 3) out float outAscii;
 
 
 void main()
@@ -53,7 +58,7 @@ void main()
     vec2 scale = instancingUBO.params[id].scale.xy;
     vec2 texCoord = inTexCoord;
     
-    // rect, circle, triangle
+    // rect, circle
     if(instancingUBO.params[id].shapeType == 0 || instancingUBO.params[id].shapeType == 1)
     {
         // 0 -> 1 to -1 -> 1
@@ -96,8 +101,19 @@ void main()
         pos = pos * 2.0 - 1.0;
         gl_Position = vec4(vec3(xRotated, yRotated, 0) + vec3(pos.x, pos.y ,0), 1.0);
     }
+    // text
+    else if(instancingUBO.params[id].shapeType == 4)
+    {
+        // 0 -> 1 to -1 -> 1
+        pos = pos * 2.0 - 1.0;
+        gl_Position = vec4(vec3(inPosition.x * scale.x, inPosition.y * scale.y, 0) + vec3(pos.x, pos.y ,0), 1.0);
+    }
 
     outColor = instancingUBO.params[id].color;
     outTexCoord = texCoord;
     outShapeType = instancingUBO.params[id].shapeType;
+    outAscii = instancingUBO.params[id].ascii;
+    outDummy1 = instancingUBO.params[id].dummy1;
+    outDummy2 = instancingUBO.params[id].dummy2;
+    outDummy3 = instancingUBO.params[id].dummy3;
 }
