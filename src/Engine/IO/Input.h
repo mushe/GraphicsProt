@@ -9,7 +9,9 @@ enum KeyCode
     SPACE,
     F,
     G,
-    Escape = 256
+    Escape = GLFW_KEY_ESCAPE,
+    RightShift = GLFW_KEY_RIGHT_SHIFT,
+    LeftShift = GLFW_KEY_LEFT_SHIFT,
 };
 
 enum MouseCode
