@@ -5,9 +5,9 @@ namespace OrbitalControl
 {
     float wheelVel = 0.0f;
     Vec2 rightMouseVel = Vec2(0.0f);
-    float orbitalTheta = 1.0f;
-    float orbitalPhi = 7.16f;
-    float orbitalRadius = 15.5f;
+    float orbitalTheta = 0.95f;
+    float orbitalPhi =7.0f;
+    float orbitalRadius = 17.0f;
 }
 
 // camera orbital control

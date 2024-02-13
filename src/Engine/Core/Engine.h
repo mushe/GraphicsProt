@@ -55,7 +55,7 @@ public:
     }
 
     static shared_ptr<Engine> Create() { return std::make_shared<Engine>(); }
-    static shared_ptr<Engine> Init(const int windowWidth = 1920, const int windowHeight = 1080, const int windowPosX = 0, const int windowPosY = 50);
+    static shared_ptr<Engine> Init(const int windowWidth = 800, const int windowHeight = 800, const int windowPosX = 250, const int windowPosY = 50);
     void Run();
 
     float ElapsedTimeSeconds(){return elapsedTimeSeconds_;}
