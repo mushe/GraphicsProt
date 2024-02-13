@@ -181,6 +181,66 @@ handy text rendering API
 - Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/TextRender
 - Font Credit :  https://levien.com/type/myfonts/inconsolata.html
 
+## White Noise (CPU)
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/8319a337-b9f1-468f-a485-c1a575919057" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/WhiteNoiseCPU
+
+## White Noise (GPU)
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/b097bab1-cc50-4b67-81da-1ae49047dfdb" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/WhiteNoiseGPU
+
+## Catmull–Rom Spline interpolation
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/e92b686e-a45f-4e06-b59b-269a82647876" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/CatmullRomSpline
+- References
+
+(1) Catmull–Rom Spline補間
+
+https://zenn.dev/mushe/articles/92c65e0c8023aa
+
+## Kaleidoscope
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/3e7ab265-dd03-4d61-8b9a-8af320396e06" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Kaleidoscope
+- References
+
+(1) mushe/UnrealVFXCollection:
+
+https://github.com/mushe/UnrealVFXCollection
+
+## Kira sticker
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/13bcd81f-dd81-4c73-bcef-bd65288bb359" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/KiraSticker
+- References
+
+(1) mushe/UnrealVFXCollection:
+
+https://github.com/mushe/UnrealVFXCollection
+
+## Sierpiński triangle
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/b2d99945-7cfc-47e4-b832-f9712497d837" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/SierpinskiTriangle
+- References
+
+(1) Sierpiński triangle - Wikipedia
+
+[https://en.wikipedia.org/wiki/Sierpiński_triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)
+
+## Koch snowflake
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/45e93dc7-b9bb-43de-8cf3-feeecdc93305" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/KochSnowflake
+- References
+
+(1) Koch snowflake - Wikipedia
+
+https://en.wikipedia.org/wiki/Koch_snowflake
+
 # Usage Examples
 
 ## minimum code
