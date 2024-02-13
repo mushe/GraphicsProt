@@ -46,7 +46,7 @@ int main()
     grayMesh->SetMaterial(grayMat);
 
     Camera camera;
-    OrbitalControl::SetOrbit(3.14f, -4.71f, 15.0f);
+    OrbitalControl::SetOrbit(3.14f, -4.71f, 23.5f);
     OrbitalControl::Update(camera);
 
     while (engine->Running())
@@ -57,6 +57,7 @@ int main()
         engine->BeginRenderToScreen();
         colorMesh->Draw(camera);
         grayMesh->Draw(camera);
+        OrbitalControl::Update(camera);
 
         engine->OnGUI([&]()
         {

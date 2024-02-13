@@ -3,7 +3,7 @@
 
 int main()
 {
-    auto engine = Engine::Init(1500, 1500, 0, 50);
+    auto engine = Engine::Init();
 
     int GridNum = 20;
     int N = GridNum * GridNum;

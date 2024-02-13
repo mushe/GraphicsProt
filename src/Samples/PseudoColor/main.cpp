@@ -48,7 +48,7 @@ int main()
 
     Camera camera;
     OrbitalControl::Update(camera);
-    OrbitalControl::SetOrbit(3.14f, -4.71f, 15.0f);
+    OrbitalControl::SetOrbit(3.14f, -4.71f, 23.5f);
 
     while (engine->Running())
     {

@@ -64,9 +64,7 @@ void dig(std::vector<std::vector<Maze>>& grids, MazePosition p)
 
 int main()
 {
-    const int windowWidth = 1920;
-    const int windowHeight = 1080;
-    auto engine = Engine::Init(windowWidth, windowHeight, 0, 50);
+    auto engine = Engine::Init();
 
     // generate maze
     int GridX = 41;
