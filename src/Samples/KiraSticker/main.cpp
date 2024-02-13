@@ -36,8 +36,7 @@ int main()
     {
         engine->BeginFrame();
         if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
-        OrbitalControl::Update(camera);
-        OrbitalControl::LogOrbit();
+        OrbitalControl::Update(camera, 0.0f, 0.0f);
 
         engine->BeginRenderToScreen();
         floorMesh->Draw(camera);
