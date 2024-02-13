@@ -113,7 +113,4 @@ void main()
     outTexCoord = texCoord;
     outShapeType = instancingUBO.params[id].shapeType;
     outAscii = instancingUBO.params[id].ascii;
-    outDummy1 = instancingUBO.params[id].dummy1;
-    outDummy2 = instancingUBO.params[id].dummy2;
-    outDummy3 = instancingUBO.params[id].dummy3;
 }
