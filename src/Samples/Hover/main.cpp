@@ -3,16 +3,27 @@
 struct Particle
 {
     Vec2 position = Vec2(0.5f, 0.5f);
+    Vec2 velocity = Vec2(0.0f, 0.0f);
     float lifeTime = 1.0f;
     float age = 0.0f;
+    float scale = 1.0f;
 };
 
 Particle SpawnParticle(Vec2 position)
 {
     Particle particle;
-    particle.position = position;
+
+    float posXVariation = 0.03f;
+    float posYVariation = 0.01f;
+    particle.position = position + Vec2(Random::Range(-posXVariation ,posXVariation), Random::Range(-posYVariation ,posYVariation));
+
+    float velXVariation = 0.005f;
+    float velY = 0.01f + Random::Range(0.0f, 0.005f);
+    particle.velocity = Vec2(Random::Range(-velXVariation, velXVariation), velY);
+
     particle.lifeTime = 1.0f;
     particle.age = 0.0f;
+    particle.scale = Random::Range(0.005f, 0.01f);
     return particle;
 }
 
@@ -27,7 +38,7 @@ int main()
     float hoverForce = 8.0f;
     float rotationalForce = 40.0f;
     float rotationalVelocityAttenuation = 0.95f;
-    float particleSpawnRate = 1.0f;
+    float particleSpawnRate = 5.0f;
 
     // variables
     Vec2 position = initialPosition;
@@ -36,7 +47,7 @@ int main()
     float rotationalVelocity = 0.0f;
 
     // jet particle
-    std::vector<Vec2> particles;
+    std::vector<Particle> particles;
 
     while (engine->Running())
     {
@@ -81,19 +92,32 @@ int main()
 
         
         // particles
-        int particleAddCount = particleSpawnRate * (leftInput + rightInput);
-        for(int i = 0; i < particleAddCount; i++)
+        int leftParticleAddCount = particleSpawnRate * leftInput;
+        int rightParticleAddCount = particleSpawnRate * rightInput;
+        for(int i = 0; i < leftParticleAddCount; i++)
         {
-            particles.push_back(Vec2(0.5f, 0.5f));
+            particles.push_back(SpawnParticle((start.x > end.x) ? end : start));
         }
-        for(auto particle : particles)
+        for(int i = 0; i < rightParticleAddCount; i++)
         {
-            ShapeDrawer::Rect(particle, Vec2(0.2f), Vec4(0.6, 0.4, 0.3, 1.0));
+            particles.push_back(SpawnParticle((start.x > end.x) ? start : end));
+        }
+        for (auto it = particles.rbegin(); it != particles.rend(); ++it) 
+        {
+            it->position += it->velocity;
+            ShapeDrawer::Rect(it->position, Vec2(it->scale), Vec4(0.6, 0.4, 0.3, 1.0));
+
+            // lifetime calculation
+            it->age += 0.016f;
+            if(it->age > it->lifeTime)
+            {
+                particles.erase(std::next(it).base());
+            }
         }
 
         // ui 
-        Text("particle count : " + to_string(particles.size()), Vec2(0.05, 0.65));
-        Text("press LEFT SHIFT and RIGHT SHIFT key to hover", Vec2(0.05, 0.7));
+        Text("press LEFT SHIFT or RIGHT SHIFT key to hover", Vec2(0.18, 0.03));
+        Text("particle count : " + to_string(particles.size()), Vec2(0.05, 0.7));
         Text("left and right input : " + to_string(int(leftInput)) + "," + to_string(int(rightInput)), Vec2(0.05, 0.75));
 
         Text("position : " + to_string(position.x) + "," + to_string(position.y), Vec2(0.05, 0.80));
