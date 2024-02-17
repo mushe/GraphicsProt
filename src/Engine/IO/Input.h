@@ -9,6 +9,7 @@ enum KeyCode
     SPACE,
     F,
     G,
+    R = GLFW_KEY_R,
     Escape = GLFW_KEY_ESCAPE,
     RightShift = GLFW_KEY_RIGHT_SHIFT,
     LeftShift = GLFW_KEY_LEFT_SHIFT,
@@ -37,14 +38,12 @@ private:
 public:
     void Init(GLFWwindow* window);
 
-    static bool KeyPressedNow(KeyCode keyCode) {
-        return false;
-    }
-
     void Update();
 
     static bool KeyDown(KeyCode keyCode);
     bool KeyDown_Call(KeyCode keyCode);
+
+    static bool KeyUp(KeyCode keyCode) { return false; }
 
     static float MouseWheelDelta();
     float MouseWheelDelta_Call();
@@ -73,10 +72,7 @@ public:
         Input::GetInstance()->mousePositionDelta_ = Vec2((float)xpos, (float)ypos) - Input::GetInstance()->mousePosition_;
         Input::GetInstance()->mousePosition_ = Vec2((float)xpos, (float)ypos);
     }
-
-
-    static bool KeyUp(KeyCode keyCode) { return false; }
-
+    
     static bool MouseClickedNow(MouseCode mouseCode = MouseCode::LEFT) { return false; }
     static bool MouseDown(MouseCode mouseCode = MouseCode::LEFT) { return false; }
     static bool MouseUp(MouseCode mouseCode = MouseCode::LEFT) { return false; }

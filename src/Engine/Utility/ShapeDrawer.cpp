@@ -22,7 +22,7 @@ namespace ShapeDrawer
     shared_ptr<Material> mat_;
     shared_ptr<Mesh> mesh_;
 
-    const int instanceCount_ = 5000;
+    const int instanceCount_ = 15000;
     Camera camera_;
 
     std::vector<InstancingBuffer> instancingBuffer_(instanceCount_);
