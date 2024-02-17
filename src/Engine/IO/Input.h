@@ -3,17 +3,23 @@
 #include "Core/Common.h"
 #include "Utility/Singleton.h"
 #include "Utility/Debug.h"
+#include <unordered_map>
 
 enum KeyCode
 {
-    SPACE,
-    F,
-    G,
+    Space = GLFW_KEY_SPACE,
+    F = GLFW_KEY_F,
+    G = GLFW_KEY_G,
     R = GLFW_KEY_R,
     Escape = GLFW_KEY_ESCAPE,
     RightShift = GLFW_KEY_RIGHT_SHIFT,
     LeftShift = GLFW_KEY_LEFT_SHIFT,
+    Up = GLFW_KEY_UP,
+    Down = GLFW_KEY_DOWN,
+    Left = GLFW_KEY_LEFT,
+    Right = GLFW_KEY_RIGHT,
 };
+
 
 enum MouseCode
 {
@@ -35,6 +41,8 @@ private:
     bool rightMouseDown_ = false;
     bool leftMouseDown_ = false;
 
+    std::unordered_map<KeyCode, uint> keyDownFrames_;
+
 public:
     void Init(GLFWwindow* window);
 
@@ -42,6 +50,9 @@ public:
 
     static bool KeyDown(KeyCode keyCode);
     bool KeyDown_Call(KeyCode keyCode);
+
+    static bool KeyDownNow(KeyCode keyCode);
+    bool KeyDownNow_Call(KeyCode keyCode);
 
     static bool KeyUp(KeyCode keyCode) { return false; }
 
