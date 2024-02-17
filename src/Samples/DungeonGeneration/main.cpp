@@ -2,7 +2,7 @@
 #include <cmath>
 
 
-const int GridNum = 100;
+const int GridNum = 50;
 const float GridScale = 1.0f / (float) GridNum;
 
 class Room
@@ -11,7 +11,7 @@ private:
     const int minRoomSize = 5;
 public:
     Room(glm::uvec2 leftDown, glm::uvec2 rightUp)
-        : leftDown_(leftDown), rightUp_(rightUp), leftRoom_(nullptr), rightRoom_(nullptr), color_(Vec4(Random::Range(0.0f, 0.2f), Random::Range(0.1f, 0.2f), Random::Range(0.0f, 1.0f), 1.0f))
+        : leftDown_(leftDown), rightUp_(rightUp), leftRoom_(nullptr), rightRoom_(nullptr), color_(Vec4(Random::Range(0.0f, 1.0f), Random::Range(0.0f, 1.0f), Random::Range(0.0f, 1.0f), 1.0f))
     {
         if(leftDown_.x > rightUp_.x || leftDown_.y > rightUp_.y)
         {
@@ -104,29 +104,11 @@ void DisplayRooms(Room* rootRoom)
     for(auto room : rooms)
     {
         //LogRoom(room);
-        float x = (room->rightUp_.x + room->leftDown_.x) * 0.5f / (float)GridNum;
-        float y = 1.0f - (room->rightUp_.y + room->leftDown_.y) * 0.5f / (float)GridNum;
-        float xScale = (room->rightUp_.x - room->leftDown_.x) / (float)GridNum;
-        float yScale = (room->rightUp_.y - room->leftDown_.y) / (float)GridNum;
+        float x = (room->rightUp_.x + room->leftDown_.x) * 0.5f / (float)GridNum + GridScale * 0.5;
+        float y = 1.0f - (room->rightUp_.y + room->leftDown_.y) * 0.5f / (float)GridNum - GridScale * 0.5;
+        float xScale = ((room->rightUp_.x - room->leftDown_.x) + 1.0f) / (float)GridNum;
+        float yScale = ((room->rightUp_.y - room->leftDown_.y) + 1.0f) / (float)GridNum;
         ShapeDrawer::Rect(Vec2(x, y), Vec2(xScale, yScale), room->color_);
-
-
-        ShapeDrawer::Rect
-        (
-            Vec2(
-                (float)room->rightUp_.x / (float)GridNum +  GridScale * 0.5f,
-                1.0f - (float)room->rightUp_.y / (float)GridNum +  GridScale * 0.5f
-            ),
-            Vec2(GridScale)
-        );
-        ShapeDrawer::Rect
-        (
-            Vec2(
-                (float)room->leftDown_.x / (float)GridNum +  GridScale * 0.5f,
-                1.0f - (float)room->leftDown_.y / (float)GridNum +  GridScale * 0.5f
-            ),
-            Vec2(GridScale)
-        );
     }
 }
 
@@ -137,36 +119,24 @@ int main()
 {
     auto engine = Engine::Init();
 
-    // Room* root = new Room(glm::uvec2(50, 90), glm::uvec2(60, 100));
-    // Room* root_left = new Room(glm::uvec2(30, 70), glm::uvec2(40, 80));
-    // Room* root_right = new Room(glm::uvec2(60, 70), glm::uvec2(70, 80));
-    // root->leftRoom_ = root_left;
-    // root->rightRoom_ = root_right;
-
-    // Room* root_left_left = new Room(glm::uvec2(20, 50), glm::uvec2(30, 60));
-    // Room* root_left_right = new Room(glm::uvec2(40, 50), glm::uvec2(50, 60));
-    // root_left->leftRoom_ = root_left_left;
-    // root_left->rightRoom_ = root_left_right;
-
-
-    Room* root = new Room(glm::uvec2(10, 10), glm::uvec2(90, 90));
+    Room* root = new Room(glm::uvec2(1, 1), glm::uvec2(GridNum-2, GridNum-2));
     root->Divide();
 
-    for(int i = 0; i < 10; i++)
-    {
-        auto leaves = std::vector<Room*>();
-        GetAllLeaves(root, leaves);
+    // for(int i = 0; i < 10; i++)
+    // {
+    //     auto leaves = std::vector<Room*>();
+    //     GetAllLeaves(root, leaves);
 
-        auto dividableLeaves = std::vector<Room*>();
-        for(auto leaf : leaves)
-        {
-            if(leaf->IsDividable()) dividableLeaves.push_back(leaf);
-        }
+    //     auto dividableLeaves = std::vector<Room*>();
+    //     for(auto leaf : leaves)
+    //     {
+    //         if(leaf->IsDividable()) dividableLeaves.push_back(leaf);
+    //     }
 
-        if(dividableLeaves.size() == 0) break;
+    //     if(dividableLeaves.size() == 0) break;
 
-        dividableLeaves[Random::Range(0, dividableLeaves.size()-1)]->Divide();
-    }
+    //     dividableLeaves[Random::Range(0, dividableLeaves.size()-1)]->Divide();
+    // }
 
 
     while (engine->Running())
@@ -176,7 +146,6 @@ int main()
         if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
 
         engine->BeginRenderToScreen();
-
 
         DisplayRooms(root);
 
@@ -193,9 +162,9 @@ int main()
 
         //ShapeDrawer::Rect(positions[i], Vec2(GridScale * 0.9), colors[i]);
 
-        engine->OnGUI([&]()
-        {
-        });
+        // engine->OnGUI([&]()
+        // {
+        // });
 
         engine->EndRenderToScreen();
         engine->EndFrame();
