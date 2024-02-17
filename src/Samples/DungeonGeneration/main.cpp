@@ -415,6 +415,7 @@ Room* GenerateDungeon()
 }
 
 
+float t = 0.0f;
 
 int main()
 {
@@ -430,10 +431,13 @@ int main()
 
         engine->BeginRenderToScreen();
 
-        if (Input::KeyDown(KeyCode::R))
+        t += 0.016f;
+        if (Input::KeyDown(KeyCode::R) || t > 1.0f)
         {
             //TODO cleanup room before regenerate
             root = GenerateDungeon();
+
+            t = 0.0f;
         }
 
         DisplayRooms(root);
