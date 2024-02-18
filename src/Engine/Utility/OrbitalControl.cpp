@@ -40,6 +40,11 @@ void OrbitalControl::SetOrbit(float theta, float phi, float radius)
 	orbitalRadius = radius;
 }
 
+void OrbitalControl::SetPhi(float phi)
+{
+    orbitalPhi = phi;
+}
+
 void OrbitalControl::SetRadius(float radius)
 {
     orbitalRadius = radius;
