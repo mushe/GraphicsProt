@@ -20,8 +20,9 @@ const glm::uvec2 initialRightUp = glm::uvec2(gridNum-2, gridNum-2);
 const int minRoomSize = 11;
 const int minPadding = 1;
 const int maxPadding = 3;
-glm::uvec2 playerPos = glm::uvec2(0,0);
-glm::uvec2 goalPos = glm::uvec2(0,0);
+glm::ivec2 playerPos = glm::ivec2(0,0);
+glm::ivec2 playerDir = glm::ivec2(1,0);
+glm::ivec2 goalPos = glm::ivec2(0,0);
 
 class Room
 {
@@ -38,7 +39,7 @@ private:
 
 public:
     Room(glm::uvec2 leftDown, glm::uvec2 rightUp, Room* parentRoom, int currentLevel)
-        : leftDown_(leftDown), rightUp_(rightUp), leftRoom_(nullptr), rightRoom_(nullptr), parentRoom_(parentRoom), color_(Vec4(0.7f)), level_(currentLevel + 1)
+        : leftDown_(leftDown), rightUp_(rightUp), leftRoom_(nullptr), rightRoom_(nullptr), parentRoom_(parentRoom), color_(Vec4(0.7f)), level_(currentLevel + 1), verticallyDivided(false)
     {
         if(leftDown_.x > rightUp_.x || leftDown_.y > rightUp_.y)
         {
@@ -58,9 +59,6 @@ public:
     Vec4 GetColor(){return color_;}
     int GetLevel(){return level_;}
     bool IsVerticallyDivided(){return verticallyDivided;}
-
-    glm::ivec2 goalPoint = glm::uvec2(-1,-1);
-    glm::ivec2 startPoint = glm::uvec2(-1,-1);
 
     bool IsLeaf()
     {
@@ -295,7 +293,6 @@ std::vector<std::vector<int>> ConvertRoomToVector2D(Room* root)
     std::vector<Room*> rooms;
     GetAllRooms(root, rooms);
 
-
     for(auto room : rooms)
     {
         // not leaf room(connected)
@@ -320,18 +317,6 @@ std::vector<std::vector<int>> ConvertRoomToVector2D(Room* root)
                 }
             }
         }
-
-        if(room->startPoint.x != -1)
-        {
-            result[room->startPoint.y][room->startPoint.x] = Grid::PLAYER;
-            playerPos = glm::ivec2(room->startPoint.y, room->startPoint.x);
-        }
-        else if(room->goalPoint.x != -1)
-        {
-            result[room->goalPoint.y][room->goalPoint.x] = Grid::GOAL;
-            goalPos = glm::ivec2(room->goalPoint.y, room->goalPoint.x);
-        }
-        
     }
 
     return result;
@@ -438,16 +423,16 @@ void ConnectRooms(Room* root)
 
 void GenerateStartAndGoal(Room* room)
 {
-    auto startRoom = SelectRandomRoom(room);
-    startRoom->startPoint = glm::ivec2
-    (
-        Random::Range((int)startRoom->GetLeftDown().x, (int)startRoom->GetRightUp().x), Random::Range((int)startRoom->GetLeftDown().y, (int)startRoom->GetRightUp().y)
-    );
-
     auto goalRoom = SelectRandomRoom(room);
-    goalRoom->goalPoint = glm::ivec2
+    goalPos = glm::ivec2
     (
         Random::Range((int)goalRoom->GetLeftDown().x, (int)goalRoom->GetRightUp().x), Random::Range((int)goalRoom->GetLeftDown().y, (int)goalRoom->GetRightUp().y)
+    );
+
+    auto startRoom = SelectRandomRoom(room);
+    playerPos = glm::ivec2
+    (
+        Random::Range((int)startRoom->GetLeftDown().x, (int)startRoom->GetRightUp().x), Random::Range((int)startRoom->GetLeftDown().y, (int)startRoom->GetRightUp().y)
     );
 }
 
@@ -473,7 +458,14 @@ std::vector<std::vector<int>> GenerateDungeonToData()
 {
     //TODO cleanup room
     auto root = GenerateDungeon();
-    return ConvertRoomToVector2D(root); 
+
+    auto dungeonData = ConvertRoomToVector2D(root);
+
+    // add player and goal
+    dungeonData[playerPos.y][playerPos.x] = Grid::PLAYER;
+    dungeonData[goalPos.y][goalPos.x] = Grid::GOAL;
+
+    return dungeonData; 
 }
 
 void DisplayDungeonData(std::vector<std::vector<int>> dungeonData)
@@ -490,30 +482,32 @@ void DisplayDungeonData(std::vector<std::vector<int>> dungeonData)
             }
             else if(dungeonData[i][j] == Grid::PLAYER)
             {
-                ShapeDrawer::Circle(Vec2(x, y), Vec2(gridScale * 0.7f), Vec4(1.0f, 0.0f, 0.0f, 1.0f));
+                ShapeDrawer::Triangle(Vec2(x, y), Vec2(playerDir.x, playerDir.y), Vec2(gridScale * 1.0f,gridScale * 0.7f), Vec4(0.7f, 0.0f, 0.0f, 1.0f));
                 ShapeDrawer::Rect(Vec2(x, y), Vec2(gridScale * 0.95f), Vec4(0.1f, 0.1f, 0.1f, 1.0f));
             }
             else if(dungeonData[i][j] == Grid::GOAL)
             {
-                Text("G", Vec2(x, y), 0.9f, Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+                Text("G", Vec2(x, y), gridScale * 30.0f, Vec4(1.0f, 1.0f, 1.0f, 1.0f));
                 ShapeDrawer::Rect(Vec2(x, y), Vec2(gridScale * 0.9), Vec4(0.0f, 0.0f, 1.0f, 1.0f));
             }
         }
     }
+
 }
 
 
 // return goal or not
-void MovePlayer(std::vector<std::vector<int>> &dungeonData, glm::uvec2 direction)
+void MovePlayer(std::vector<std::vector<int>> &dungeonData, glm::ivec2 direction)
 {
     auto nextPos = playerPos + direction;
     if(nextPos.x < 0 || nextPos.x >= gridNum || nextPos.y < 0 || nextPos.y >= gridNum) return;
-    if(dungeonData[nextPos.x][nextPos.y] == Grid::EMPTY) return;
+    if(dungeonData[nextPos.y][nextPos.x] == Grid::EMPTY) return;
 
-    dungeonData[playerPos.x][playerPos.y] = Grid::DUNGEON;
-    dungeonData[nextPos.x][nextPos.y] = Grid::PLAYER;
+    dungeonData[playerPos.y][playerPos.x] = Grid::DUNGEON;
+    dungeonData[nextPos.y][nextPos.x] = Grid::PLAYER;
 
     playerPos = nextPos;
+    playerDir = direction;
 }
 
 
@@ -539,10 +533,12 @@ int main()
             dungeon = GenerateDungeonToData();
         }
 
-        if (Input::KeyDownNow(KeyCode::Up)) MovePlayer(dungeon, glm::uvec2(-1, 0));
-        if (Input::KeyDownNow(KeyCode::Down)) MovePlayer(dungeon, glm::uvec2(1, 0));
-        if (Input::KeyDownNow(KeyCode::Left)) MovePlayer(dungeon, glm::uvec2(0, -1));
-        if (Input::KeyDownNow(KeyCode::Right)) MovePlayer(dungeon, glm::uvec2(0, 1));
+
+        if (Input::KeyDownNow(KeyCode::Up) || Input::KeyDownNow(KeyCode::W)) MovePlayer(dungeon, glm::uvec2(0, -1));
+        if (Input::KeyDownNow(KeyCode::Down) || Input::KeyDownNow(KeyCode::S)) MovePlayer(dungeon, glm::uvec2(0, 1));
+        if (Input::KeyDownNow(KeyCode::Left) || Input::KeyDownNow(KeyCode::A)) MovePlayer(dungeon, glm::uvec2(-1, 0));
+        if (Input::KeyDownNow(KeyCode::Right) || Input::KeyDownNow(KeyCode::D)) MovePlayer(dungeon, glm::uvec2(1, 0));
+
 
         if(playerPos == goalPos)
         {
