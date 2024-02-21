@@ -9,7 +9,7 @@ struct Boid2D
 
 int main()
 {
-    const int boidsCount = 300;
+    const int boidsCount = 500;
     Boid2D boids[boidsCount];
     for (int i = 0; i < boidsCount; i++)
     {
@@ -22,13 +22,13 @@ int main()
 
     // parameters
     float boidScale = 0.4f;
-    float maxVelocity = 0.35f;
+    float maxVelocity = 0.15f;
     float alignmentRadius = 0.1f;
     float cohesionRadius = 0.13f;
-    float separationRadius = 0.05f;
-    float alignmentWeight = 0.003f;
-    float cohesionWeight = 0.17f;
-    float separationWeight = 0.75f;
+    float separationRadius = 0.035f;
+    float alignmentWeight = 0.013f;
+    float cohesionWeight = 0.09f;
+    float separationWeight = 0.95f;
 
     while (engine->Running())
     {
