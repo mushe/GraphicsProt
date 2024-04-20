@@ -341,6 +341,19 @@ https://github.com/mushe/UnrealVFXCollection
 
 https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf
 
+## Compute Shader (fish swarm)
+
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/da81d45c-2f11-4745-9e65-7bca1f68d44b" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/ComputeShader
+- References :
+
+(1) Reynolds, Craig (1987). Flocks, herds and schools: A distributed behavioral model. SIGGRAPH '87: Proceedings of the 14th Annual Conference on Computer Graphics and Interactive Techniques.
+
+(2) UnrelVFXCollection - Flocking
+
+https://github.com/mushe/UnrealVFXCollection
+
 # Usage Examples
 
 ## minimum code
