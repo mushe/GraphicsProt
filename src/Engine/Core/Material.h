@@ -126,7 +126,7 @@ private:
 	void CreateDescriptorSets();
 	void CreateGraphicsPipeline();
 
-    VkShaderModule CreateShaderModule(const std::vector<char>& shaderCode);
+    
 	void LoadShaders(std::string vertexShaderPath, std::string fragmentShaderPath);
 	void AddTexture(std::shared_ptr<Texture> texture){ textures_.push_back(texture); }
 

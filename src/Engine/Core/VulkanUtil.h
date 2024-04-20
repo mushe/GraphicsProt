@@ -18,4 +18,6 @@ namespace VulkanUtil
 
     void BeginSimpleCommand(VkCommandBuffer& commandBuffer);
     void EndSimpleCommand(VkCommandBuffer& commandBuffer);
+
+    VkShaderModule CreateShaderModule(const std::vector<char>& shaderCode);
 };

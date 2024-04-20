@@ -45,3 +45,4 @@ Windows_VS2022
 *.xcuserstate
 *.DS_Store
 build
+.vscode/settings.json

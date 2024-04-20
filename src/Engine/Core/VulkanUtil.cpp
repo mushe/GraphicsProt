@@ -140,3 +140,17 @@ void VulkanUtil::EndSimpleCommand(VkCommandBuffer& commandBuffer)
 
     vkFreeCommandBuffers(VulkanCore::GetDevice(), VulkanCore::GetCommandPool(), 1, &commandBuffer);
 }
+
+
+VkShaderModule VulkanUtil::CreateShaderModule(const std::vector<char>& shaderCode)
+{
+    VkShaderModuleCreateInfo createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+    createInfo.codeSize = shaderCode.size();
+    createInfo.pCode = reinterpret_cast<const uint32_t*>(shaderCode.data());
+
+    VkShaderModule shaderModule;
+    assert(vkCreateShaderModule(VulkanCore::GetDevice(), &createInfo, nullptr, &shaderModule) == VK_SUCCESS);
+
+    return shaderModule;
+}

@@ -70,19 +70,6 @@ shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fr
     return Create(materialInfo);
 }
 
-VkShaderModule Material::CreateShaderModule(const std::vector<char>& shaderCode)
-{
-    VkShaderModuleCreateInfo createInfo{};
-    createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-    createInfo.codeSize = shaderCode.size();
-    createInfo.pCode = reinterpret_cast<const uint32_t*>(shaderCode.data());
-
-    VkShaderModule shaderModule;
-    assert(vkCreateShaderModule(VulkanCore::GetDevice(), &createInfo, nullptr, &shaderModule) == VK_SUCCESS);
-
-    return shaderModule;
-}
-
 void Material::LoadShaders(std::string vertexShaderPath, std::string fragmentShaderPath)
 {
     // xxxx.vert -> xxxxVert.spv
@@ -94,8 +81,8 @@ void Material::LoadShaders(std::string vertexShaderPath, std::string fragmentSha
     auto vertShaderCode = File::ReadShaderFile(vertexShaderPath);
     auto fragShaderCode = File::ReadShaderFile(fragmentShaderPath);
 
-    vertShaderModule_ = CreateShaderModule(vertShaderCode);
-    fragShaderModule_ = CreateShaderModule(fragShaderCode);
+    vertShaderModule_ = VulkanUtil::CreateShaderModule(vertShaderCode);
+    fragShaderModule_ = VulkanUtil::CreateShaderModule(fragShaderCode);
 
     VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
     vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
