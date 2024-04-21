@@ -41,6 +41,7 @@ public:
     static void Color(const Vec4& color, const string label = "");
 
     static void ChangeStyleToLight();
+    static void ChangeStyleToDefault();
 
     static void Begin();
     void CallBegin();
@@ -56,6 +57,12 @@ public:
 
     static void PrintParameters();
     void CallPrintParameters();
+
+    static bool Button(const string label);
+    bool CallButton(const string label);
+
+    static void SameLine();
+    void CallSameLine();
 
 protected:
     GUI():imGuiWrapper_(nullptr){}

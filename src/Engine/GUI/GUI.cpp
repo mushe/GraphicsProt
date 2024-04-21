@@ -54,6 +54,11 @@ void GUI::ChangeStyleToLight()
 	GUI::GetInstance()->imGuiWrapper_->ChangeStyleToLight();
 }
 
+void GUI::ChangeStyleToDefault()
+{
+	GUI::GetInstance()->imGuiWrapper_->ChangeStyleToDefault();
+}
+
 void GUI::Begin() { GUI::GetInstance()->CallBegin(); }
 void GUI::CallBegin()
 {
@@ -111,4 +116,23 @@ void GUI::CallPrintParameters()
 
 	}
 	Debug::Log("------------------------------------------------------------------------------");
+}
+
+
+bool GUI::CallButton(const string label)
+{
+	return ImGui::Button(label.c_str());
+}
+bool GUI::Button(const string label)
+{
+	return GUI::GetInstance()->CallButton(label);
+}
+
+void GUI::CallSameLine()
+{
+	ImGui::SameLine();
+}
+void GUI::SameLine()
+{
+	GUI::GetInstance()->CallSameLine();
 }

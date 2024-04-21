@@ -16,4 +16,5 @@ public:
     void EndFrame(VkCommandBuffer commandBufferToDraw);
     void ShowFPS();
     void ChangeStyleToLight();
+    void ChangeStyleToDefault();
 };

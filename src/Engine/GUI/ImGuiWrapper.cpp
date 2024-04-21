@@ -57,6 +57,32 @@ void ImGuiWrapper::Init(GLFWwindow* window, VkInstance instance, VkDevice device
     vkDeviceWaitIdle(device);
     vkFreeCommandBuffers(device, commandPool, 1, &command);
 
+    ChangeStyleToDefault();
+}
+
+void ImGuiWrapper::BeginFrame(std::string guiName)
+{
+    ImGui_ImplVulkan_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    ImGui::Begin(guiName.c_str(), NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+}
+
+void ImGuiWrapper::EndFrame(VkCommandBuffer commandBufferToDraw)
+{
+    ImGui::End();
+    ImGui::Render();
+    ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBufferToDraw);
+}
+
+void ImGuiWrapper::ShowFPS()
+{
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::Text("%.1f FPS", io.Framerate);
+}
+
+void ImGuiWrapper::ChangeStyleToDefault()
+{
     ImGui::StyleColorsClassic();
     //ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
@@ -81,27 +107,6 @@ void ImGuiWrapper::Init(GLFWwindow* window, VkInstance instance, VkDevice device
     colors[ImGuiCol_Button] = ImVec4(1.0f, 1.0f, 1.0f, 0.04f);
     colors[ImGuiCol_ButtonHovered] = ImVec4(1.0f, 1.0f, 1.0f, 0.06f);
     colors[ImGuiCol_ButtonActive] = ImVec4(1.0f, 1.0f, 1.0f, 0.04f);
-}
-
-void ImGuiWrapper::BeginFrame(std::string guiName)
-{
-    ImGui_ImplVulkan_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-    ImGui::Begin(guiName.c_str(), NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
-}
-
-void ImGuiWrapper::EndFrame(VkCommandBuffer commandBufferToDraw)
-{
-    ImGui::End();
-    ImGui::Render();
-    ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBufferToDraw);
-}
-
-void ImGuiWrapper::ShowFPS()
-{
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui::Text("%.1f FPS", io.Framerate);
 }
 
 void ImGuiWrapper::ChangeStyleToLight()

@@ -270,6 +270,7 @@ void Engine::Quit()
 void Engine::Terminate()
 {
     Debug::Log("Engine::Terminate()");
+
     glfwDestroyWindow(window_);
     glfwTerminate();
 }
@@ -291,8 +292,8 @@ void Engine::OnGUI(std::function<void()> callback)
         
         callback();
 
-        if (ImGui::Button("Print GUI Parameters"))
-            GUI::PrintParameters();
+        //if (ImGui::Button("Print GUI Parameters"))
+        //    GUI::PrintParameters();
     }
     imGuiWrapper_.EndFrame(VulkanCore::GetCurrentCommandBuffer());
 }
