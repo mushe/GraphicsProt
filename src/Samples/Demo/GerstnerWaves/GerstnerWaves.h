@@ -65,9 +65,9 @@ public:
 
 private:
     shared_ptr<Mesh> waveMesh_;
-    shared_ptr<Material> waveMat;
-    shared_ptr<Mesh> bgMesh;
-    shared_ptr<Material> bgMat;
-    GerstnerWaveUBO waveUBO{};
-    Camera camera;
+    shared_ptr<Material> waveMat_;
+    shared_ptr<Mesh> bgMesh_;
+    shared_ptr<Material> bgMat_;
+    GerstnerWaveUBO waveUBO_;
+    Camera camera_;
 };

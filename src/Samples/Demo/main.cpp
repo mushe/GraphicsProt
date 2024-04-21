@@ -2,6 +2,7 @@
 #include "Core/SceneManager.h"
 
 #include "GerstnerWaves/GerstnerWaves.h"
+#include "Boids2dCPU/Boids2dCPU.h"
 
 int main()
 {
@@ -10,6 +11,7 @@ int main()
 
     SceneManager manager(engine);
     auto gerstnerWavesScene = make_shared<GerstnerWaves>();
+    auto boids2dScene = make_shared<Boids2dCPU>();
 
 
     // main rendering loop
@@ -30,7 +32,9 @@ int main()
         {
             GUI::Label("select a scene to open");
             GUI::Space();
-            if(GUI::Button("Gerstner Waves")) manager.OpenScene(gerstnerWavesScene);
+            if(GUI::Button("Gerstner Waves (ocean wave generation)")) manager.OpenScene(gerstnerWavesScene);
+            GUI::SameLine();
+            if(GUI::Button("Boids 2D CPU (flocking simulation)")) manager.OpenScene(boids2dScene);
 		});
 
         engine->EndRenderToScreen();
