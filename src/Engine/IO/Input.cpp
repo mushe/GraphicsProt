@@ -15,7 +15,7 @@ void Input::Update()
 	for (const auto& pair : keyDownFrames_) 
 	{
 		if(glfwGetKey(window_, pair.first) == GLFW_PRESS)
-			keyDownFrames_[pair.first] = min(keyDownFrames_[pair.first]+ 1, (uint)2);
+			keyDownFrames_[pair.first] = min(keyDownFrames_[pair.first]+ 1, 2);
 		else
 			keyDownFrames_[pair.first] = 0;
     }

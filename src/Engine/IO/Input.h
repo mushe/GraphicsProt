@@ -64,7 +64,7 @@ private:
     bool rightMouseDown_ = false;
     bool leftMouseDown_ = false;
 
-    std::unordered_map<KeyCode, uint> keyDownFrames_;
+    std::unordered_map<KeyCode, int> keyDownFrames_;
 
 public:
     void Init(GLFWwindow* window);
