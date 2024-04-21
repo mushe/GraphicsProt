@@ -121,7 +121,7 @@ void GUI::CallPrintParameters()
 
 bool GUI::CallButton(const string label)
 {
-	return ImGui::Button(label.c_str());
+	return ImGui::Button(label.c_str(), ImVec2(0,40));
 }
 bool GUI::Button(const string label)
 {

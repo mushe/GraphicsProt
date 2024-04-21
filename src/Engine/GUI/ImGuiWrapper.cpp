@@ -130,7 +130,7 @@ void ImGuiWrapper::ChangeStyleToLight()
     colors[ImGuiCol_ScrollbarGrab] = ImVec4(1.0f, 1.0f, 1.0f, 0.1f);
     colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(1.0f, 1.0f, 1.0f, 0.1f);
 
-    colors[ImGuiCol_Button] = ImVec4(1.0f, 1.0f, 1.0f, 0.04f);
+    colors[ImGuiCol_Button] = ImVec4(0.1f, 0.1f, 0.1f, 0.3f);
     colors[ImGuiCol_ButtonHovered] = ImVec4(1.0f, 1.0f, 1.0f, 0.06f);
     colors[ImGuiCol_ButtonActive] = ImVec4(1.0f, 1.0f, 1.0f, 0.04f);
 }

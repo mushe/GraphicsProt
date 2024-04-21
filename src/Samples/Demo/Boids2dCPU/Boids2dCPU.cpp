@@ -97,7 +97,7 @@ bool Boids2dCPU::Update(shared_ptr<Engine> engine)
 
     engine->OnGUI([&]()
     {
-        if (GUI::Button("Back To Menu")) closeScene = true;
+        if (GUI::Button(" return to menu ")) closeScene = true;
     });
 
     engine->EndRenderToScreen();
