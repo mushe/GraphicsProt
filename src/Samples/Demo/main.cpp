@@ -4,6 +4,7 @@
 #include "GerstnerWaves/GerstnerWaves.h"
 #include "Boids2dCPU/Boids2dCPU.h"
 #include "PerlinNoise/PerlinNoise.h"
+#include "KiraSticker/KiraSticker.h"
 
 int main()
 {
@@ -14,6 +15,7 @@ int main()
     auto gerstnerWavesScene = make_shared<GerstnerWaves>();
     auto boids2dScene = make_shared<Boids2dCPU>();
     auto perlinNoiseScene = make_shared<PerlinNoise>();
+    auto kiraStickerScene = make_shared<KiraSticker>();
 
 
     // main rendering loop
@@ -41,6 +43,8 @@ int main()
 
             GUI::Space();
             if (GUI::Button(" gpu noise generation (perlin noise) ")) manager.OpenScene(perlinNoiseScene);
+            GUI::SameLine();
+            if (GUI::Button(" old style kirakira sticker ")) manager.OpenScene(kiraStickerScene);
 		});
 
         engine->EndRenderToScreen();
