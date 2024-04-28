@@ -32,10 +32,10 @@ struct InstancingParameter
 };
 
 layout(std140, binding = 2)
-uniform InstancingUniformBufferObject
+buffer InstancingShaderStorageBufferObject
 {
     InstancingParameter params[1];
-} instancingUBO;
+} instancingSSBO;
 
 
 layout(location = 0) in vec3 inPosition;
@@ -54,25 +54,25 @@ layout(location = 3) out float outAscii;
 void main()
 {
     int id = gl_InstanceIndex;
-    vec2 pos = instancingUBO.params[id].position.xy;
-    vec2 scale = instancingUBO.params[id].scale.xy;
+    vec2 pos = instancingSSBO.params[id].position.xy;
+    vec2 scale = instancingSSBO.params[id].scale.xy;
     vec2 texCoord = inTexCoord;
     
     // rect, circle
-    if(instancingUBO.params[id].shapeType == 0 || instancingUBO.params[id].shapeType == 1)
+    if(instancingSSBO.params[id].shapeType == 0 || instancingSSBO.params[id].shapeType == 1)
     {
         // 0 -> 1 to -1 -> 1
         pos = pos * 2.0 - 1.0;
         gl_Position = vec4(vec3(inPosition.x * scale.x, inPosition.y * scale.y, 0) + vec3(pos.x, pos.y ,0), 1.0);
     }
     // line
-    else if (instancingUBO.params[id].shapeType == 2)
+    else if (instancingSSBO.params[id].shapeType == 2)
     {
         vec2 startPos = pos;
         vec2 endPos = scale; // for memory saving
         vec2 centerPos = (startPos + endPos) - 1.0;
 
-        float width = instancingUBO.params[id].scale.z; // for memory saving
+        float width = instancingSSBO.params[id].scale.z; // for memory saving
         vec2 diff = endPos - startPos;
         float height = length(diff);
 
@@ -85,7 +85,7 @@ void main()
         gl_Position = vec4(vec3(xRotated, yRotated, 0) + vec3(centerPos.x, centerPos.y ,0), 1.0);
     }
     // triangle
-    else if(instancingUBO.params[id].shapeType == 3)
+    else if(instancingSSBO.params[id].shapeType == 3)
     {
         vec3 vertexPos = inPosition;
         if(gl_VertexIndex == 0) vertexPos = vec3(-0.6, -1.0, 0.0);
@@ -94,23 +94,23 @@ void main()
         if(gl_VertexIndex == 3) vertexPos = vec3(0.0, 1.0, 0.0);
         float x = vertexPos.x * scale.x;
         float y = vertexPos.y * scale.y;
-        float xRotated = x * cos(instancingUBO.params[id].directionTheta) - y * sin(instancingUBO.params[id].directionTheta);
-        float yRotated = x * sin(instancingUBO.params[id].directionTheta) + y * cos(instancingUBO.params[id].directionTheta);
+        float xRotated = x * cos(instancingSSBO.params[id].directionTheta) - y * sin(instancingSSBO.params[id].directionTheta);
+        float yRotated = x * sin(instancingSSBO.params[id].directionTheta) + y * cos(instancingSSBO.params[id].directionTheta);
 
         // 0 -> 1 to -1 -> 1
         pos = pos * 2.0 - 1.0;
         gl_Position = vec4(vec3(xRotated, yRotated, 0) + vec3(pos.x, pos.y ,0), 1.0);
     }
     // text
-    else if(instancingUBO.params[id].shapeType == 4)
+    else if(instancingSSBO.params[id].shapeType == 4)
     {
         // 0 -> 1 to -1 -> 1
         pos = pos * 2.0 - 1.0;
         gl_Position = vec4(vec3(inPosition.x * scale.x, inPosition.y * scale.y, 0) + vec3(pos.x, pos.y ,0), 1.0);
     }
 
-    outColor = instancingUBO.params[id].color;
+    outColor = instancingSSBO.params[id].color;
     outTexCoord = texCoord;
-    outShapeType = instancingUBO.params[id].shapeType;
-    outAscii = instancingUBO.params[id].ascii;
+    outShapeType = instancingSSBO.params[id].shapeType;
+    outAscii = instancingSSBO.params[id].ascii;
 }

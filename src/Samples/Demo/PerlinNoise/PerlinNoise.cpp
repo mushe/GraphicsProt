@@ -21,7 +21,7 @@ void PerlinNoise::Start(shared_ptr<Engine> engine)
 
 bool PerlinNoise::Update(shared_ptr<Engine> engine)
 {
-    if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
+    if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
     engine->BeginFrame();
 
     bool closeScene = false;
@@ -33,6 +33,7 @@ bool PerlinNoise::Update(shared_ptr<Engine> engine)
     engine->OnGUI([&]()
     {
         if (GUI::Button(" return to menu ")) closeScene = true;
+        GUI::Space();
 
         GUI::Float(ubo_.scale, "scale", 0.01f);
         GUI::Float(ubo_.speed, "speed", 0.01f);

@@ -13,3 +13,5 @@ typedef glm::vec2 Vec2;
 typedef glm::vec3 Vec3;
 typedef glm::vec4 Vec4;
 const float PI = 3.14159265359f;
+
+#define rep(i, n) for (int i = 0; i < n; i++)

@@ -31,7 +31,7 @@ void KiraSticker::Start(shared_ptr<Engine> engine)
 
 bool KiraSticker::Update(shared_ptr<Engine> engine)
 {
-    if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
+    if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
     engine->BeginFrame();
 
     bool closeScene = false;
@@ -45,6 +45,7 @@ bool KiraSticker::Update(shared_ptr<Engine> engine)
     engine->OnGUI([&]()
     {
         if (GUI::Button(" return to menu ")) closeScene = true;
+        GUI::Space();
         GUI::Float(ubo_.division, "division", 1.00f);
         GUI::Float(ubo_.scrollSpeed, "scrollSpeed", 0.01f);
     });

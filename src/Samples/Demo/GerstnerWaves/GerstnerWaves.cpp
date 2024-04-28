@@ -47,7 +47,7 @@ void GerstnerWaves::Start(shared_ptr<Engine> engine)
 
 bool GerstnerWaves::Update(shared_ptr<Engine> engine)
 {
-    if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
+    if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
 
     engine->BeginFrame();
 
@@ -61,6 +61,7 @@ bool GerstnerWaves::Update(shared_ptr<Engine> engine)
     engine->OnGUI([&]()
     {
         if(GUI::Button(" return to menu ")) closeScene = true;
+        GUI::Space();
 
         GUI::Label("Wave 1");
         GUI::FloatSlider(waveUBO_.waveHeight_1, "waveHeight_1", 0.0f, 0.05f);

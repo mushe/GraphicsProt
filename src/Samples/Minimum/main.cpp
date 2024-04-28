@@ -29,7 +29,7 @@ int main()
         engine->BeginFrame(); // must be called at the beginning of every frame
 
         // input handling
-        if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
+        if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
 
         // camera orbital control with mouse
         OrbitalControl::Update(camera);

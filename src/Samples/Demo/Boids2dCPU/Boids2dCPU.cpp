@@ -17,7 +17,7 @@ void Boids2dCPU::Start(shared_ptr<Engine> engine)
 
 bool Boids2dCPU::Update(shared_ptr<Engine> engine)
 {
-    if (Input::KeyDown(KeyCode::Escape)) engine->Quit();
+    if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
     engine->BeginFrame();
 
 

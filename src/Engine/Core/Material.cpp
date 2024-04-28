@@ -9,7 +9,7 @@ void Material::Init()
         VulkanUtil::CreateBuffer(customUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, uniformBuffer_, uniformBufferMemory_);
 
     if(instancingUboBufferSize_ > 0)
-        VulkanUtil::CreateBuffer(instancingUboBufferSize_, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, instancingUniformBuffer_, instancingUniformBufferMemory_);
+        VulkanUtil::CreateBuffer(instancingUboBufferSize_, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, instancingUniformBuffer_, instancingUniformBufferMemory_);
 
     VulkanUtil::CreateBuffer(sizeof(CommonUniformBuffer), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, commonUniformBuffer_, commonUniformBufferMemory_);
 
@@ -123,7 +123,7 @@ void Material::CreateDescriptorSetLayout()
     VkDescriptorSetLayoutBinding instancingUboLayoutBinding{};
     instancingUboLayoutBinding.binding = 2;
     instancingUboLayoutBinding.descriptorCount = 1;
-    instancingUboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    instancingUboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
     instancingUboLayoutBinding.pImmutableSamplers = nullptr;
     instancingUboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
     bindings.push_back(instancingUboLayoutBinding);
@@ -162,7 +162,7 @@ void Material::CreateDescriptorPool()
     poolSizes.push_back(commonPoolSize);
 
     VkDescriptorPoolSize instancingPoolSize{};
-    instancingPoolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    instancingPoolSize.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
     instancingPoolSize.descriptorCount = static_cast<uint32_t>(maxFrames_);
     poolSizes.push_back(instancingPoolSize);
 
@@ -241,7 +241,7 @@ void Material::CreateDescriptorSets()
             uboDescriptorWrite.dstSet = descriptorSets_[i];
             uboDescriptorWrite.dstBinding = 2;
             uboDescriptorWrite.dstArrayElement = 0;
-            uboDescriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            uboDescriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
             uboDescriptorWrite.descriptorCount = 1;
             uboDescriptorWrite.pBufferInfo = &bufferInfo;
             descriptorWrites.push_back(uboDescriptorWrite);

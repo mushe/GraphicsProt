@@ -54,3 +54,12 @@ void OrbitalControl::LogOrbit()
 {
    Debug::Log(to_string(orbitalTheta) + " " + to_string(orbitalPhi) + " " + to_string(orbitalRadius));
 }
+
+void OrbitalControl::Reset()
+{
+    wheelVel = 0.0f;
+    rightMouseVel = Vec2(0.0f);
+    orbitalTheta = 0.95f;
+    orbitalPhi = 7.0f;
+    orbitalRadius = 17.0f;
+}

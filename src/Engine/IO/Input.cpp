@@ -21,20 +21,20 @@ void Input::Update()
     }
 }
 
-bool Input::KeyDown(KeyCode keyCode)
+bool Input::KeyDown(InputCode::Key keyCode)
 {
 	return GetInstance()->KeyDown_Call(keyCode);
 }
-bool Input::KeyDown_Call(KeyCode keyCode)
+bool Input::KeyDown_Call(InputCode::Key keyCode)
 {
 	return glfwGetKey(window_, keyCode) == GLFW_PRESS;
 }
 
-bool Input::KeyDownNow(KeyCode keyCode)
+bool Input::KeyDownNow(InputCode::Key keyCode)
 {
 	return GetInstance()->KeyDownNow_Call(keyCode);
 }
-bool Input::KeyDownNow_Call(KeyCode keyCode)
+bool Input::KeyDownNow_Call(InputCode::Key keyCode)
 {
 	return keyDownFrames_[keyCode] == 1;
 }

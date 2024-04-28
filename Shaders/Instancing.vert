@@ -24,10 +24,10 @@ struct InstancingParameter
 };
 
 layout(binding = 2)
-uniform InstancingUniformBufferObject
+buffer InstancingShaderStorageBufferObject
 {
     InstancingParameter params[1];
-} instancingUBO;
+} instancingSSBO;
 
 layout(location = 0) in vec3 inPosition;
 layout(location = 1) in vec3 inColor;
@@ -47,7 +47,7 @@ layout(location = 5) out vec3 outBiTangent;
 void main()
 {
     int id = gl_InstanceIndex;
-    vec3 position = inPosition * instancingUBO.params[id].scale * ubo.scale + instancingUBO.params[id].position;
+    vec3 position = inPosition * instancingSSBO.params[id].scale * ubo.scale + instancingSSBO.params[id].position;
     
     gl_Position = commonUBO.WVP * vec4(position, 1.0);
     outPosition = gl_Position;

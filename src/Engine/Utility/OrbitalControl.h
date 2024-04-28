@@ -8,4 +8,5 @@ namespace OrbitalControl
     void SetRadius(float radius);
     void SetPhi(float phi);
     void LogOrbit();
+    void Reset();
 }
