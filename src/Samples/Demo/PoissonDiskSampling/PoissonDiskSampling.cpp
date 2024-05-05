@@ -111,8 +111,6 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
 
 void PoissonDiskSampling::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("PoissonDiskSampling::Start()");
-
     positions_ = PoissonDiskSampling2D(r_, k_, Vec2(1.0f, 1.0f));
     colors_.resize(positions_.size());
     for (int i = 0; i < positions_.size(); i++)
@@ -155,7 +153,6 @@ bool PoissonDiskSampling::Update(shared_ptr<Engine> engine)
 
 void PoissonDiskSampling::Release()
 {
-    Debug::Log("PoissonDiskSampling::Release()");
     positions_.clear();
     colors_.clear();
     t_ = 0.0f;

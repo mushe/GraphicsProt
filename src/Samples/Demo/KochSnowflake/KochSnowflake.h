@@ -8,9 +8,8 @@ public:
     KochSnowflake():
         t_(1.0f)
     {
-        Debug::Log("KochSnowflake()");
     }
-    virtual ~KochSnowflake() { Debug::Log("~KochSnowflake()"); }
+    virtual ~KochSnowflake() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

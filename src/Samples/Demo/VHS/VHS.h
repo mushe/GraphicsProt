@@ -19,9 +19,8 @@ class VHS : public Scene
 public:
     VHS()
     {
-        Debug::Log("VHS()");
     }
-    virtual ~VHS() { Debug::Log("~VHS()"); }
+    virtual ~VHS() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

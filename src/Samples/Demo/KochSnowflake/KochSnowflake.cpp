@@ -28,7 +28,6 @@ void KochSnowflake::Snowflake(Vec2 p1, Vec2 p2, Vec2 p3, int depth)
 
 void KochSnowflake::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("KochSnowflake::Start()");
     t_ = 1.0f;
 }
 
@@ -70,5 +69,4 @@ bool KochSnowflake::Update(shared_ptr<Engine> engine)
 
 void KochSnowflake::Release()
 {
-    Debug::Log("KochSnowflake::Release()");
 }

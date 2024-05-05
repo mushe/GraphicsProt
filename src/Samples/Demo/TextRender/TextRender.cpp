@@ -19,7 +19,6 @@ void TextRender::Reset()
 
 void TextRender::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("TextRender::Start()");
     Reset();
 }
 
@@ -56,7 +55,6 @@ bool TextRender::Update(shared_ptr<Engine> engine)
 
 void TextRender::Release()
 {
-    Debug::Log("TextRender::Release()");
     positions_.clear();
     scales_.clear();
     colors_.clear();

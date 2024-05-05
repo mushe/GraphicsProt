@@ -11,9 +11,8 @@ class PseudoColor : public Scene
 public:
     PseudoColor()
     {
-        Debug::Log("PseudoColor()");
     }
-    virtual ~PseudoColor() { Debug::Log("~PseudoColor()"); }
+    virtual ~PseudoColor() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

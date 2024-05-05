@@ -3,7 +3,6 @@
 
 void WhiteNoiseCPU::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("WhiteNoiseCPU::Start()");
     positions_.resize(N_);
 
     for (int i = 0; i < N_; i++)
@@ -46,5 +45,4 @@ bool WhiteNoiseCPU::Update(shared_ptr<Engine> engine)
 
 void WhiteNoiseCPU::Release()
 {
-    Debug::Log("WhiteNoiseCPU::Release()");
 }

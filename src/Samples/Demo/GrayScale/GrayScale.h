@@ -11,9 +11,8 @@ class GrayScale : public Scene
 public:
     GrayScale()
     {
-        Debug::Log("GrayScale()");
     }
-    virtual ~GrayScale() { Debug::Log("~GrayScale()"); }
+    virtual ~GrayScale() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

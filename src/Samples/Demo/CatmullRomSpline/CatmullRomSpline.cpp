@@ -14,7 +14,6 @@ Vec2 CatmullRomSpline::CatmullRomSplineInterp(Vec2 p_mi1, Vec2 p_0, Vec2 p_1, Ve
 
 void CatmullRomSpline::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("CatmullRomSpline::Start()");
 }
 
 
@@ -69,5 +68,4 @@ bool CatmullRomSpline::Update(shared_ptr<Engine> engine)
 
 void CatmullRomSpline::Release()
 {
-    Debug::Log("CatmullRomSpline::Release()");
 }

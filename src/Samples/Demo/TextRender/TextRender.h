@@ -8,9 +8,8 @@ public:
     TextRender():
         t_(0.0f)
     {
-        Debug::Log("TextRender()");
     }
-    virtual ~TextRender() { Debug::Log("~TextRender()"); }
+    virtual ~TextRender() { }
 
     void Reset();
     void Start(shared_ptr<Engine> engine) override;

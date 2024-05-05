@@ -24,7 +24,6 @@ Point PiCalculation::GenerateRandomPoint()
 
 void PiCalculation::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("PiCalculation::Start()");
 }
 
 
@@ -73,5 +72,4 @@ bool PiCalculation::Update(shared_ptr<Engine> engine)
 
 void PiCalculation::Release()
 {
-    Debug::Log("PiCalculation::Release()");
 }

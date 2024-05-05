@@ -19,9 +19,8 @@ public:
         fishCount_(desiredFishCount_ - desiredFishCount_ % 256),
         fieldScale_(1.0f)
     {
-        Debug::Log("ComputeShaderScene()");
     }
-    virtual ~ComputeShaderScene() { Debug::Log("~ComputeShaderScene()"); }
+    virtual ~ComputeShaderScene() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

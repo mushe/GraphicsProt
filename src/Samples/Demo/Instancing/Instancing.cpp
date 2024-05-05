@@ -3,8 +3,6 @@
 
 void Instancing::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Instancing::Start()");
-
     instancingBuffer.resize(instanceCount_);
 
     auto plane = ModelGenerator::GeneratePlane();
@@ -75,5 +73,4 @@ bool Instancing::Update(shared_ptr<Engine> engine)
 
 void Instancing::Release()
 {
-    Debug::Log("Instancing::Release()");
 }

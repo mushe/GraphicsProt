@@ -3,9 +3,6 @@
 
 void PerlinNoise::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("PerlinNoise::Start()");
-
-    
     rt_ = RenderTarget::Create(1920, 1080);
     postProcessMat_ = Material::Create
     (
@@ -47,5 +44,4 @@ bool PerlinNoise::Update(shared_ptr<Engine> engine)
 
 void PerlinNoise::Release()
 {
-    Debug::Log("PerlinNoise::Release()");
 }

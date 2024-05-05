@@ -3,8 +3,6 @@
 
 void NormalMapping::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("NormalMapping::Start()");
-
     floorMesh_ = Mesh::Create();
     auto plane = ModelGenerator::GeneratePlane(100);
     floorMesh_->SetIndices(plane.indices);
@@ -65,5 +63,4 @@ bool NormalMapping::Update(shared_ptr<Engine> engine)
 
 void NormalMapping::Release()
 {
-    Debug::Log("NormalMapping::Release()");
 }

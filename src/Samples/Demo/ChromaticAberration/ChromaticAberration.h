@@ -9,11 +9,8 @@ struct ChromaticAberrationPostProcessUBO :public UniformBufferBase
 class ChromaticAberration : public Scene
 {
 public:
-    ChromaticAberration()
-    {
-        Debug::Log("ChromaticAberration()");
-    }
-    virtual ~ChromaticAberration() { Debug::Log("~ChromaticAberration()"); }
+    ChromaticAberration(){ }
+    virtual ~ChromaticAberration(){ }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

@@ -5,11 +5,8 @@
 class Minimum : public Scene
 {
 public:
-    Minimum()
-    {
-        Debug::Log("Minimum()");
-    }
-    virtual ~Minimum() { Debug::Log("~Minimum()"); }
+    Minimum(){ }
+    virtual ~Minimum(){  }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

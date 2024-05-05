@@ -15,9 +15,8 @@ public:
         noiseScale_(0.96f),
         noiseSpeed_(0.63f)
     {
-        Debug::Log("Grass()");
     }
-    virtual ~Grass() { Debug::Log("~Grass()"); }
+    virtual ~Grass() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

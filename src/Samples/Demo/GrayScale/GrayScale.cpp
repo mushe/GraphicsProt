@@ -3,8 +3,6 @@
 
 void GrayScale::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("GrayScale::Start()");
-
     // mesh
     mesh_ = Mesh::FromOBJ("../Models/StevenUNiverseRoom/StevenUNiverseRoom.obj");
     mesh_->SetPosition(Vec3(0, -1.0f, 0));
@@ -60,5 +58,4 @@ bool GrayScale::Update(shared_ptr<Engine> engine)
 
 void GrayScale::Release()
 {
-    Debug::Log("GrayScale::Release()");
 }

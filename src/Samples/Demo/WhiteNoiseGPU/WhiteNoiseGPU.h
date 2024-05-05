@@ -7,9 +7,8 @@ class WhiteNoiseGPU : public Scene
 public:
     WhiteNoiseGPU()
     {
-        Debug::Log("WhiteNoiseGPU()");
     }
-    virtual ~WhiteNoiseGPU() { Debug::Log("~WhiteNoiseGPU()"); }
+    virtual ~WhiteNoiseGPU() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

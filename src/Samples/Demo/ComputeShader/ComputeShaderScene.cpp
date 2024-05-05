@@ -3,8 +3,6 @@
 
 void ComputeShaderScene::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("ComputeShaderScene::Start()");
-
     computeUBO_.resize(fishCount_);
 
     // ----------------------------------------------------------------
@@ -74,5 +72,4 @@ bool ComputeShaderScene::Update(shared_ptr<Engine> engine)
 
 void ComputeShaderScene::Release()
 {
-    Debug::Log("ComputeShaderScene::Release()");
 }

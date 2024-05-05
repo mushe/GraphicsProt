@@ -3,8 +3,6 @@
 
 void ChromaticAberration::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("ChromaticAberration::Start()");
-
     // mesh
     mesh_ = Mesh::FromOBJ("../Models/StevenUNiverseRoom/StevenUNiverseRoom.obj");
     mesh_->SetPosition(Vec3(0, -1.0f, 0));
@@ -60,5 +58,4 @@ bool ChromaticAberration::Update(shared_ptr<Engine> engine)
 
 void ChromaticAberration::Release()
 {
-    Debug::Log("ChromaticAberration::Release()");
 }

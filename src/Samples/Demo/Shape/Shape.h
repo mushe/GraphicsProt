@@ -11,9 +11,8 @@ public:
         GridScale_(1.0f / (float)GridNum_),
         t_(0.0f)
     {
-        Debug::Log("Shape()");
     }
-    virtual ~Shape() { Debug::Log("~Shape()"); }
+    virtual ~Shape() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

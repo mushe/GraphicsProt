@@ -26,9 +26,8 @@ public:
         velocity_(initialVelocity_ * 0.0001),
         rotationalVelocity_(0.0f)
     {
-        Debug::Log("Hover()");
     }
-    virtual ~Hover() { Debug::Log("~Hover()"); }
+    virtual ~Hover() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

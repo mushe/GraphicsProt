@@ -10,9 +10,8 @@ public:
         r_(0.05f),
         k_(30.0f)
     {
-        Debug::Log("PoissonDiskSampling()");
     }
-    virtual ~PoissonDiskSampling() { Debug::Log("~PoissonDiskSampling()"); }
+    virtual ~PoissonDiskSampling() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

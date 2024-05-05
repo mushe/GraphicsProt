@@ -142,9 +142,8 @@ public:
         instanceCount(Dungeon3DConstants::gridNum* Dungeon3DConstants::gridNum),
         yOffs_(1.02f)
     {
-        Debug::Log("Dungeon3D()");
     }
-    virtual ~Dungeon3D() { Debug::Log("~Dungeon3D()"); }
+    virtual ~Dungeon3D() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

@@ -3,7 +3,6 @@
 
 void SceneTemplate::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("SceneTemplate::Start()");
 }
 
 
@@ -31,5 +30,4 @@ bool SceneTemplate::Update(shared_ptr<Engine> engine)
 
 void SceneTemplate::Release()
 {
-    Debug::Log("SceneTemplate::Release()");
 }

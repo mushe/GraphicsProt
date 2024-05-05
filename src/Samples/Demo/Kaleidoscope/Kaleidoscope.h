@@ -11,9 +11,8 @@ class Kaleidoscope : public Scene
 public:
     Kaleidoscope():t_(0.0f)
     {
-        Debug::Log("Kaleidoscope()");
     }
-    virtual ~Kaleidoscope() { Debug::Log("~Kaleidoscope()"); }
+    virtual ~Kaleidoscope() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

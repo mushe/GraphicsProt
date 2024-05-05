@@ -413,8 +413,6 @@ void Dungeon3D::MovePlayer(std::vector<std::vector<int>>& dungeonData, glm::ivec
 
 void Dungeon3D::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Dungeon3D::Start()");
-
     dungeon_ = GenerateDungeonToData();
     currentFloor_ = 1;
     showMap_ = true;
@@ -516,5 +514,4 @@ bool Dungeon3D::Update(shared_ptr<Engine> engine)
 
 void Dungeon3D::Release()
 {
-    Debug::Log("Dungeon3D::Release()");
 }

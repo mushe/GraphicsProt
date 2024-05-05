@@ -3,8 +3,6 @@
 
 void PseudoColor::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("PseudoColor::Start()");
-
     tex_ = Texture::FromPNG("../Textures/Milwaukee_City_Hall_Old_Public_Domain_Photo.png");
     auto plane = ModelGenerator::GeneratePlane(100);
 
@@ -71,5 +69,4 @@ bool PseudoColor::Update(shared_ptr<Engine> engine)
 
 void PseudoColor::Release()
 {
-    Debug::Log("PseudoColor::Release()");
 }

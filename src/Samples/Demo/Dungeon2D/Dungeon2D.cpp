@@ -394,8 +394,6 @@ void Dungeon2D::MovePlayer(std::vector<std::vector<int>>& dungeonData, glm::ivec
 
 void Dungeon2D::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Dungeon2D::Start()");
-
     dungeon_ = GenerateDungeonToData();
     currentFloor_ = 1;
 }
@@ -448,5 +446,4 @@ bool Dungeon2D::Update(shared_ptr<Engine> engine)
 
 void Dungeon2D::Release()
 {
-    Debug::Log("Dungeon2D::Release()");
 }

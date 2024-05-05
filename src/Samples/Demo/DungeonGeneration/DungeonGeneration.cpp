@@ -314,7 +314,6 @@ DungeonGenerationRoom* DungeonGeneration::GenerateDungeon()
 
 void DungeonGeneration::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("DungeonGeneration::Start()");
     root_ = GenerateDungeon();
 }
 
@@ -365,5 +364,4 @@ bool DungeonGeneration::Update(shared_ptr<Engine> engine)
 
 void DungeonGeneration::Release()
 {
-    Debug::Log("DungeonGeneration::Release()");
 }

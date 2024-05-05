@@ -20,7 +20,6 @@ Particle Hover::SpawnParticle(Vec2 position)
 
 void Hover::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Hover::Start()");
 }
 
 
@@ -124,5 +123,4 @@ bool Hover::Update(shared_ptr<Engine> engine)
 
 void Hover::Release()
 {
-    Debug::Log("Hover::Release()");
 }

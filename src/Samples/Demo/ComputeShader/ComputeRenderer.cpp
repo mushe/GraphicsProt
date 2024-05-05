@@ -53,8 +53,6 @@ void ComputeRenderer::Draw()
     vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout_, 0, 1, &descriptorSets_, 0, nullptr);
 
     vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices.size()), particleCount_, 0, 0, 0);
-    
-    
 }
 
 //todo

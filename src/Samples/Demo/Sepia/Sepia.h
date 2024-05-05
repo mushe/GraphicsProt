@@ -11,9 +11,8 @@ class Sepia : public Scene
 public:
     Sepia()
     {
-        Debug::Log("Sepia()");
     }
-    virtual ~Sepia() { Debug::Log("~Sepia()"); }
+    virtual ~Sepia() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

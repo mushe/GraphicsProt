@@ -14,9 +14,8 @@ class PerlinNoise : public Scene
 public:
     PerlinNoise()
     {
-        Debug::Log("PerlinNoise()");
     }
-    virtual ~PerlinNoise() { Debug::Log("~PerlinNoise()"); }
+    virtual ~PerlinNoise() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

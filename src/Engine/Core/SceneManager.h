@@ -7,9 +7,8 @@ class SceneManager
 public:
     SceneManager(shared_ptr<Engine> engine) : engine_(engine), currentScene_(nullptr)
     {
-        Debug::Log("SceneManager()");
     }
-    virtual ~SceneManager(){Debug::Log("~Scene()");}
+    virtual ~SceneManager(){ }
 
     bool UpdateCurrentScene();
     void OpenScene(shared_ptr<Scene> scene);

@@ -4,8 +4,6 @@
 
 void River::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("River::Start()");
-
     mesh_ = Mesh::Create();
     auto plane = ModelGenerator::GeneratePlane(100);
     mesh_->SetIndices(plane.indices);
@@ -88,5 +86,4 @@ bool River::Update(shared_ptr<Engine> engine)
 
 void River::Release()
 {
-    Debug::Log("River::Release()");
 }

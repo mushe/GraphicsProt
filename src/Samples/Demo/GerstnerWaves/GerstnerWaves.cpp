@@ -3,8 +3,6 @@
 
 void GerstnerWaves::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("GerstnerWaves::Start()");
-
     GUI::ChangeStyleToLight();
 
     // wave mesh
@@ -41,7 +39,6 @@ void GerstnerWaves::Start(shared_ptr<Engine> engine)
     
     camera_.transform_.position = Vec3(0.0f, 0.0f, 1.91f);
     camera_.transform_.rotation = Vec3(0.0f, 0.0f, -1.0f);
-
 }
 
 
@@ -120,5 +117,4 @@ bool GerstnerWaves::Update(shared_ptr<Engine> engine)
 
 void GerstnerWaves::Release()
 {
-    Debug::Log("GerstnerWaves::Release()");
 }

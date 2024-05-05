@@ -45,9 +45,8 @@ public:
         riverColG_(0.26f),
         riverColB_(0.413f)
     {
-        Debug::Log("River()");
     }
-    virtual ~River() { Debug::Log("~River()"); }
+    virtual ~River() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

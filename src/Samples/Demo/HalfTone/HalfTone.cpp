@@ -3,8 +3,6 @@
 
 void HalfTone::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("HalfTone::Start()");
-
     mesh_ = Mesh::FromOBJ("../Models/StevenUNiverseRoom/StevenUNiverseRoom.obj");
     mesh_->SetPosition(Vec3(0, -1.0f, 0));
     mesh_->SetRotation(Vec3(0));
@@ -59,5 +57,4 @@ bool HalfTone::Update(shared_ptr<Engine> engine)
 
 void HalfTone::Release()
 {
-    Debug::Log("HalfTone::Release()");
 }

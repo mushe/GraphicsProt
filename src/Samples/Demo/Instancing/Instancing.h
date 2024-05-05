@@ -17,9 +17,8 @@ class Instancing : public Scene
 public:
     Instancing():instanceCount_(10000)
     {
-        Debug::Log("Instancing()");
     }
-    virtual ~Instancing() { Debug::Log("~Instancing()"); }
+    virtual ~Instancing() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

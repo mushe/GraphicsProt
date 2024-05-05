@@ -3,8 +3,6 @@
 
 void Posterization::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Posterization::Start()");
-
     tex_ = Texture::FromPNG("../Textures/mountain.png");
     auto plane = ModelGenerator::GeneratePlane(100);
     colorMesh_ = Mesh::Create();
@@ -71,5 +69,4 @@ bool Posterization::Update(shared_ptr<Engine> engine)
 
 void Posterization::Release()
 {
-    Debug::Log("Posterization::Release()");
 }

@@ -7,10 +7,8 @@ class CatmullRomSpline : public Scene
 public:
     CatmullRomSpline():
 		t_(0.0f)
-    {
-        Debug::Log("CatmullRomSpline()");
-    }
-    virtual ~CatmullRomSpline() { Debug::Log("~CatmullRomSpline()"); }
+    { }
+    virtual ~CatmullRomSpline() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

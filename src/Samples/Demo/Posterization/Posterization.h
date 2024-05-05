@@ -11,9 +11,8 @@ class Posterization : public Scene
 public:
     Posterization()
     {
-        Debug::Log("Posterization()");
     }
-    virtual ~Posterization() { Debug::Log("~Posterization()"); }
+    virtual ~Posterization() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

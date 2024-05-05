@@ -15,9 +15,8 @@ public:
         interval_(0.016f),
         scale_(0.01f)
     {
-        Debug::Log("PiCalculation()");
     }
-    virtual ~PiCalculation() { Debug::Log("~PiCalculation()"); }
+    virtual ~PiCalculation() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

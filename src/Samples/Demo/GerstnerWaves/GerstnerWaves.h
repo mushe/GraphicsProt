@@ -55,9 +55,8 @@ class GerstnerWaves : public Scene
 public:
     GerstnerWaves()
     {
-        Debug::Log("GerstnerWaves()");
     }
-    virtual ~GerstnerWaves(){Debug::Log("~GerstnerWaves()");}
+    virtual ~GerstnerWaves(){ }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

@@ -7,9 +7,8 @@ class SierpinskiTriangle : public Scene
 public:
     SierpinskiTriangle()
     {
-        Debug::Log("SierpinskiTriangle()");
     }
-    virtual ~SierpinskiTriangle() { Debug::Log("~SierpinskiTriangle()"); }
+    virtual ~SierpinskiTriangle() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

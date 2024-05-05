@@ -12,9 +12,8 @@ class HalfTone : public Scene
 public:
     HalfTone()
     {
-        Debug::Log("HalfTone()");
     }
-    virtual ~HalfTone() { Debug::Log("~HalfTone()"); }
+    virtual ~HalfTone() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

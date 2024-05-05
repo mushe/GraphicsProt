@@ -3,8 +3,6 @@
 
 void Kaleidoscope::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Kaleidoscope::Start()");
-
     // mesh
     mesh_ = Mesh::FromOBJ("../Models/StevenUNiverseRoom/StevenUNiverseRoom.obj");
     mesh_->SetPosition(Vec3(0, -1.0f, 0));
@@ -68,5 +66,4 @@ bool Kaleidoscope::Update(shared_ptr<Engine> engine)
 
 void Kaleidoscope::Release()
 {
-    Debug::Log("Kaleidoscope::Release()");
 }

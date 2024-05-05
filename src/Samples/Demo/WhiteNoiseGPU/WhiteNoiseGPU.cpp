@@ -3,8 +3,6 @@
 
 void WhiteNoiseGPU::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("WhiteNoiseGPU::Start()");
-
     rt_ = RenderTarget::Create(1920, 1080);
     postProcessMat_ = Material::Create
     (
@@ -41,5 +39,4 @@ bool WhiteNoiseGPU::Update(shared_ptr<Engine> engine)
 
 void WhiteNoiseGPU::Release()
 {
-    Debug::Log("WhiteNoiseGPU::Release()");
 }

@@ -3,8 +3,6 @@
 
 void Boids2dCPU::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Boids2dCPU::Start()");
-
     boids.resize(boidsCount);
     for (int i = 0; i < boidsCount; i++)
     {
@@ -108,5 +106,4 @@ bool Boids2dCPU::Update(shared_ptr<Engine> engine)
 
 void Boids2dCPU::Release()
 {
-    Debug::Log("Boids2dCPU::Release()");
 }

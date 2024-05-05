@@ -24,7 +24,6 @@ void SierpinskiTriangle::SiepinskiTriangle(Vec2 p1, Vec2 p2, Vec2 p3, int depth)
 
 void SierpinskiTriangle::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("SierpinskiTriangle::Start()");
 }
 
 
@@ -63,5 +62,4 @@ bool SierpinskiTriangle::Update(shared_ptr<Engine> engine)
 
 void SierpinskiTriangle::Release()
 {
-    Debug::Log("SierpinskiTriangle::Release()");
 }

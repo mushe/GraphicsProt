@@ -3,8 +3,6 @@
 
 void KiraSticker::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("KiraSticker::Start()");
-
     floorMesh_ = Mesh::Create();
     auto plane = ModelGenerator::GeneratePlane(100);
     floorMesh_->SetIndices(plane.indices);
@@ -59,5 +57,4 @@ bool KiraSticker::Update(shared_ptr<Engine> engine)
 
 void KiraSticker::Release()
 {
-    Debug::Log("KiraSticker::Release()");
 }

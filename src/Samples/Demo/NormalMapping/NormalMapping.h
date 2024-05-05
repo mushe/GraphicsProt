@@ -21,9 +21,8 @@ public:
     NormalMapping():
         meshRotation_(0, 0, 0)
     {
-        Debug::Log("NormalMapping()");
     }
-    virtual ~NormalMapping() { Debug::Log("~NormalMapping()"); }
+    virtual ~NormalMapping() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

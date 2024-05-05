@@ -129,9 +129,8 @@ public:
         playerDir_(glm::ivec2(1, 0)),
         goalPos_(glm::ivec2(0, 0))
     {
-        Debug::Log("Dungeon2D()");
     }
-    virtual ~Dungeon2D() { Debug::Log("~Dungeon2D()"); }
+    virtual ~Dungeon2D() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

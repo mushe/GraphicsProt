@@ -3,8 +3,6 @@
 
 void Shape::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Shape::Start()");
-
     randIndices_.resize(N_);
     positions_.resize(N_);
     randScales_.resize(N_);
@@ -71,5 +69,4 @@ bool Shape::Update(shared_ptr<Engine> engine)
 
 void Shape::Release()
 {
-    Debug::Log("Shape::Release()");
 }

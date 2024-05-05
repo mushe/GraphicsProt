@@ -113,9 +113,8 @@ public:
     DungeonGeneration():
         t_(0.0f)
     {
-        Debug::Log("DungeonGeneration()");
     }
-    virtual ~DungeonGeneration() { Debug::Log("~DungeonGeneration()"); }
+    virtual ~DungeonGeneration() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

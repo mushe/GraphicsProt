@@ -3,8 +3,6 @@
 
 void Grass::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Grass::Start()");
-
     floorMesh_ = Mesh::Create();
     auto plane = ModelGenerator::GeneratePlane();
     floorMesh_->SetIndices(plane.indices);
@@ -81,5 +79,4 @@ bool Grass::Update(shared_ptr<Engine> engine)
 
 void Grass::Release()
 {
-    Debug::Log("Grass::Release()");
 }

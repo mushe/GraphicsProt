@@ -99,9 +99,8 @@ public:
         color_(Vec4(1,1,1,1)),
         t_(0.0f)
     {
-        Debug::Log("RoomDivision()");
     }
-    virtual ~RoomDivision() { Debug::Log("~RoomDivision()"); }
+    virtual ~RoomDivision() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

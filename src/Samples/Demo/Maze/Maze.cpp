@@ -79,8 +79,6 @@ void Maze::Reset()
 
 void Maze::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Maze::Start()");
-
     GUI::ChangeStyleToDefault();
 
     Reset();
@@ -136,6 +134,5 @@ bool Maze::Update(shared_ptr<Engine> engine)
 
 void Maze::Release()
 {
-    Debug::Log("Maze::Release()");
     grids_.clear();
 }

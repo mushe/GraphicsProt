@@ -10,9 +10,8 @@ public:
         N_(GridNum_* GridNum_),
         GridScale_(1.0f / (float)GridNum_)
     {
-        Debug::Log("WhiteNoiseCPU()");
     }
-    virtual ~WhiteNoiseCPU() { Debug::Log("~WhiteNoiseCPU()"); }
+    virtual ~WhiteNoiseCPU() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

@@ -83,7 +83,6 @@ Room* RoomDivision::GenerateDividedRoom()
 
 void RoomDivision::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("RoomDivision::Start()");
     root_ = GenerateDividedRoom();
 }
 
@@ -134,5 +133,4 @@ bool RoomDivision::Update(shared_ptr<Engine> engine)
 
 void RoomDivision::Release()
 {
-    Debug::Log("RoomDivision::Release()");
 }

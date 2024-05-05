@@ -19,9 +19,8 @@ public:
     Maze():
         t_(0.0f)
     {
-        Debug::Log("Maze()");
     }
-    virtual ~Maze() { Debug::Log("~Maze()"); }
+    virtual ~Maze() { }
 
     void Reset();
 

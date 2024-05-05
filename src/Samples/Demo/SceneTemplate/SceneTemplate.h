@@ -7,9 +7,8 @@ class SceneTemplate : public Scene
 public:
     SceneTemplate()
     {
-        Debug::Log("SceneTemplate()");
     }
-    virtual ~SceneTemplate() { Debug::Log("~SceneTemplate()"); }
+    virtual ~SceneTemplate() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;

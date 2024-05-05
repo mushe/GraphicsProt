@@ -3,8 +3,6 @@
 
 void Minimum::Start(shared_ptr<Engine> engine)
 {
-    Debug::Log("Minimum::Start()");
-
     // create mesh from obj
     mesh_ = Mesh::FromOBJ("../Models/StevenUNiverseRoom/StevenUNiverseRoom.obj");
     mesh_->SetPosition(Vec3(0, -1.0f, 0));
@@ -52,5 +50,4 @@ bool Minimum::Update(shared_ptr<Engine> engine)
 
 void Minimum::Release()
 {
-    Debug::Log("Minimum::Release()");
 }

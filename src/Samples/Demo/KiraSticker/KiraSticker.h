@@ -12,9 +12,8 @@ class KiraSticker : public Scene
 public:
     KiraSticker()
     {
-        Debug::Log("KiraSticker()");
     }
-    virtual ~KiraSticker() { Debug::Log("~KiraSticker()"); }
+    virtual ~KiraSticker() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;
