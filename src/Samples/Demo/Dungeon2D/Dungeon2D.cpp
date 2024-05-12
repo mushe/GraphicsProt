@@ -10,8 +10,8 @@ void Dungeon2D::GetAllRooms(Dungeon2DRoom* room, std::vector<Dungeon2DRoom*>& ro
 
     if (!room->IsLeaf())
     {
-        if (room->GetLeft() != nullptr) GetAllRooms(room->GetLeft(), rooms);
-        if (room->GetRight() != nullptr) GetAllRooms(room->GetRight(), rooms);
+        if (room->GetLeft() != nullptr) GetAllRooms(room->GetLeft().get(), rooms);
+        if (room->GetRight() != nullptr) GetAllRooms(room->GetRight().get(), rooms);
     }
 }
 
@@ -26,8 +26,8 @@ void Dungeon2D::GetAllRoomsAtLevel(Dungeon2DRoom* room, int level, std::vector<D
 
     if (!room->IsLeaf())
     {
-        if (room->GetLeft() != nullptr) GetAllRoomsAtLevel(room->GetLeft(), level, rooms);
-        if (room->GetRight() != nullptr) GetAllRoomsAtLevel(room->GetRight(), level, rooms);
+        if (room->GetLeft() != nullptr) GetAllRoomsAtLevel(room->GetLeft().get(), level, rooms);
+        if (room->GetRight() != nullptr) GetAllRoomsAtLevel(room->GetRight().get(), level, rooms);
     }
 }
 
@@ -41,8 +41,8 @@ void Dungeon2D::GetAllLeaves(Dungeon2DRoom* room, std::vector<Dungeon2DRoom*>& r
     }
     else
     {
-        if (room->GetLeft() != nullptr) GetAllLeaves(room->GetLeft(), rooms);
-        if (room->GetRight() != nullptr) GetAllLeaves(room->GetRight(), rooms);
+        if (room->GetLeft() != nullptr) GetAllLeaves(room->GetLeft().get(), rooms);
+        if (room->GetRight() != nullptr) GetAllLeaves(room->GetRight().get(), rooms);
     }
 }
 
@@ -132,14 +132,14 @@ int Dungeon2D::GetDeepestLevel(Dungeon2DRoom* room)
     return deepestLevel;
 }
 
-Dungeon2DRoom* Dungeon2D::GenerateDividedRoom()
+shared_ptr<Dungeon2DRoom> Dungeon2D::GenerateDividedRoom()
 {
-    Dungeon2DRoom* root = new Dungeon2DRoom(initialLeftDown, initialRightUp, nullptr, 0);
+    shared_ptr<Dungeon2DRoom> root = make_shared<Dungeon2DRoom>(initialLeftDown, initialRightUp, nullptr, 0);
     root->Divide();
     for (int i = 0; i < maxDivision; i++)
     {
         auto leaves = std::vector<Dungeon2DRoom*>();
-        GetAllLeaves(root, leaves);
+        GetAllLeaves(root.get(), leaves);
 
         auto dividableLeaves = std::vector<Dungeon2DRoom*>();
         for (auto leaf : leaves)
@@ -213,8 +213,8 @@ void Dungeon2D::Connect(Dungeon2DRoom* room)
             (int)room->GetLeftDown().x + maxPadding,
             (int)room->GetRightUp().x - maxPadding
         );
-        auto up = ConvertRoomToVector2D(room->GetRight());
-        auto down = ConvertRoomToVector2D(room->GetLeft());
+        auto up = ConvertRoomToVector2D(room->GetRight().get());
+        auto down = ConvertRoomToVector2D(room->GetLeft().get());
 
         int connectYup = 0;
         int connectYdown = 0;
@@ -249,8 +249,8 @@ void Dungeon2D::Connect(Dungeon2DRoom* room)
             (int)room->GetRightUp().y - maxPadding
         );
 
-        auto left = ConvertRoomToVector2D(room->GetLeft());
-        auto right = ConvertRoomToVector2D(room->GetRight());
+        auto left = ConvertRoomToVector2D(room->GetLeft().get());
+        auto right = ConvertRoomToVector2D(room->GetRight().get());
 
 
         int connectXleft = 0;
@@ -317,19 +317,19 @@ void Dungeon2D::GenerateStartAndGoal(Dungeon2DRoom* room)
 }
 
 
-Dungeon2DRoom* Dungeon2D::GenerateDungeon()
+shared_ptr<Dungeon2DRoom> Dungeon2D::GenerateDungeon()
 {
     // divide rooms
-    Dungeon2DRoom* root = GenerateDividedRoom();
+    shared_ptr<Dungeon2DRoom> root = GenerateDividedRoom();
 
     // add padding
-    GeneratePaddingToRooms(root);
+    GeneratePaddingToRooms(root.get());
 
     // connect rooms
-    ConnectRooms(root);
+    ConnectRooms(root.get());
 
     // generate start and goal
-    GenerateStartAndGoal(root);
+    GenerateStartAndGoal(root.get());
 
     return root;
 }
@@ -339,7 +339,7 @@ std::vector<std::vector<int>> Dungeon2D::GenerateDungeonToData()
     //TODO cleanup room
     auto root = GenerateDungeon();
 
-    auto dungeonData = ConvertRoomToVector2D(root);
+    auto dungeonData = ConvertRoomToVector2D(root.get());
 
     // add player and goal
     dungeonData[playerPos_.y][playerPos_.x] = Grid::PLAYER;

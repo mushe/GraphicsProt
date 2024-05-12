@@ -27,8 +27,8 @@ class Dungeon2DRoom
 private:
     glm::uvec2 leftDown_ = glm::uvec2(0, 0);
     glm::uvec2 rightUp_ = glm::uvec2(0, 0);
-    Dungeon2DRoom* leftRoom_ = nullptr;
-    Dungeon2DRoom* rightRoom_ = nullptr;
+    shared_ptr<Dungeon2DRoom> leftRoom_ = nullptr;
+    shared_ptr<Dungeon2DRoom> rightRoom_ = nullptr;
     Dungeon2DRoom* parentRoom_ = nullptr;
     Vec4 color_ = Vec4(1, 1, 1, 1);
     int level_ = 0;
@@ -49,8 +49,8 @@ public:
     glm::uvec2 rightConnectionPoint = glm::uvec2(0, 0);
     glm::uvec2 leftConnectionPoint = glm::uvec2(0, 0);
 
-    Dungeon2DRoom* GetLeft() { return leftRoom_; }
-    Dungeon2DRoom* GetRight() { return rightRoom_; }
+    shared_ptr<Dungeon2DRoom> GetLeft() { return leftRoom_; }
+    shared_ptr<Dungeon2DRoom> GetRight() { return rightRoom_; }
     Dungeon2DRoom* GetParent() { return parentRoom_; }
     glm::uvec2 GetLeftDown() { return leftDown_; }
     glm::uvec2 GetRightUp() { return rightUp_; }
@@ -102,15 +102,16 @@ public:
         if (vertical)
         {
             int divideIndex = Random::Range((int)leftDown_.y + Dungeon2DConstants::minRoomSize - 1, (int)rightUp_.y - Dungeon2DConstants::minRoomSize);
-            leftRoom_ = new Dungeon2DRoom(leftDown_, glm::uvec2(rightUp_.x, divideIndex), this, level_);
-            rightRoom_ = new Dungeon2DRoom(glm::uvec2(leftDown_.x, divideIndex + 1), rightUp_, this, level_);
+            leftRoom_ = make_shared<Dungeon2DRoom>(leftDown_, glm::uvec2(rightUp_.x, divideIndex), this, level_);
+            rightRoom_ = make_shared<Dungeon2DRoom>(glm::uvec2(leftDown_.x, divideIndex + 1), rightUp_, this, level_);
         }
         // horizontal division
         else
         {
             int divideIndex = Random::Range((int)leftDown_.x + Dungeon2DConstants::minRoomSize - 1, (int)rightUp_.x - Dungeon2DConstants::minRoomSize);
-            leftRoom_ = new Dungeon2DRoom(leftDown_, glm::uvec2(divideIndex, rightUp_.y), this, level_);
-            rightRoom_ = new Dungeon2DRoom(glm::uvec2(divideIndex + 1, leftDown_.y), rightUp_, this, level_);
+
+            leftRoom_ = make_shared<Dungeon2DRoom>(leftDown_, glm::uvec2(divideIndex, rightUp_.y), this, level_);
+            rightRoom_ = make_shared<Dungeon2DRoom>(glm::uvec2(divideIndex + 1, leftDown_.y), rightUp_, this, level_);
         }
 
         verticallyDivided = vertical;
@@ -153,13 +154,13 @@ private:
     void DisplayRoom(Dungeon2DRoom* room);
     void DisplayRooms(Dungeon2DRoom* rootRoom);
     int GetDeepestLevel(Dungeon2DRoom* room);
-    Dungeon2DRoom* GenerateDividedRoom();
+    shared_ptr<Dungeon2DRoom> GenerateDividedRoom();
     void GeneratePaddingToRooms(Dungeon2DRoom* root);
     std::vector<std::vector<int>> ConvertRoomToVector2D(Dungeon2DRoom* root);
     void Connect(Dungeon2DRoom* room);
     void ConnectRooms(Dungeon2DRoom* root);
     void GenerateStartAndGoal(Dungeon2DRoom* room);
-    Dungeon2DRoom* GenerateDungeon();
+    shared_ptr<Dungeon2DRoom> GenerateDungeon();
     std::vector<std::vector<int>> GenerateDungeonToData();
     void DisplayDungeonData(std::vector<std::vector<int>> dungeonData);
     void MovePlayer(std::vector<std::vector<int>>& dungeonData, glm::ivec2 direction);

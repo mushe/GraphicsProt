@@ -126,14 +126,14 @@ int DungeonGeneration::GetDeepestLevel(DungeonGenerationRoom* room)
 }
 
 
-DungeonGenerationRoom* DungeonGeneration::GenerateDividedRoom()
+shared_ptr<DungeonGenerationRoom> DungeonGeneration::GenerateDividedRoom()
 {
-    DungeonGenerationRoom* root = new DungeonGenerationRoom(initialLeftDown, initialRightUp, nullptr, 0);
+    shared_ptr<DungeonGenerationRoom> root = make_shared<DungeonGenerationRoom>(initialLeftDown, initialRightUp, nullptr, 0);
     root->Divide();
     for (int i = 0; i < maxDivision; i++)
     {
         auto leaves = std::vector<DungeonGenerationRoom*>();
-        GetAllLeaves(root, leaves);
+        GetAllLeaves(root.get(), leaves);
 
         auto dividableLeaves = std::vector<DungeonGenerationRoom*>();
         for (auto leaf : leaves)
@@ -298,16 +298,16 @@ void DungeonGeneration::ConnectRooms(DungeonGenerationRoom* root)
 }
 
 
-DungeonGenerationRoom* DungeonGeneration::GenerateDungeon()
+shared_ptr<DungeonGenerationRoom> DungeonGeneration::GenerateDungeon()
 {
     // divide rooms
-    DungeonGenerationRoom* root = GenerateDividedRoom();
+    shared_ptr<DungeonGenerationRoom> root = GenerateDividedRoom();
 
     // add padding
-    GeneratePaddingToRooms(root);
+    GeneratePaddingToRooms(root.get());
 
     // connect rooms
-    ConnectRooms(root);
+    ConnectRooms(root.get());
 
     return root;
 }
@@ -337,7 +337,7 @@ bool DungeonGeneration::Update(shared_ptr<Engine> engine)
         t_ = 0.0f;
     }
 
-    DisplayRooms(root_);
+    DisplayRooms(root_.get());
 
     // display grids
     for (int i = 0; i < gridNum; i++)

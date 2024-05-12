@@ -12,8 +12,8 @@ void Dungeon3D::GetAllRooms(Dungeon3DRoom* room, std::vector<Dungeon3DRoom*>& ro
 
     if (!room->IsLeaf())
     {
-        if (room->GetLeft() != nullptr) GetAllRooms(room->GetLeft(), rooms);
-        if (room->GetRight() != nullptr) GetAllRooms(room->GetRight(), rooms);
+        if (room->GetLeft() != nullptr) GetAllRooms(room->GetLeft().get(), rooms);
+        if (room->GetRight() != nullptr) GetAllRooms(room->GetRight().get(), rooms);
     }
 }
 
@@ -28,8 +28,8 @@ void Dungeon3D::GetAllRoomsAtLevel(Dungeon3DRoom* room, int level, std::vector<D
 
     if (!room->IsLeaf())
     {
-        if (room->GetLeft() != nullptr) GetAllRoomsAtLevel(room->GetLeft(), level, rooms);
-        if (room->GetRight() != nullptr) GetAllRoomsAtLevel(room->GetRight(), level, rooms);
+        if (room->GetLeft() != nullptr) GetAllRoomsAtLevel(room->GetLeft().get(), level, rooms);
+        if (room->GetRight() != nullptr) GetAllRoomsAtLevel(room->GetRight().get(), level, rooms);
     }
 }
 
@@ -43,8 +43,8 @@ void Dungeon3D::GetAllLeaves(Dungeon3DRoom* room, std::vector<Dungeon3DRoom*>& r
     }
     else
     {
-        if (room->GetLeft() != nullptr) GetAllLeaves(room->GetLeft(), rooms);
-        if (room->GetRight() != nullptr) GetAllLeaves(room->GetRight(), rooms);
+        if (room->GetLeft() != nullptr) GetAllLeaves(room->GetLeft().get(), rooms);
+        if (room->GetRight() != nullptr) GetAllLeaves(room->GetRight().get(), rooms);
     }
 }
 
@@ -135,14 +135,14 @@ int Dungeon3D::GetDeepestLevel(Dungeon3DRoom* room)
 }
 
 
-Dungeon3DRoom* Dungeon3D::GenerateDividedRoom()
+shared_ptr<Dungeon3DRoom> Dungeon3D::GenerateDividedRoom()
 {
-    Dungeon3DRoom* root = new Dungeon3DRoom(initialLeftDown, initialRightUp, nullptr, 0);
+    shared_ptr<Dungeon3DRoom> root = make_shared<Dungeon3DRoom>(initialLeftDown, initialRightUp, nullptr, 0);
     root->Divide();
     for (int i = 0; i < maxDivision; i++)
     {
         auto leaves = std::vector<Dungeon3DRoom*>();
-        GetAllLeaves(root, leaves);
+        GetAllLeaves(root.get(), leaves);
 
         auto dividableLeaves = std::vector<Dungeon3DRoom*>();
         for (auto leaf : leaves)
@@ -216,8 +216,8 @@ void Dungeon3D::Connect(Dungeon3DRoom* room)
             (int)room->GetLeftDown().x + maxPadding,
             (int)room->GetRightUp().x - maxPadding
         );
-        auto up = ConvertRoomToVector2D(room->GetRight());
-        auto down = ConvertRoomToVector2D(room->GetLeft());
+        auto up = ConvertRoomToVector2D(room->GetRight().get());
+        auto down = ConvertRoomToVector2D(room->GetLeft().get());
 
         int connectYup = 0;
         int connectYdown = 0;
@@ -252,8 +252,8 @@ void Dungeon3D::Connect(Dungeon3DRoom* room)
             (int)room->GetRightUp().y - maxPadding
         );
 
-        auto left = ConvertRoomToVector2D(room->GetLeft());
-        auto right = ConvertRoomToVector2D(room->GetRight());
+        auto left = ConvertRoomToVector2D(room->GetLeft().get());
+        auto right = ConvertRoomToVector2D(room->GetRight().get());
 
 
         int connectXleft = 0;
@@ -320,19 +320,19 @@ void Dungeon3D::GenerateStartAndGoal(Dungeon3DRoom* room)
 }
 
 
-Dungeon3DRoom* Dungeon3D::GenerateDungeon()
+shared_ptr<Dungeon3DRoom> Dungeon3D::GenerateDungeon()
 {
     // divide rooms
-    Dungeon3DRoom* root = GenerateDividedRoom();
+    shared_ptr<Dungeon3DRoom> root = GenerateDividedRoom();
 
     // add padding
-    GeneratePaddingToRooms(root);
+    GeneratePaddingToRooms(root.get());
 
     // connect rooms
-    ConnectRooms(root);
+    ConnectRooms(root.get());
 
     // generate start and goal
-    GenerateStartAndGoal(root);
+    GenerateStartAndGoal(root.get());
 
     return root;
 }
@@ -342,7 +342,7 @@ std::vector<std::vector<int>> Dungeon3D::GenerateDungeonToData()
     //TODO cleanup room
     auto root = GenerateDungeon();
 
-    auto dungeonData = ConvertRoomToVector2D(root);
+    auto dungeonData = ConvertRoomToVector2D(root.get());
 
     // add player and goal
     dungeonData[playerPos_.y][playerPos_.x] = Grid::PLAYER;

@@ -180,6 +180,5 @@ int main()
         engine->EndFrame(); // must be called at the end of every frame
     }
 
-    gerstnerWavesScene->Release();
     engine->Terminate();
 }

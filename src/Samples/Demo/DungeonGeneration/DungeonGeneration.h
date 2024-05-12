@@ -122,7 +122,7 @@ public:
 
 private:
     float t_;
-    DungeonGenerationRoom* root_;
+    shared_ptr<DungeonGenerationRoom> root_;
 
     void GetAllRooms(DungeonGenerationRoom* room, std::vector<DungeonGenerationRoom*>& rooms);
     void GetAllRoomsAtLevel(DungeonGenerationRoom* room, int level, std::vector<DungeonGenerationRoom*>& rooms);
@@ -131,12 +131,12 @@ private:
     void DisplayRoom(DungeonGenerationRoom* room);
     void DisplayRooms(DungeonGenerationRoom* rootRoom);
     int GetDeepestLevel(DungeonGenerationRoom* room);
-    DungeonGenerationRoom* GenerateDividedRoom();
+    shared_ptr<DungeonGenerationRoom> GenerateDividedRoom();
     void GeneratePaddingToRooms(DungeonGenerationRoom* root);
 
     // 0 = blank, 1 = room or corridor
     std::vector<std::vector<int>> ConvertRoomToVector2D(DungeonGenerationRoom* root);
     void Connect(DungeonGenerationRoom* room);
     void ConnectRooms(DungeonGenerationRoom* root);
-    DungeonGenerationRoom* GenerateDungeon();
+    shared_ptr<DungeonGenerationRoom> GenerateDungeon();
 };

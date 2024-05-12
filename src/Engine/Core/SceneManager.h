@@ -12,11 +12,9 @@ public:
 
     bool UpdateCurrentScene();
     void OpenScene(shared_ptr<Scene> scene);
-
-    void Init(shared_ptr<Engine> engine);
+    void CloseCurrentScene();
 
 private:
-    void CloseCurrentScene();
     shared_ptr<Engine> engine_;
 
 private:
