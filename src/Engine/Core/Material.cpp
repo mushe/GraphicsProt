@@ -410,3 +410,30 @@ void Material::CreateGraphicsPipeline()
 
     assert(vkCreateGraphicsPipelines(VulkanCore::GetDevice(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline_) == VK_SUCCESS);
 }
+
+
+void Material::Release()
+{
+    vkDestroyPipeline(VulkanCore::GetDevice(), pipeline_, nullptr);
+    vkDestroyPipelineLayout(VulkanCore::GetDevice(), pipelineLayout_, nullptr);
+    vkDestroyDescriptorPool(VulkanCore::GetDevice(), descriptorPool_, nullptr);
+    vkDestroyDescriptorSetLayout(VulkanCore::GetDevice(), descriptorSetLayout_, nullptr);
+
+    if (customUboBufferSize_ > 0)
+    {
+        vkDestroyBuffer(VulkanCore::GetDevice(), uniformBuffer_, nullptr);
+        vkFreeMemory(VulkanCore::GetDevice(), uniformBufferMemory_, nullptr);
+    }
+
+    if (instancingUboBufferSize_ > 0)
+    {
+        vkDestroyBuffer(VulkanCore::GetDevice(), instancingUniformBuffer_, nullptr);
+        vkFreeMemory(VulkanCore::GetDevice(), instancingUniformBufferMemory_, nullptr);
+    }
+
+    vkDestroyBuffer(VulkanCore::GetDevice(), commonUniformBuffer_, nullptr);
+    vkFreeMemory(VulkanCore::GetDevice(), commonUniformBufferMemory_, nullptr);
+
+    vkDestroyShaderModule(VulkanCore::GetDevice(), fragShaderModule_, nullptr);
+    vkDestroyShaderModule(VulkanCore::GetDevice(), vertShaderModule_, nullptr);
+}

@@ -79,4 +79,17 @@ bool Grass::Update(shared_ptr<Engine> engine)
 
 void Grass::Release()
 {
+    floorMesh_ = nullptr;
+    floorTex_ = nullptr;
+    floorMat_ = nullptr;
+    for (auto& m : meshes_)
+        m = nullptr;
+    for (auto& m : materials_)
+        m = nullptr;
+    for (auto& u : ubos_)
+        u = nullptr;
+
+    meshes_.clear();
+    materials_.clear();
+    ubos_.clear();
 }

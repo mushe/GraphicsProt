@@ -63,4 +63,7 @@ bool NormalMapping::Update(shared_ptr<Engine> engine)
 
 void NormalMapping::Release()
 {
+    floorMesh_ = nullptr;
+    floorMat_ = nullptr;
+    floorTex_ = nullptr;
 }

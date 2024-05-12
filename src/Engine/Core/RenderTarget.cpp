@@ -128,3 +128,11 @@ void RenderTarget::EndRenderToTexture()
 {
     vkCmdEndRenderPass(VulkanCore::GetCurrentCommandBuffer());
 }
+
+void RenderTarget::Release()
+{
+    vkDestroyFramebuffer(VulkanCore::GetDevice(), renderTextureFrameBuffer_, nullptr);
+    vkDestroyRenderPass(VulkanCore::GetDevice(), renderPass_, nullptr);
+    renderTexture_ = nullptr;
+    renderDepthTexture_ = nullptr;
+}

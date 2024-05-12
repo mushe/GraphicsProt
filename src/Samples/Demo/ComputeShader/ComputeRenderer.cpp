@@ -55,10 +55,8 @@ void ComputeRenderer::Draw()
     vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices.size()), particleCount_, 0, 0, 0);
 }
 
-//todo
 void ComputeRenderer::Release()
 {
-    vkDestroyDescriptorPool(VulkanCore::GetDevice(), descriptorPool_, nullptr);
     vkDestroyBuffer(VulkanCore::GetDevice(), indexBuffer_, nullptr);
     vkFreeMemory(VulkanCore::GetDevice(), indexBufferMemory_, nullptr);
 
@@ -70,7 +68,6 @@ void ComputeRenderer::Release()
     
     vkDestroyBuffer(VulkanCore::GetDevice(), instanceUniformBuffer_, nullptr);
     vkFreeMemory(VulkanCore::GetDevice(), instanceUniformBufferMemory_, nullptr);
-
     
     vkDestroySampler(VulkanCore::GetDevice(), textureSampler_, nullptr);
     vkDestroyImageView(VulkanCore::GetDevice(), textureImageView_, nullptr);
@@ -78,12 +75,11 @@ void ComputeRenderer::Release()
     vkDestroyImage(VulkanCore::GetDevice(), textureImage_, nullptr);
     vkFreeMemory(VulkanCore::GetDevice(), textureImageMemory_, nullptr);
     
-    
     vkDestroyPipeline(VulkanCore::GetDevice(), pipeline_, nullptr);
     vkDestroyPipelineLayout(VulkanCore::GetDevice(), pipelineLayout_, nullptr);
     
     vkDestroyDescriptorSetLayout(VulkanCore::GetDevice(), descriptorSetLayout_, nullptr);
-
+    vkDestroyDescriptorPool(VulkanCore::GetDevice(), descriptorPool_, nullptr);
 }
 
 void ComputeRenderer::CreateDescriptorSetLayout()

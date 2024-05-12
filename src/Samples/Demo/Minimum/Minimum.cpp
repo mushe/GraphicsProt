@@ -50,4 +50,7 @@ bool Minimum::Update(shared_ptr<Engine> engine)
 
 void Minimum::Release()
 {
+    mesh_ = nullptr;
+    mat_ = nullptr;
+    tex_ = nullptr;
 }

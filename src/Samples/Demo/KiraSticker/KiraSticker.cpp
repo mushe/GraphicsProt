@@ -57,4 +57,7 @@ bool KiraSticker::Update(shared_ptr<Engine> engine)
 
 void KiraSticker::Release()
 {
+    floorMesh_ = nullptr;
+    gradTex_ = nullptr;
+    floorMat_ = nullptr;
 }

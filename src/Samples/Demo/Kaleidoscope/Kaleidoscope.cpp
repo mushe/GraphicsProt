@@ -66,4 +66,9 @@ bool Kaleidoscope::Update(shared_ptr<Engine> engine)
 
 void Kaleidoscope::Release()
 {
+    mesh_ = nullptr;
+    mat_ = nullptr;
+    tex_ = nullptr;
+    postProcessMat_ = nullptr;
+    rt_ = nullptr;
 }

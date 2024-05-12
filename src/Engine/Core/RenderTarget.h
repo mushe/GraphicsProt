@@ -15,7 +15,14 @@ public:
         renderDepthTexture_(nullptr), 
         renderTextureFrameBuffer_(VK_NULL_HANDLE), 
         renderPass_(VK_NULL_HANDLE) 
-    {}
+    {
+        Debug::Log("RenderTarget::RenderTarget()");
+    }
+    ~RenderTarget()
+    {
+        Debug::Log("RenderTarget::~RenderTarget()");
+        Release();
+    }
 
     static shared_ptr<RenderTarget> Create(int width, int height)
     {
@@ -33,6 +40,7 @@ public:
 private:
     void Init(const int width, const int height);
     void InitRenderPass();
+    void Release();
 
 private:
     std::shared_ptr<RenderTexture> renderTexture_;

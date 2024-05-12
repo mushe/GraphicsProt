@@ -74,4 +74,11 @@ bool VHS::Update(shared_ptr<Engine> engine)
 
 void VHS::Release()
 {
+    mesh_ = nullptr;
+    mat_ = nullptr;
+    tex_ = nullptr;
+    chromaticAberrationMat_ = nullptr;
+    vhsMat_ = nullptr;
+    rt1_ = nullptr;
+    rt2_ = nullptr;
 }

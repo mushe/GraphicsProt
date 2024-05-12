@@ -47,14 +47,15 @@ void ComputeShader::Execute()
 
 void ComputeShader::Release()
 {
-    vkDestroyBuffer(VulkanCore::GetDevice(), storageBuffer_, nullptr);
-
     vkDestroyPipeline(VulkanCore::GetDevice(), pipeline_, nullptr);
     vkDestroyPipelineLayout(VulkanCore::GetDevice(), pipelineLayout_, nullptr);
     vkDestroyDescriptorSetLayout(VulkanCore::GetDevice(), descriptorSetLayout_, nullptr);
 
     vkDestroySemaphore(VulkanCore::GetDevice(), semaphore_, nullptr);
     vkDestroyFence(VulkanCore::GetDevice(), fence_, nullptr);
+
+    vkFreeDescriptorSets(VulkanCore::GetDevice(), descriptorPool_, 1, &descriptorSet_);
+    vkDestroyDescriptorPool(VulkanCore::GetDevice(), descriptorPool_, nullptr);
 }
 
 

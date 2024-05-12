@@ -69,4 +69,9 @@ bool PseudoColor::Update(shared_ptr<Engine> engine)
 
 void PseudoColor::Release()
 {
+    colorMesh_ = nullptr;
+    grayMesh_ = nullptr;
+    tex_ = nullptr;
+    colorMat_ = nullptr;
+    grayMat_ = nullptr;
 }

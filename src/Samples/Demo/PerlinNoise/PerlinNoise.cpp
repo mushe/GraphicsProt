@@ -44,4 +44,6 @@ bool PerlinNoise::Update(shared_ptr<Engine> engine)
 
 void PerlinNoise::Release()
 {
+    rt_ = nullptr;
+    postProcessMat_ = nullptr;
 }

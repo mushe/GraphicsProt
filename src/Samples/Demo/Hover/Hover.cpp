@@ -31,7 +31,6 @@ bool Hover::Update(shared_ptr<Engine> engine)
     bool closeScene = false;
 
 
-
     // input
     float leftInput = 0.0f;
     float rightInput = 0.0f;
@@ -123,4 +122,5 @@ bool Hover::Update(shared_ptr<Engine> engine)
 
 void Hover::Release()
 {
+    particles_.clear();
 }

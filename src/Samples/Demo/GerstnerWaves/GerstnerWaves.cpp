@@ -117,4 +117,8 @@ bool GerstnerWaves::Update(shared_ptr<Engine> engine)
 
 void GerstnerWaves::Release()
 {
+    waveMesh_ = nullptr;
+    waveMat_ = nullptr;
+    bgMesh_ = nullptr;
+    bgMat_ = nullptr;
 }

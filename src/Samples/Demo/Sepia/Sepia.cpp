@@ -58,4 +58,9 @@ bool Sepia::Update(shared_ptr<Engine> engine)
 
 void Sepia::Release()
 {
+    mesh_ = nullptr;
+    mat_ = nullptr;
+    tex_ = nullptr;
+    postProcessMat_ = nullptr;
+    rt_ = nullptr;
 }

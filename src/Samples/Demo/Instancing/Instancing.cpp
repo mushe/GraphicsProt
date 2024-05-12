@@ -73,4 +73,8 @@ bool Instancing::Update(shared_ptr<Engine> engine)
 
 void Instancing::Release()
 {
+    mesh_ = nullptr;
+    mat_ = nullptr;
+
+    instancingBuffer.clear();
 }

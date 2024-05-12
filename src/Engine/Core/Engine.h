@@ -51,7 +51,7 @@ public:
 
     ~Engine()
     {
-        File::ReleaseImageCache();
+        Release();
     }
 
     static shared_ptr<Engine> Create() { return std::make_shared<Engine>(); }
@@ -94,6 +94,7 @@ private:
     void SubmitQueue();
     void Present();
     void FixFPS(const int waitFPS = 60);
+    void Release();
 
 // vulkan initialize
 private:
@@ -124,37 +125,37 @@ public:
     VkQueue presentQueue_;
 
     VkSwapchainKHR swapChain_;
-    std::vector<VkImage> swapChainImages_;
+    vector<VkImage> swapChainImages_;
     VkFormat swapChainImageFormat_;
     VkExtent2D swapChainExtent_;
 
-    std::vector<VkImageView> swapChainImageViews_;
-    std::vector<VkFramebuffer> swapChainFramebuffers_;
+    vector<VkImageView> swapChainImageViews_;
+    vector<VkFramebuffer> swapChainFramebuffers_;
 
     VkImage depthImage_;
     VkDeviceMemory depthImageMemory_;
     VkImageView depthImageView_;
 
-    std::vector<VkSemaphore> objectRenderSemaphores_;
-    std::vector<VkSemaphore> renderingSemaphores_;
-    std::vector<VkFence> objectRenderFences_;
+    vector<VkSemaphore> objectRenderSemaphores_;
+    vector<VkSemaphore> renderingSemaphores_;
+    vector<VkFence> objectRenderFences_;
 
     uint32_t frameIndex_ = 0;
     uint32_t imageIndex_ = 0;
 
     bool closeWindow_ = false;
 
-    std::shared_ptr<RenderTexture> renderTexture_;
-    std::shared_ptr<RenderTexture> renderDepthTexture_;
+    shared_ptr<RenderTexture> renderTexture_;
+    shared_ptr<RenderTexture> renderDepthTexture_;
     VkFramebuffer renderTextureFrameBuffer_;
 
-    std::chrono::system_clock::time_point startTime_;
-    std::chrono::system_clock::time_point endTime_;
+    chrono::system_clock::time_point startTime_;
+    chrono::system_clock::time_point endTime_;
 
     bool windowResized_ = false;
 
     // quad mesh for screen rendering
-    std::shared_ptr<Mesh> quadMesh_;
+    shared_ptr<Mesh> quadMesh_;
     Camera dummyCamera_;
 
     float elapsedTimeSeconds_ = 0.0f;

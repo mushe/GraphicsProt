@@ -39,4 +39,6 @@ bool WhiteNoiseGPU::Update(shared_ptr<Engine> engine)
 
 void WhiteNoiseGPU::Release()
 {
+    postProcessMat_ = nullptr;
+    rt_ = nullptr;
 }

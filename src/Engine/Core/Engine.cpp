@@ -484,3 +484,30 @@ void Engine::SetWindowPosition(const int windowPosx, const int windowPosY)
 {
 	glfwSetWindowPos(window_, windowPosx, windowPosY);
 }
+
+void Engine::Release()
+{
+    quadMesh_ = nullptr;
+    renderTexture_ = nullptr;
+    renderDepthTexture_ = nullptr;
+    File::ReleaseImageCache();
+
+    for (auto swapchainFramebuffer : swapChainFramebuffers_)
+        vkDestroyFramebuffer(VulkanCore::GetDevice(), swapchainFramebuffer, nullptr);
+    
+    for (auto swapchainImageView : swapChainImageViews_)
+        vkDestroyImageView(VulkanCore::GetDevice(), swapchainImageView, nullptr);
+    
+    vkDestroySwapchainKHR(VulkanCore::GetDevice(), swapChain_, nullptr);
+    vkDestroyImageView(VulkanCore::GetDevice(), depthImageView_, nullptr);
+    vkDestroyFramebuffer(VulkanCore::GetDevice(), renderTextureFrameBuffer_, nullptr);
+    vkDestroyImage(VulkanCore::GetDevice(), depthImage_, nullptr);
+    vkFreeMemory(VulkanCore::GetDevice(), depthImageMemory_, nullptr);
+
+    for (int i = 0; i < maxFrames_; i++)
+    {
+        vkDestroySemaphore(VulkanCore::GetDevice(), objectRenderSemaphores_[i], nullptr);
+        vkDestroySemaphore(VulkanCore::GetDevice(), renderingSemaphores_[i], nullptr);
+        vkDestroyFence(VulkanCore::GetDevice(), objectRenderFences_[i], nullptr);
+    }
+}

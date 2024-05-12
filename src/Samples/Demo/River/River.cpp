@@ -86,4 +86,8 @@ bool River::Update(shared_ptr<Engine> engine)
 
 void River::Release()
 {
+    mesh_ = nullptr;
+    tex1_ = nullptr;
+    tex2_ = nullptr;
+    mat_ = nullptr;
 }

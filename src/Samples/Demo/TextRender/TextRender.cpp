@@ -7,11 +7,10 @@ void TextRender::Reset()
     scales_.clear();
     colors_.clear();
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 1000; i++)
     {
-        // random position
         positions_.push_back(Vec2(Random::Range(0.0f, 1.0f), Random::Range(0.0f, 1.0f)));
-        scales_.push_back(Random::Range(1.0f, 5.0f));
+        scales_.push_back(Random::Range(0.1f, 2.0f));
         colors_.push_back(Vec4(Random::Range(0.0f, 0.2f), Random::Range(0.1f, 0.2f), Random::Range(0.0f, 1.0f), 1.0f));
     }
 }

@@ -25,6 +25,7 @@ public:
         indexBufferMemory_(VK_NULL_HANDLE),
         material_(nullptr)
     {
+        Debug::Log("Mesh::Mesh()");
     }
 
     static std::shared_ptr<Mesh> Create();
@@ -32,6 +33,7 @@ public:
 
     ~Mesh()
     {
+        Debug::Log("Mesh::~Mesh()");
         Release();
     }
 

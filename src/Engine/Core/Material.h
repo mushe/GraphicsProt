@@ -66,11 +66,13 @@ public:
 		instancingUniformBufferMapped_(VK_NULL_HANDLE),
 		instancingUniformBufferMemory_(VK_NULL_HANDLE),
 		instancingUboBufferSize_(0)
-	{}
+	{
+		Debug::Log("Material::Material()");
+	}
 	~Material() 
 	{
-		vkDestroyShaderModule(VulkanCore::GetDevice(), fragShaderModule_, nullptr);
-		vkDestroyShaderModule(VulkanCore::GetDevice(), vertShaderModule_, nullptr);
+		Debug::Log("Material::~Material()");
+		Release();
 	}
 
 	static shared_ptr<Material> Create(MaterialInfo materialInfo);
@@ -132,4 +134,6 @@ private:
 
 	// init must call after add texture
 	void Init();
+
+	void Release();
 };

@@ -57,4 +57,9 @@ bool HalfTone::Update(shared_ptr<Engine> engine)
 
 void HalfTone::Release()
 {
+    mesh_ = nullptr;
+    mat_ = nullptr;
+    tex_ = nullptr;
+    postProcessMat_ = nullptr;
+    rt_ = nullptr;
 }

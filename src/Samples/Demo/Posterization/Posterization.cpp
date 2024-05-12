@@ -69,4 +69,9 @@ bool Posterization::Update(shared_ptr<Engine> engine)
 
 void Posterization::Release()
 {
+    tex_ = nullptr;
+    colorMesh_ = nullptr;
+    colorMat_ = nullptr;
+    grayMesh_ = nullptr;
+    grayMat_ = nullptr;
 }

@@ -72,4 +72,9 @@ bool ComputeShaderScene::Update(shared_ptr<Engine> engine)
 
 void ComputeShaderScene::Release()
 {
+    computeRenderer_.Release();
+    computeShader_.Release();
+
+    vkDestroyBuffer(VulkanCore::GetDevice(), sharingBuffer_, nullptr);
+    vkFreeMemory(VulkanCore::GetDevice(), sharingBufferMemory_, nullptr);
 }
