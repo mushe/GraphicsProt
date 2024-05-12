@@ -36,6 +36,8 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
     );
     int initialX = floor(initialSample.x / cellSize);
     int initialY = floor(initialSample.y / cellSize);
+    initialX = min(cellCountX - 1, initialX);
+    initialY = min(cellCountY - 1, initialY);
     grid[initialX][initialY] = currentIndex;
     activeList.push_back(currentIndex);
     res.push_back(initialSample);
