@@ -67,11 +67,9 @@ public:
 		instancingUniformBufferMemory_(VK_NULL_HANDLE),
 		instancingUboBufferSize_(0)
 	{
-		Debug::Log("Material::Material()");
 	}
 	~Material() 
 	{
-		Debug::Log("Material::~Material()");
 		Release();
 	}
 

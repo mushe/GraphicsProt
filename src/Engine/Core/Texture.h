@@ -13,13 +13,11 @@ public:
         textureImageView_(VK_NULL_HANDLE), 
         textureSampler_(VK_NULL_HANDLE)
     {
-        Debug::Log("Texture::Texture()");
         width_ = 0;
         height_ = 0;
     }
     ~Texture()
     {
-        Debug::Log("Texture::~Texture()");
         Release();
     }
 

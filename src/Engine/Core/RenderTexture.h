@@ -5,10 +5,8 @@ class RenderTexture : public Texture
 {
 public:
     RenderTexture(): Texture() {
-        Debug::Log("RenderTexture::RenderTexture()");
     }
     ~RenderTexture() {
-        Debug::Log("RenderTexture::~RenderTexture()");
     }
 
     static shared_ptr<RenderTexture> Create()

@@ -16,11 +16,9 @@ public:
         renderTextureFrameBuffer_(VK_NULL_HANDLE), 
         renderPass_(VK_NULL_HANDLE) 
     {
-        Debug::Log("RenderTarget::RenderTarget()");
     }
     ~RenderTarget()
     {
-        Debug::Log("RenderTarget::~RenderTarget()");
         Release();
     }
 
