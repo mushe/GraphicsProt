@@ -10,8 +10,8 @@ void DungeonGeneration::GetAllRooms(DungeonGenerationRoom* room, std::vector<Dun
 
     if (!room->IsLeaf())
     {
-        if (room->GetLeft() != nullptr) GetAllRooms(room->GetLeft(), rooms);
-        if (room->GetRight() != nullptr) GetAllRooms(room->GetRight(), rooms);
+        if (room->GetLeft() != nullptr) GetAllRooms(room->GetLeft().get(), rooms);
+        if (room->GetRight() != nullptr) GetAllRooms(room->GetRight().get(), rooms);
     }
 }
 
@@ -26,8 +26,8 @@ void DungeonGeneration::GetAllRoomsAtLevel(DungeonGenerationRoom* room, int leve
 
     if (!room->IsLeaf())
     {
-        if (room->GetLeft() != nullptr) GetAllRoomsAtLevel(room->GetLeft(), level, rooms);
-        if (room->GetRight() != nullptr) GetAllRoomsAtLevel(room->GetRight(), level, rooms);
+        if (room->GetLeft() != nullptr) GetAllRoomsAtLevel(room->GetLeft().get(), level, rooms);
+        if (room->GetRight() != nullptr) GetAllRoomsAtLevel(room->GetRight().get(), level, rooms);
     }
 }
 
@@ -41,8 +41,8 @@ void DungeonGeneration::GetAllLeaves(DungeonGenerationRoom* room, std::vector<Du
     }
     else
     {
-        if (room->GetLeft() != nullptr) GetAllLeaves(room->GetLeft(), rooms);
-        if (room->GetRight() != nullptr) GetAllLeaves(room->GetRight(), rooms);
+        if (room->GetLeft() != nullptr) GetAllLeaves(room->GetLeft().get(), rooms);
+        if (room->GetRight() != nullptr) GetAllLeaves(room->GetRight().get(), rooms);
     }
 }
 
@@ -210,8 +210,8 @@ void DungeonGeneration::Connect(DungeonGenerationRoom* room)
             (int)room->GetLeftDown().x + maxPadding,
             (int)room->GetRightUp().x - maxPadding
         );
-        auto up = ConvertRoomToVector2D(room->GetRight());
-        auto down = ConvertRoomToVector2D(room->GetLeft());
+        auto up = ConvertRoomToVector2D(room->GetRight().get());
+        auto down = ConvertRoomToVector2D(room->GetLeft().get());
 
         int connectYup = 0;
         int connectYdown = 0;
@@ -246,8 +246,8 @@ void DungeonGeneration::Connect(DungeonGenerationRoom* room)
             (int)room->GetRightUp().y - maxPadding
         );
 
-        auto left = ConvertRoomToVector2D(room->GetLeft());
-        auto right = ConvertRoomToVector2D(room->GetRight());
+        auto left = ConvertRoomToVector2D(room->GetLeft().get());
+        auto right = ConvertRoomToVector2D(room->GetRight().get());
 
 
         int connectXleft = 0;

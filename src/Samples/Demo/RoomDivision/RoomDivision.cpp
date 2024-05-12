@@ -3,7 +3,7 @@
 using namespace RoomDivisionConstants;
 
 
-void RoomDivision::GetAllNodes(Room* room, std::vector<Room*>& rooms)
+void RoomDivision::GetAllNodes(shared_ptr<Room> room, vector<shared_ptr<Room>>& rooms)
 {
     if (room == nullptr) return;
 
@@ -16,7 +16,7 @@ void RoomDivision::GetAllNodes(Room* room, std::vector<Room*>& rooms)
     }
 }
 
-void RoomDivision::GetAllLeaves(Room* room, std::vector<Room*>& rooms)
+void RoomDivision::GetAllLeaves(shared_ptr<Room> room, vector<shared_ptr<Room>>& rooms)
 {
     if (room == nullptr) return;
 
@@ -31,7 +31,7 @@ void RoomDivision::GetAllLeaves(Room* room, std::vector<Room*>& rooms)
     }
 }
 
-void RoomDivision::LogRoom(Room* room)
+void RoomDivision::LogRoom(shared_ptr<Room> room)
 {
     if (room == nullptr) return;
 
@@ -39,9 +39,9 @@ void RoomDivision::LogRoom(Room* room)
 
 }
 
-void RoomDivision::DisplayRooms(Room* rootRoom)
+void RoomDivision::DisplayRooms(shared_ptr<Room> rootRoom)
 {
-    std::vector<Room*> rooms;
+    vector<shared_ptr<Room>> rooms;
     GetAllLeaves(rootRoom, rooms);
 
     //Debug::Log("----------------------");
@@ -57,16 +57,16 @@ void RoomDivision::DisplayRooms(Room* rootRoom)
 }
 
 
-Room* RoomDivision::GenerateDividedRoom()
+shared_ptr<Room> RoomDivision::GenerateDividedRoom()
 {
-    Room* root = new Room(initialLeftDown, initialRightUp);
+    shared_ptr<Room> root = make_shared<Room>(initialLeftDown, initialRightUp);
     root->Divide();
     for (int i = 0; i < maxDivision; i++)
     {
-        auto leaves = std::vector<Room*>();
+        auto leaves = vector<shared_ptr<Room>>();
         GetAllLeaves(root, leaves);
 
-        auto dividableLeaves = std::vector<Room*>();
+        auto dividableLeaves = vector<shared_ptr<Room>>();
         for (auto leaf : leaves)
         {
             if (leaf->IsDividable()) dividableLeaves.push_back(leaf);

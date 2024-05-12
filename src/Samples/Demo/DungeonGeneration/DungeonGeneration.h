@@ -18,8 +18,8 @@ class DungeonGenerationRoom
 private:
     glm::uvec2 leftDown_ = glm::uvec2(0, 0);
     glm::uvec2 rightUp_ = glm::uvec2(0, 0);
-    DungeonGenerationRoom* leftRoom_ = nullptr;
-    DungeonGenerationRoom* rightRoom_ = nullptr;
+    shared_ptr<DungeonGenerationRoom> leftRoom_ = nullptr;
+    shared_ptr<DungeonGenerationRoom> rightRoom_ = nullptr; 
     DungeonGenerationRoom* parentRoom_ = nullptr;
     Vec4 color_ = Vec4(1, 1, 1, 1);
     int level_ = 0;
@@ -39,8 +39,8 @@ public:
     glm::uvec2 rightConnectionPoint = glm::uvec2(0, 0);
     glm::uvec2 leftConnectionPoint = glm::uvec2(0, 0);
 
-    DungeonGenerationRoom* GetLeft() { return leftRoom_; }
-    DungeonGenerationRoom* GetRight() { return rightRoom_; }
+    shared_ptr<DungeonGenerationRoom> GetLeft() { return leftRoom_; }
+    shared_ptr<DungeonGenerationRoom> GetRight() { return rightRoom_; }
     DungeonGenerationRoom* GetParent() { return parentRoom_; }
     glm::uvec2 GetLeftDown() { return leftDown_; }
     glm::uvec2 GetRightUp() { return rightUp_; }
@@ -92,15 +92,15 @@ public:
         if (vertical)
         {
             int divideIndex = Random::Range((int)leftDown_.y + DungeonGenerationConstants::minRoomSize - 1, (int)rightUp_.y - DungeonGenerationConstants::minRoomSize);
-            leftRoom_ = new DungeonGenerationRoom(leftDown_, glm::uvec2(rightUp_.x, divideIndex), this, level_);
-            rightRoom_ = new DungeonGenerationRoom(glm::uvec2(leftDown_.x, divideIndex + 1), rightUp_, this, level_);
+            leftRoom_ = make_shared<DungeonGenerationRoom>(leftDown_, glm::uvec2(rightUp_.x, divideIndex), this, level_);
+            rightRoom_ = make_shared<DungeonGenerationRoom>(glm::uvec2(leftDown_.x, divideIndex + 1), rightUp_, this, level_);
         }
         // horizontal division
         else
         {
             int divideIndex = Random::Range((int)leftDown_.x + DungeonGenerationConstants::minRoomSize - 1, (int)rightUp_.x - DungeonGenerationConstants::minRoomSize);
-            leftRoom_ = new DungeonGenerationRoom(leftDown_, glm::uvec2(divideIndex, rightUp_.y), this, level_);
-            rightRoom_ = new DungeonGenerationRoom(glm::uvec2(divideIndex + 1, leftDown_.y), rightUp_, this, level_);
+            leftRoom_ = make_shared<DungeonGenerationRoom>(leftDown_, glm::uvec2(divideIndex, rightUp_.y), this, level_);
+            rightRoom_ = make_shared<DungeonGenerationRoom>(glm::uvec2(divideIndex + 1, leftDown_.y), rightUp_, this, level_);
         }
 
         verticallyDivided = vertical;
