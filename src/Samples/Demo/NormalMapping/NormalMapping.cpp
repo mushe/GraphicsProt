@@ -20,6 +20,7 @@ void NormalMapping::Start(shared_ptr<Engine> engine)
     floorMat_->SetUniformBufferData(&ubo_);
     floorMesh_->SetMaterial(floorMat_);
 
+    OrbitalControl::SetOrbit(0.95f, 8.0f, 17.0f);
     OrbitalControl::Update(camera_);
 
 }
