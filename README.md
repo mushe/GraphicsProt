@@ -354,6 +354,19 @@ https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf
 
 https://github.com/mushe/UnrealVFXCollection
 
+## Blur (post process)
+
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/582f4977-9d84-4a8d-9163-5e8041bf5383" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Demo/Blur
+- References :
+
+(1) Marius Bjørge(2015), Bandwidth-Efficient Rendering, SIGGRAPH 2015
+
+https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-20-66/siggraph2015_2D00_mmg_2D00_marius_2D00_slides.pdf
+
+
+
 # Usage Examples
 
 ## minimum code
