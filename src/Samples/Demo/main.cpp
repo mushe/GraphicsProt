@@ -34,6 +34,7 @@
 #include "SierpinskiTriangle/SierpinskiTriangle.h"
 #include "WhiteNoiseCPU/WhiteNoiseCPU.h"
 #include "ComputeShader/ComputeShaderScene.h"
+#include "Blur/Blur.h"
 
 int main()
 {
@@ -74,6 +75,7 @@ int main()
     auto sierpinskiTriangleScene = make_shared<SierpinskiTriangle>();
     auto whiteNoiseCPUScene = make_shared<WhiteNoiseCPU>();
     auto computeShaderScene = make_shared<ComputeShaderScene>();
+    auto blurScene = make_shared<Blur>();
     
     // main rendering loop
     while (engine->Running())
@@ -168,6 +170,9 @@ int main()
             if (GUI::Button(" kaleidoscope (post process) ")) manager.OpenScene(kaleidoscopeScene);
             GUI::SameLine();
             if (GUI::Button(" compute shader (fish swarm) ")) manager.OpenScene(computeShaderScene);
+
+            GUI::Space();
+            if (GUI::Button(" blur (post process) ")) manager.OpenScene(blurScene);
 
             rep(i,5) GUI::Space();
             if (GUI::Button(" Exit ")) engine->Quit();
