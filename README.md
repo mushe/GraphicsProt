@@ -83,7 +83,7 @@ normal map texture is generated at https://cpetry.github.io/NormalMap-Online/
 - Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Demo/NormalMapping
 
 ## Instancing
-<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/fa369c74-079e-4908-ab0f-4b60d010beb1" width="70%"></p>
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/c1e7763a-a5e3-4eed-a483-a3116b49ca74" width="70%"></p>
 
 Instancing is a standard technique for drawing many objects
 - Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Demo/Instancing
