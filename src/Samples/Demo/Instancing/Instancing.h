@@ -15,7 +15,7 @@ struct InstancingBuffer : InstancingUniformBufferBase
 class Instancing : public Scene
 {
 public:
-    Instancing():instanceCount_(10000)
+    Instancing():instanceCount_(100000)
     {
     }
     virtual ~Instancing() { }

@@ -12,5 +12,6 @@ class ModelGenerator
 {
 public:
     static ModelGeneratorData GeneratePlane(int division = 1);
+    static ModelGeneratorData GenerateSphere(int division = 1);
     static ModelGeneratorData GenerateDisplayQuad();
 };

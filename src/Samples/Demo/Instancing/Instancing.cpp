@@ -5,7 +5,7 @@ void Instancing::Start(shared_ptr<Engine> engine)
 {
     instancingBuffer.resize(instanceCount_);
 
-    auto plane = ModelGenerator::GeneratePlane();
+    auto plane = ModelGenerator::GenerateSphere(10);
     mesh_ = Mesh::Create();
     mesh_->SetIndices(plane.indices);
     mesh_->SetVertices(plane.vertices);
@@ -19,8 +19,8 @@ void Instancing::Start(shared_ptr<Engine> engine)
     );
 
     float posRange = 5.0f;
-    float scaleMin = 0.05f;
-    float scaleMax = 0.2f;
+    float scaleMin = 0.005f;
+    float scaleMax = 0.05f;
     for (int i = 0; i < instanceCount_; ++i)
     {
         instancingBuffer[i].pos = Vec3
@@ -38,7 +38,7 @@ void Instancing::Start(shared_ptr<Engine> engine)
     mat_->SetUniformBufferData(&ubo_);
     mesh_->SetMaterial(mat_);
 
-    OrbitalControl::SetOrbit(0.12f, 48.2f, 7.6f);
+    OrbitalControl::SetOrbit(1.85f, 56.2f, 6.35f);
     OrbitalControl::Update(camera_);
 
     GUI::ChangeStyleToLight();
@@ -50,7 +50,7 @@ bool Instancing::Update(shared_ptr<Engine> engine)
     if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
 
     engine->BeginFrame();
-    OrbitalControl::Update(camera_);
+    OrbitalControl::Update(camera_, 0.0f, 0.001f);
 
     bool closeScene = false;
 
