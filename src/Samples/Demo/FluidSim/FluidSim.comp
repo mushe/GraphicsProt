@@ -1,0 +1,145 @@
+#version 450
+
+struct Particle 
+{
+    vec3 pos;
+    vec3 vel;
+    float density;
+    float pressure;
+};
+
+layout(std140, binding = 0) buffer ParticleSSBO 
+{
+   Particle particles[ ];
+};
+
+layout (local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
+
+float _PI = 3.1415926535;
+
+
+// --------------------------------------------------------
+// simulation parameters
+// --------------------------------------------------------
+int _N = 10000;
+float _FIELD_SCALE = 3.0;
+float _GRAVITY = -0.0002;
+
+float _EPSILON = 0.0000001;
+float _KernelH = 0.44;
+float _KernelH2 = _KernelH*_KernelH;
+float _KernelH9 = _KernelH*_KernelH*_KernelH*_KernelH*_KernelH*_KernelH*_KernelH*_KernelH*_KernelH;
+float _Poly6Constant = 315.0 / (64.0 * (_PI * _KernelH9));
+
+float _MAX_ACCELERATION_LENGTH = 0.003;
+float _MAX_VELOCITY_LENGTH = 0.2;
+
+float _WALL_AVOIDANCE = 0.0008;
+
+float _PressureScale = 4.0;
+float _TargetDensity = 1.0;
+float _ViscosityForceScale = 0.013;
+float _PressureForceScale = 0.47;
+
+
+void main()
+{
+    uint index = gl_GlobalInvocationID.x;
+    vec3 pos = particles[index].pos;
+    vec3 vel = particles[index].vel;
+    vec3 acc = vec3(0.0);
+    
+
+    // --------------------------------------------------------
+    // pressure force and viscosity force
+    // --------------------------------------------------------
+    vec3 force = vec3(0.0);
+
+    // density
+    float density = 0.0;
+    for(uint i = 0 ; i < _N; i++)
+    {
+        if(i == index) continue;
+        vec3 neighborPosition = particles[i].pos;
+        vec3 direction = pos - neighborPosition;
+
+        float r = length(direction);
+        if(r > _KernelH) continue;
+
+        // poly6 kernel
+        float x = _KernelH2 - r * r;
+        float poly6 = _Poly6Constant * x * x * x;
+        density += poly6;
+    }
+    particles[index].density = density * 0.02;
+
+    // pressure
+    float pressure = max(_PressureScale * (density - _TargetDensity), 0.0);
+    particles[index].pressure = pressure;
+
+    // pressure force and viscosity force
+    for(uint i = 0 ; i < _N; i++)
+    {
+        if(i == index) continue;
+        vec3 neighborPosition = particles[i].pos;
+        vec3 neighborVelocity = particles[i].vel;
+
+        vec3 direction = pos - neighborPosition;
+
+        float r = length(direction);
+        if(r > _KernelH) continue;
+
+        float neighborDensity = particles[i].density;
+        float neighborPressure = particles[i].pressure;
+
+        // pressure force
+        if(neighborDensity > _EPSILON && density > _EPSILON)
+        {
+            // spiky kernel
+            float h_minus_r = _KernelH - r;
+            vec3 spikyGradient =  h_minus_r * h_minus_r * direction / r;
+
+            vec3 pressureForce = _PressureForceScale * ((pressure + neighborPressure) / 2.0) * spikyGradient;
+            force += pressureForce * 0.000001;
+        }
+
+        // visicosity force
+        if (neighborDensity > _EPSILON)
+        {
+            float viscosityLaplacian = _KernelH - r;
+            vec3 viscosityForce = _ViscosityForceScale * (neighborVelocity - vel) / neighborDensity * viscosityLaplacian;
+            force += viscosityForce;
+
+        }
+        
+    }
+    acc += force;
+
+
+    // --------------------------------------------------------
+    // wall avoidance
+    // --------------------------------------------------------
+    if(pos.x > _FIELD_SCALE) acc.x += -_WALL_AVOIDANCE;
+    if(pos.x < 0.0) acc.x += _WALL_AVOIDANCE;
+    if(pos.y < 0.0) acc.y += _WALL_AVOIDANCE;
+    if(pos.z > _FIELD_SCALE) acc.z += -_WALL_AVOIDANCE;
+    if(pos.z < 0.0) acc.z += _WALL_AVOIDANCE;
+
+
+    // --------------------------------------------------------
+    // gravity
+    // --------------------------------------------------------
+    acc += vec3(0.0, _GRAVITY, 0.0);
+
+    
+    // --------------------------------------------------------
+    // update position
+    // --------------------------------------------------------
+    if(length(acc) > _MAX_ACCELERATION_LENGTH) acc = normalize(acc) * _MAX_ACCELERATION_LENGTH;
+    vel += acc;
+    if(length(vel) > _MAX_VELOCITY_LENGTH) vel = normalize(vel) * _MAX_VELOCITY_LENGTH;
+    
+    particles[index].pos = pos + vel;
+    particles[index].vel = vel;
+
+}

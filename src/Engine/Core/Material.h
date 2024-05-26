@@ -42,6 +42,8 @@ struct MaterialInfo
 	int customUiformBufferSize;
 	int instancingUiformBufferSize;
 	std::vector<shared_ptr<Texture>> textures;
+	VkBuffer storageBuffer = VK_NULL_HANDLE;
+	bool isAdditive = false;
 };
 
 class Material
@@ -65,7 +67,9 @@ public:
 		instancingUniformBuffer_(VK_NULL_HANDLE),
 		instancingUniformBufferMapped_(VK_NULL_HANDLE),
 		instancingUniformBufferMemory_(VK_NULL_HANDLE),
-		instancingUboBufferSize_(0)
+		instancingUboBufferSize_(0),
+		storageBuffer_(VK_NULL_HANDLE),
+		isAdditive_(false)
 	{
 	}
 	~Material() 
@@ -77,6 +81,7 @@ public:
 	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, std::vector<shared_ptr<Texture>> textures);
 	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, int instancingUniformBufferSize,  std::vector<shared_ptr<Texture>> textures);
 	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, std::vector<shared_ptr<Texture>> textures);
+	static shared_ptr<Material> Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, int instancingUniformBufferSize,  std::vector<shared_ptr<Texture>> textures, VkBuffer storageBuffer, bool isAdditive = false);
 	
 	int GetUboBufferSize() { return customUboBufferSize_; }
 	VkPipelineShaderStageCreateInfo* GetShaderStages() { return shaderStages_; }
@@ -119,6 +124,10 @@ private:
 
 	VkShaderModule vertShaderModule_;
 	VkShaderModule fragShaderModule_;
+
+	VkBuffer storageBuffer_;
+
+	bool isAdditive_;
 
 private:
 	void CreateDescriptorSetLayout();

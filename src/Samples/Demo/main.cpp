@@ -35,6 +35,7 @@
 #include "WhiteNoiseCPU/WhiteNoiseCPU.h"
 #include "ComputeShader/ComputeShaderScene.h"
 #include "Blur/Blur.h"
+#include "FluidSim/FluidSim.h"
 
 int main()
 {
@@ -77,6 +78,7 @@ int main()
     auto whiteNoiseCPUScene = make_shared<WhiteNoiseCPU>();
     auto computeShaderScene = make_shared<ComputeShaderScene>();
     auto blurScene = make_shared<Blur>();
+    auto fluidSimScene = make_shared<FluidSim>();
     
     // main rendering loop
     while (engine->Running())
@@ -174,6 +176,8 @@ int main()
 
             GUI::Space();
             if (GUI::Button(" blur (post process) ")) manager.OpenScene(blurScene, "blur (post process)");
+            GUI::SameLine();
+            if (GUI::Button(" fluid simulation ")) manager.OpenScene(fluidSimScene, "fluid simulation");
 
             rep(i,5) GUI::Space();
             if (GUI::Button(" Exit ")) engine->Quit();

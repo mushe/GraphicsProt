@@ -31,6 +31,13 @@ shared_ptr<Material> Material::Create(MaterialInfo materialInfo)
     {
 		material->AddTexture(texture);
 	}
+
+    if(materialInfo.storageBuffer != VK_NULL_HANDLE)
+    {
+        material->storageBuffer_ = materialInfo.storageBuffer;
+    }
+
+    material->isAdditive_ = materialInfo.isAdditive;
     
     material->Init();
 
@@ -56,6 +63,19 @@ shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fr
 	materialInfo.customUiformBufferSize = uiformBufferSize;
 	materialInfo.instancingUiformBufferSize = instancingUniformBufferSize;
 	materialInfo.textures = textures;
+	return Create(materialInfo);
+}
+
+shared_ptr<Material> Material::Create(std::string vertShaderPath, std::string fragShaderPath, int uiformBufferSize, int instancingUniformBufferSize,  std::vector<shared_ptr<Texture>> textures, VkBuffer storageBuffer, bool isAdditive)
+{
+    MaterialInfo materialInfo;
+	materialInfo.vertShaderPath = vertShaderPath;
+	materialInfo.fragShaderPath = fragShaderPath;
+	materialInfo.customUiformBufferSize = uiformBufferSize;
+	materialInfo.instancingUiformBufferSize = instancingUniformBufferSize;
+	materialInfo.textures = textures;
+    materialInfo.storageBuffer = storageBuffer;
+    materialInfo.isAdditive = isAdditive;
 	return Create(materialInfo);
 }
 
@@ -233,7 +253,10 @@ void Material::CreateDescriptorSets()
         if (instancingUboBufferSize_ > 0)
         {
             VkDescriptorBufferInfo bufferInfo{};
-            bufferInfo.buffer = instancingUniformBuffer_;
+            if(storageBuffer_ != VK_NULL_HANDLE)
+                bufferInfo.buffer = storageBuffer_;
+            else
+                bufferInfo.buffer = instancingUniformBuffer_;
             bufferInfo.offset = 0;
             bufferInfo.range = instancingUboBufferSize_;
             VkWriteDescriptorSet uboDescriptorWrite{};
@@ -363,6 +386,16 @@ void Material::CreateGraphicsPipeline()
     colorBlendAttachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_ZERO;
     colorBlendAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
 
+    if(isAdditive_)
+    {
+        colorBlendAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_ONE;
+        colorBlendAttachment.dstColorBlendFactor = VK_BLEND_FACTOR_ONE;
+        colorBlendAttachment.colorBlendOp = VK_BLEND_OP_ADD;
+        colorBlendAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
+        colorBlendAttachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
+        colorBlendAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
+    }
+
     VkPipelineColorBlendStateCreateInfo colorBlending{};
     colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
     colorBlending.logicOpEnable = VK_FALSE;
@@ -400,7 +433,7 @@ void Material::CreateGraphicsPipeline()
     pipelineInfo.pViewportState = &viewportState;
     pipelineInfo.pRasterizationState = &rasterizer;
     pipelineInfo.pMultisampleState = &multisampling;
-    pipelineInfo.pDepthStencilState = &depthStencil;
+    pipelineInfo.pDepthStencilState = isAdditive_? nullptr : &depthStencil;
     pipelineInfo.pColorBlendState = &colorBlending;
     pipelineInfo.pDynamicState = &dynamicState;
     pipelineInfo.layout = pipelineLayout_;
