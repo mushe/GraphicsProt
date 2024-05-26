@@ -365,6 +365,28 @@ https://github.com/mushe/UnrealVFXCollection
 
 https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-20-66/siggraph2015_2D00_mmg_2D00_marius_2D00_slides.pdf
 
+## Fluid Simulation and Water Rendering
+
+<p align="center"><img src="https://github.com/mushe/GraphicsProt/assets/26865534/c418c297-446b-47a4-b027-4beea8f4c7be" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Demo/FluidSim
+- References :
+
+(1) Doyub Kim, "Fluid Engine Development", A K Peters/CRC Press, 2017
+
+https://www.amazon.co.jp/-/en/Doyub-Kim-ebook/dp/B01MRDA6S8
+
+(2) Matthias Müller et al, "Particle-based fluid simulation for interactive applications", ACM SIGGRAPH/Eurographics symposium on Computer animation, 2003
+
+https://dl.acm.org/doi/10.5555/846276.846298
+
+(3) Screen Space Fluid Rendering for Games - Nvidia
+
+https://developer.download.nvidia.com/presentations/2010/gdc/Direct3D_Effects.pdf
+
+(4) 武者 拓也, "Unreal Engine 5で学ぶビジュアルエフェクト実装 基本機能からNiagara、シミュレーションまで", 翔泳社, 2023
+
+https://www.shoeisha.co.jp/book/detail/9784798177700
 
 
 # Usage Examples
