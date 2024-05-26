@@ -49,6 +49,11 @@ void Engine::InitWindow()
     glfwSetMouseButtonCallback(window_, Input::MouseButtonCallback);
 }
 
+void Engine::ChangeWindowTitle(const string& title)
+{
+    glfwSetWindowTitle(window_, title.c_str());
+}
+
 void Engine::FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     auto engine = reinterpret_cast<Engine*>(glfwGetWindowUserPointer(window));

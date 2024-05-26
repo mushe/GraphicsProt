@@ -11,7 +11,7 @@ public:
     virtual ~SceneManager(){ }
 
     bool UpdateCurrentScene();
-    void OpenScene(shared_ptr<Scene> scene);
+    void OpenScene(shared_ptr<Scene> scene, const string& windowTitle = "Scene Selection");
     void CloseCurrentScene();
 
 private:

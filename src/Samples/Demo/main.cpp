@@ -40,6 +40,7 @@ int main()
 {
     // engine initialization
     auto engine = Engine::Init(800, 800);
+    engine->ChangeWindowTitle("scene selection");
 
     SceneManager manager(engine);
     auto gerstnerWavesScene = make_shared<GerstnerWaves>();
@@ -96,83 +97,83 @@ int main()
             rep(i,3) GUI::Space();
             GUI::Label("select a scene to open");
             rep(i,3) GUI::Space();
-            if(GUI::Button(" ocean wave generation (gerstner waves) ")) manager.OpenScene(gerstnerWavesScene);
+            if(GUI::Button(" ocean wave generation (gerstner waves) ")) manager.OpenScene(gerstnerWavesScene, "ocean wave generation (gerstner waves)");
             GUI::SameLine();
-            if(GUI::Button(" flocking simulation (boids 2d cpu) ")) manager.OpenScene(boids2dScene);
+            if(GUI::Button(" flocking simulation (boids 2d cpu) ")) manager.OpenScene(boids2dScene, "flocking simulation (boids 2d cpu)");
 
             GUI::Space();
-            if (GUI::Button(" river ")) manager.OpenScene(riverScene);
+            if (GUI::Button(" river ")) manager.OpenScene(riverScene, "river");
             GUI::SameLine();
-            if (GUI::Button(" grass ")) manager.OpenScene(grassScene);
+            if (GUI::Button(" grass ")) manager.OpenScene(grassScene, "grass");
             GUI::SameLine();
-            if (GUI::Button(" gpu noise generation (perlin noise) ")) manager.OpenScene(perlinNoiseScene);
+            if (GUI::Button(" gpu noise generation (perlin noise) ")) manager.OpenScene(perlinNoiseScene, "gpu noise generation (perlin noise)");
             GUI::SameLine();
-            if (GUI::Button(" old style kirakira sticker ")) manager.OpenScene(kiraStickerScene);
+            if (GUI::Button(" old style kirakira sticker ")) manager.OpenScene(kiraStickerScene, "old style kirakira sticker");
 
             GUI::Space();
-            if (GUI::Button(" minimum scene (render 3d object) ")) manager.OpenScene(minimumScene);
+            if (GUI::Button(" minimum scene (render 3d object) ")) manager.OpenScene(minimumScene, "minimum scene (render 3d object)");
             GUI::SameLine();
-            if (GUI::Button(" instancing ")) manager.OpenScene(instancingScene);
+            if (GUI::Button(" instancing ")) manager.OpenScene(instancingScene, "instancing");
             GUI::SameLine();
-            if (GUI::Button(" catmull-rom spline ")) manager.OpenScene(catmullRomSplineScene);
+            if (GUI::Button(" catmull-rom spline ")) manager.OpenScene(catmullRomSplineScene, "catmull-rom spline");
             GUI::SameLine();
-            if (GUI::Button(" hover game ")) manager.OpenScene(hoverScene);
+            if (GUI::Button(" hover game ")) manager.OpenScene(hoverScene, "hover game");
 
 
             GUI::Space();
-            if (GUI::Button(" poisson disk sampling ")) manager.OpenScene(poissonDiskSamplingScene);
+            if (GUI::Button(" poisson disk sampling ")) manager.OpenScene(poissonDiskSamplingScene, "poisson disk sampling");
             GUI::SameLine();
-            if (GUI::Button(" maze generation ")) manager.OpenScene(mazeScene);
+            if (GUI::Button(" maze generation ")) manager.OpenScene(mazeScene, "maze generation");
             GUI::SameLine();
-            if (GUI::Button(" normal mapping ")) manager.OpenScene(normalMappingScene);
+            if (GUI::Button(" normal mapping ")) manager.OpenScene(normalMappingScene, "normal mapping");
             GUI::SameLine();
-            if (GUI::Button(" pseudo color ")) manager.OpenScene(pseudoColorScene);
+            if (GUI::Button(" pseudo color ")) manager.OpenScene(pseudoColorScene, "pseudo color");
             GUI::SameLine();
-            if (GUI::Button(" posterization ")) manager.OpenScene(posterizationScene);
+            if (GUI::Button(" posterization ")) manager.OpenScene(posterizationScene, "posterization");
 
             GUI::Space();
-            if (GUI::Button(" shape rendering ")) manager.OpenScene(shapeScene);
+            if (GUI::Button(" shape rendering ")) manager.OpenScene(shapeScene, "shape rendering");
             GUI::SameLine();
-            if (GUI::Button(" text rendering ")) manager.OpenScene(textRenderScene);
+            if (GUI::Button(" text rendering ")) manager.OpenScene(textRenderScene, "text rendering");
             GUI::SameLine();
-            if (GUI::Button(" gpu white noise ")) manager.OpenScene(whiteNoiseGPUScene);
+            if (GUI::Button(" gpu white noise ")) manager.OpenScene(whiteNoiseGPUScene, "gpu white noise");
             GUI::SameLine();
-            if (GUI::Button(" cpu white noise ")) manager.OpenScene(whiteNoiseCPUScene);
+            if (GUI::Button(" cpu white noise ")) manager.OpenScene(whiteNoiseCPUScene, "cpu white noise");
 
             GUI::Space();
-            if (GUI::Button(" room division ")) manager.OpenScene(roomDivisionScene);
+            if (GUI::Button(" room division ")) manager.OpenScene(roomDivisionScene, "room division");
             GUI::SameLine();
-            if (GUI::Button(" dungeon generation ")) manager.OpenScene(dungeonGenerationScene);
+            if (GUI::Button(" dungeon generation ")) manager.OpenScene(dungeonGenerationScene, "dungeon generation");
             GUI::SameLine();
-            if (GUI::Button(" 2d dungeon exploring ")) manager.OpenScene(dungeon2DScene);
+            if (GUI::Button(" 2d dungeon exploring ")) manager.OpenScene(dungeon2DScene, "2d dungeon exploring");
             GUI::SameLine();
-            if (GUI::Button(" 3d dungeon exploring ")) manager.OpenScene(dungeon3DScene);
+            if (GUI::Button(" 3d dungeon exploring ")) manager.OpenScene(dungeon3DScene, "3d dungeon exploring");
 
             GUI::Space();
-            if (GUI::Button(" koch snowflake ")) manager.OpenScene(kochSnowflakeScene);
+            if (GUI::Button(" koch snowflake ")) manager.OpenScene(kochSnowflakeScene, "koch snowflake");
             GUI::SameLine();
-            if (GUI::Button(" sierpinski triangle ")) manager.OpenScene(sierpinskiTriangleScene);
+            if (GUI::Button(" sierpinski triangle ")) manager.OpenScene(sierpinskiTriangleScene, "sierpinski triangle");
             GUI::SameLine();
-            if (GUI::Button(" pi estimation ")) manager.OpenScene(piCalculationScene);
+            if (GUI::Button(" pi estimation ")) manager.OpenScene(piCalculationScene, "pi estimation");
             GUI::SameLine();
-            if (GUI::Button(" gray scale (post process) ")) manager.OpenScene(grayScaleScene);
+            if (GUI::Button(" gray scale (post process) ")) manager.OpenScene(grayScaleScene, "gray scale (post process)");
 
             GUI::Space();
-            if (GUI::Button(" vhs (post process) ")) manager.OpenScene(vhsScene);
+            if (GUI::Button(" vhs (post process) ")) manager.OpenScene(vhsScene, "vhs (post process)");
             GUI::SameLine();
-            if (GUI::Button(" sepia (post process) ")) manager.OpenScene(sepiaScaleScene);
+            if (GUI::Button(" sepia (post process) ")) manager.OpenScene(sepiaScaleScene, "sepia (post process)");
             GUI::SameLine();
-            if (GUI::Button(" chromatic aberration (post process) ")) manager.OpenScene(chromaticAberrationScene);
+            if (GUI::Button(" chromatic aberration (post process) ")) manager.OpenScene(chromaticAberrationScene, "chromatic aberration (post process)");
             
             GUI::Space();
-            if (GUI::Button(" halftone (post process) ")) manager.OpenScene(halfToneScene);
+            if (GUI::Button(" halftone (post process) ")) manager.OpenScene(halfToneScene, "halftone (post process)");
             GUI::SameLine();
-            if (GUI::Button(" kaleidoscope (post process) ")) manager.OpenScene(kaleidoscopeScene);
+            if (GUI::Button(" kaleidoscope (post process) ")) manager.OpenScene(kaleidoscopeScene, "kaleidoscope (post process)");
             GUI::SameLine();
-            if (GUI::Button(" compute shader (fish swarm) ")) manager.OpenScene(computeShaderScene);
+            if (GUI::Button(" compute shader (fish swarm) ")) manager.OpenScene(computeShaderScene, "compute shader (fish swarm)");
 
             GUI::Space();
-            if (GUI::Button(" blur (post process) ")) manager.OpenScene(blurScene);
+            if (GUI::Button(" blur (post process) ")) manager.OpenScene(blurScene, "blur (post process)");
 
             rep(i,5) GUI::Space();
             if (GUI::Button(" Exit ")) engine->Quit();

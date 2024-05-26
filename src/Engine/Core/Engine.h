@@ -85,6 +85,8 @@ public:
     void BlitToScreen(shared_ptr<Material> material);
     void SetWindowPosition(const int windowPosx = 0, const int windowPosY = 50);
 
+    void ChangeWindowTitle(const string& title);
+
 // core
 private:
     void InitWindow();

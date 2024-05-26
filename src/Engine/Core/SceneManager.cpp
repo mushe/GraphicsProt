@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-void SceneManager::OpenScene(shared_ptr<Scene> scene)
+void SceneManager::OpenScene(shared_ptr<Scene> scene, const string& windowTitle)
 {
   if(!scene) return;
   
@@ -8,10 +8,14 @@ void SceneManager::OpenScene(shared_ptr<Scene> scene)
 
   scene->Start(engine_);
   currentScene_ = scene;
+
+  engine_->ChangeWindowTitle(windowTitle);
 }
 
 void SceneManager::CloseCurrentScene()
 {
+  engine_->ChangeWindowTitle("scene selection");
+
   if(currentScene_ != nullptr)
   {
     currentScene_->Release();
