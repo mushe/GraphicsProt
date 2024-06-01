@@ -116,7 +116,7 @@ bool Maze::Update(shared_ptr<Engine> engine)
             float posY = y / 2 * oddScaleY + (y + 1) / 2 * evenScaleY;
 
             Vec2 gridPos = Vec2(posX, posY) + Vec2(scaleX, scaleY) * 0.5f;
-            ShapeDrawer::Rect(gridPos, Vec2(scaleX, scaleY) * 1.0f, Vec4(grid) * 0.5f);
+            ShapeDrawer::Rect(gridPos, Vec2(scaleX, scaleY) * 1.0f, Vec4((float)grid) * 0.5f);
         }
     }
 

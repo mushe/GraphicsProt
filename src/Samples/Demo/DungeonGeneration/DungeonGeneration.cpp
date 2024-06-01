@@ -56,8 +56,8 @@ void DungeonGeneration::LogRoom(DungeonGenerationRoom* room)
 
 void DungeonGeneration::DisplayRoom(DungeonGenerationRoom* room)
 {
-    float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5;
-    float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5;
+    float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5f;
+    float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5f;
     float xScale = ((room->GetRightUp().x - room->GetLeftDown().x) + 1.0f) / (float)gridNum;
     float yScale = ((room->GetRightUp().y - room->GetLeftDown().y) + 1.0f) / (float)gridNum;
 
@@ -143,7 +143,7 @@ shared_ptr<DungeonGenerationRoom> DungeonGeneration::GenerateDividedRoom()
 
         if (dividableLeaves.size() == 0) break;
 
-        dividableLeaves[Random::Range(0, dividableLeaves.size() - 1)]->Divide();
+        dividableLeaves[Random::Range(0, (int)dividableLeaves.size() - 1)]->Divide();
     }
 
     return root;
@@ -174,9 +174,9 @@ std::vector<std::vector<int>> DungeonGeneration::ConvertRoomToVector2D(DungeonGe
         // not leaf room(connected)
         if (room->connected)
         {
-            for (int i = room->leftConnectionPoint.x; i <= room->rightConnectionPoint.x; i++)
+            for (int i = room->leftConnectionPoint.x; i <= (int)room->rightConnectionPoint.x; i++)
             {
-                for (int j = room->leftConnectionPoint.y; j <= room->rightConnectionPoint.y; j++)
+                for (int j = room->leftConnectionPoint.y; j <= (int)room->rightConnectionPoint.y; j++)
                 {
                     result[j][i] = 1;
                 }
@@ -185,9 +185,9 @@ std::vector<std::vector<int>> DungeonGeneration::ConvertRoomToVector2D(DungeonGe
         // leaf room
         else
         {
-            for (int i = room->GetLeftDown().x; i <= room->GetRightUp().x; i++)
+            for (int i = room->GetLeftDown().x; i <= (int)room->GetRightUp().x; i++)
             {
-                for (int j = room->GetLeftDown().y; j <= room->GetRightUp().y; j++)
+                for (int j = room->GetLeftDown().y; j <= (int)room->GetRightUp().y; j++)
                 {
                     result[j][i] = 1;
                 }
@@ -346,7 +346,7 @@ bool DungeonGeneration::Update(shared_ptr<Engine> engine)
         {
             float x = i * gridScale;
             float y = j * gridScale;
-            ShapeDrawer::Rect(Vec2(x, y) + gridScale * 0.5f, Vec2(gridScale * 0.9), Vec4(0.1f, 0.1f, 0.1f, 1.0f));
+            ShapeDrawer::Rect(Vec2(x, y) + gridScale * 0.5f, Vec2(gridScale * 0.9f), Vec4(0.1f, 0.1f, 0.1f, 1.0f));
         }
     }
 

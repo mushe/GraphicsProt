@@ -49,11 +49,11 @@ bool Hover::Update(shared_ptr<Engine> engine)
     rotation_ += rotationalVelocity_;
 
     // reset
-    if (length(position_ - Vec2(0.5f)) > 0.9)
+    if (length(position_ - Vec2(0.5f)) > 0.9f)
     {
         position_ = initialPosition_;
         rotation_ = 0.0f;
-        velocity_ = initialVelocity_ * 0.0001;;
+        velocity_ = initialVelocity_ * 0.0001f;
         rotationalVelocity_ = 0.0f;
     }
 
@@ -71,8 +71,8 @@ bool Hover::Update(shared_ptr<Engine> engine)
 
 
     // particles
-    int leftParticleAddCount = particleSpawnRate_ * leftInput;
-    int rightParticleAddCount = particleSpawnRate_ * rightInput;
+    int leftParticleAddCount = (int)(particleSpawnRate_ * leftInput);
+    int rightParticleAddCount = (int)(particleSpawnRate_ * rightInput);
     for (int i = 0; i < leftParticleAddCount; i++)
     {
         particles_.push_back(SpawnParticle((start.x > end.x) ? end : start));

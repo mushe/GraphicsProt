@@ -13,8 +13,8 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
     // Step 0.
     // -----------------------------------------------
     float cellSize = r / sqrt(2.0f);
-    int cellCountX = area.x / cellSize;
-    int cellCountY = area.y / cellSize;
+    int cellCountX = (int)(area.x / cellSize);
+    int cellCountY = (int)(area.y / cellSize);
     vector<vector<int>> grid;
     for (int x = 0; x < cellCountX; x++)
     {
@@ -34,8 +34,8 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
         Random::Range(0.0f, area.y),
         Random::Range(0.0f, area.y)
     );
-    int initialX = floor(initialSample.x / cellSize);
-    int initialY = floor(initialSample.y / cellSize);
+    int initialX = (int)floor(initialSample.x / cellSize);
+    int initialY = (int)floor(initialSample.y / cellSize);
     initialX = min(cellCountX - 1, initialX);
     initialY = min(cellCountY - 1, initialY);
     grid[initialX][initialY] = currentIndex;
@@ -47,7 +47,7 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
     // -----------------------------------------------
     while (activeList.size() > 0)
     {
-        int randomIndex = activeList[Random::Range(0, activeList.size() - 1)];
+        int randomIndex = activeList[Random::Range(0, (int)activeList.size() - 1)];
         Vec2 center = res[randomIndex];
 
         bool foundNewPoint = false;
@@ -60,8 +60,8 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
                 cos(theta) * radius + center.x,
                 sin(theta) * radius + center.y
             );
-            int ix = floor(checkPoint.x / cellSize);
-            int iy = floor(checkPoint.y / cellSize);
+            int ix = (int)floor(checkPoint.x / cellSize);
+            int iy = (int)floor(checkPoint.y / cellSize);
             if (ix < 0 || iy < 0 || ix > grid.size() - 1 || iy > grid[0].size() - 1)
                 continue;
 
@@ -113,7 +113,7 @@ vector<Vec2> PoissonDiskSampling::PoissonDiskSampling2D(float r, int k, Vec2 are
 
 void PoissonDiskSampling::Start(shared_ptr<Engine> engine)
 {
-    positions_ = PoissonDiskSampling2D(r_, k_, Vec2(1.0f, 1.0f));
+    positions_ = PoissonDiskSampling2D(r_, (int)k_, Vec2(1.0f, 1.0f));
     colors_.resize(positions_.size());
     for (int i = 0; i < positions_.size(); i++)
     {

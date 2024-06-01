@@ -50,7 +50,7 @@ Dungeon2DRoom* Dungeon2D::SelectRandomRoom(Dungeon2DRoom* dungeon)
 {
     std::vector<Dungeon2DRoom*> rooms;
     GetAllLeaves(dungeon, rooms);
-    return rooms[Random::Range(0, rooms.size() - 1)];
+    return rooms[Random::Range(0, (int)rooms.size() - 1)];
 }
 
 void Dungeon2D::LogRoom(Dungeon2DRoom* room)
@@ -63,8 +63,8 @@ void Dungeon2D::LogRoom(Dungeon2DRoom* room)
 
 void Dungeon2D::DisplayRoom(Dungeon2DRoom* room)
 {
-    float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5;
-    float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5;
+    float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5f;
+    float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5f;
     float xScale = ((room->GetRightUp().x - room->GetLeftDown().x) + 1.0f) / (float)gridNum;
     float yScale = ((room->GetRightUp().y - room->GetLeftDown().y) + 1.0f) / (float)gridNum;
 
@@ -149,7 +149,7 @@ shared_ptr<Dungeon2DRoom> Dungeon2D::GenerateDividedRoom()
 
         if (dividableLeaves.size() == 0) break;
 
-        dividableLeaves[Random::Range(0, dividableLeaves.size() - 1)]->Divide();
+        dividableLeaves[Random::Range(0, (int)dividableLeaves.size() - 1)]->Divide();
     }
 
     return root;
@@ -178,9 +178,9 @@ std::vector<std::vector<int>> Dungeon2D::ConvertRoomToVector2D(Dungeon2DRoom* ro
         // not leaf room(connected)
         if (room->connected)
         {
-            for (int i = room->leftConnectionPoint.x; i <= room->rightConnectionPoint.x; i++)
+            for (int i = room->leftConnectionPoint.x; i <= (int)room->rightConnectionPoint.x; i++)
             {
-                for (int j = room->leftConnectionPoint.y; j <= room->rightConnectionPoint.y; j++)
+                for (int j = room->leftConnectionPoint.y; j <= (int)room->rightConnectionPoint.y; j++)
                 {
                     result[j][i] = Grid::DUNGEON;
                 }
@@ -189,9 +189,9 @@ std::vector<std::vector<int>> Dungeon2D::ConvertRoomToVector2D(Dungeon2DRoom* ro
         // leaf room
         else
         {
-            for (int i = room->GetLeftDown().x; i <= room->GetRightUp().x; i++)
+            for (int i = room->GetLeftDown().x; i <= (int)room->GetRightUp().x; i++)
             {
-                for (int j = room->GetLeftDown().y; j <= room->GetRightUp().y; j++)
+                for (int j = room->GetLeftDown().y; j <= (int)room->GetRightUp().y; j++)
                 {
                     result[j][i] = Grid::DUNGEON;
                 }
@@ -368,7 +368,7 @@ void Dungeon2D::DisplayDungeonData(std::vector<std::vector<int>> dungeonData)
             else if (dungeonData[i][j] == Grid::GOAL)
             {
                 Text("G", Vec2(x, y), gridScale * 30.0f, Vec4(1.0f, 1.0f, 1.0f, 1.0f));
-                ShapeDrawer::Rect(Vec2(x, y), Vec2(gridScale * 0.9), Vec4(0.0f, 0.0f, 1.0f, 1.0f));
+                ShapeDrawer::Rect(Vec2(x, y), Vec2(gridScale * 0.9f), Vec4(0.0f, 0.0f, 1.0f, 1.0f));
             }
         }
     }

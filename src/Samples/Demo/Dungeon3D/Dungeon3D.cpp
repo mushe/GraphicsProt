@@ -52,7 +52,7 @@ Dungeon3DRoom* Dungeon3D::SelectRandomRoom(Dungeon3DRoom* dungeon)
 {
     std::vector<Dungeon3DRoom*> rooms;
     GetAllLeaves(dungeon, rooms);
-    return rooms[Random::Range(0, rooms.size() - 1)];
+    return rooms[Random::Range(0, (int)rooms.size() - 1)];
 }
 
 void Dungeon3D::LogRoom(Dungeon3DRoom* room)
@@ -65,8 +65,8 @@ void Dungeon3D::LogRoom(Dungeon3DRoom* room)
 
 void Dungeon3D::DisplayRoom(Dungeon3DRoom* room)
 {
-    float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5;
-    float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5;
+    float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5f;
+    float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5f;
     float xScale = ((room->GetRightUp().x - room->GetLeftDown().x) + 1.0f) / (float)gridNum;
     float yScale = ((room->GetRightUp().y - room->GetLeftDown().y) + 1.0f) / (float)gridNum;
 
@@ -152,7 +152,7 @@ shared_ptr<Dungeon3DRoom> Dungeon3D::GenerateDividedRoom()
 
         if (dividableLeaves.size() == 0) break;
 
-        dividableLeaves[Random::Range(0, dividableLeaves.size() - 1)]->Divide();
+        dividableLeaves[Random::Range(0, (int)dividableLeaves.size() - 1)]->Divide();
     }
 
     return root;
@@ -181,9 +181,9 @@ std::vector<std::vector<int>> Dungeon3D::ConvertRoomToVector2D(Dungeon3DRoom* ro
         // not leaf room(connected)
         if (room->connected)
         {
-            for (int i = room->leftConnectionPoint.x; i <= room->rightConnectionPoint.x; i++)
+            for (int i = room->leftConnectionPoint.x; i <= (int)room->rightConnectionPoint.x; i++)
             {
-                for (int j = room->leftConnectionPoint.y; j <= room->rightConnectionPoint.y; j++)
+                for (int j = room->leftConnectionPoint.y; j <= (int)room->rightConnectionPoint.y; j++)
                 {
                     result[j][i] = Grid::DUNGEON;
                 }
@@ -192,9 +192,9 @@ std::vector<std::vector<int>> Dungeon3D::ConvertRoomToVector2D(Dungeon3DRoom* ro
         // leaf room
         else
         {
-            for (int i = room->GetLeftDown().x; i <= room->GetRightUp().x; i++)
+            for (int i = room->GetLeftDown().x; i <= (int)room->GetRightUp().x; i++)
             {
-                for (int j = room->GetLeftDown().y; j <= room->GetRightUp().y; j++)
+                for (int j = room->GetLeftDown().y; j <= (int)room->GetRightUp().y; j++)
                 {
                     result[j][i] = Grid::DUNGEON;
                 }
@@ -472,7 +472,7 @@ bool Dungeon3D::Update(shared_ptr<Engine> engine)
     }
     if (Input::KeyDownNow(InputCode::Key::M)) showMap_ = !showMap_;
 
-    OrbitalControl::SetPhi(atan2(playerDir_.x, -playerDir_.y) + 0.57f);
+    OrbitalControl::SetPhi((float)atan2(playerDir_.x, -playerDir_.y) + 0.57f);
     OrbitalControl::Update(camera_, 0.0f, 0.0f);
 
     bool closeScene = false;

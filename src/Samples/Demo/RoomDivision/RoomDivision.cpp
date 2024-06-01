@@ -48,8 +48,8 @@ void RoomDivision::DisplayRooms(shared_ptr<Room> rootRoom)
     for (auto room : rooms)
     {
         //LogRoom(room);
-        float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5;
-        float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5;
+        float x = (room->GetRightUp().x + room->GetLeftDown().x) * 0.5f / (float)gridNum + gridScale * 0.5f;
+        float y = 1.0f - (room->GetRightUp().y + room->GetLeftDown().y) * 0.5f / (float)gridNum - gridScale * 0.5f;
         float xScale = ((room->GetRightUp().x - room->GetLeftDown().x) + 1.0f) / (float)gridNum;
         float yScale = ((room->GetRightUp().y - room->GetLeftDown().y) + 1.0f) / (float)gridNum;
         ShapeDrawer::Rect(Vec2(x, y), Vec2(xScale, yScale), room->GetColor());
@@ -74,7 +74,7 @@ shared_ptr<Room> RoomDivision::GenerateDividedRoom()
 
         if (dividableLeaves.size() == 0) break;
 
-        dividableLeaves[Random::Range(0, dividableLeaves.size() - 1)]->Divide();
+        dividableLeaves[Random::Range(0, (int)dividableLeaves.size() - 1)]->Divide();
     }
 
     return root;
@@ -115,7 +115,7 @@ bool RoomDivision::Update(shared_ptr<Engine> engine)
         {
             float x = i * gridScale;
             float y = j * gridScale;
-            ShapeDrawer::Rect(Vec2(x, y) + gridScale * 0.5f, Vec2(gridScale * 0.9), Vec4(0.1f, 0.1f, 0.1f, 1.0f));
+            ShapeDrawer::Rect(Vec2(x, y) + gridScale * 0.5f, Vec2(gridScale * 0.9f), Vec4(0.1f, 0.1f, 0.1f, 1.0f));
         }
     }
 

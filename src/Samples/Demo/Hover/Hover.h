@@ -23,7 +23,7 @@ public:
         particleSpawnRate_(5.0f),
         position_(initialPosition_),
         rotation_(0.0f),
-        velocity_(initialVelocity_ * 0.0001),
+        velocity_(initialVelocity_ * 0.0001f),
         rotationalVelocity_(0.0f)
     {
     }

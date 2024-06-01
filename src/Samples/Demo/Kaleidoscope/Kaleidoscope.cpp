@@ -21,7 +21,7 @@ void Kaleidoscope::Start(shared_ptr<Engine> engine)
         { rt_->GetColorTexture() }
     );
     postProcessMat_->SetUniformBufferData(&ubo_);
-    OrbitalControl::SetOrbit(0.413713, 6.743663, 5.470689);
+    OrbitalControl::SetOrbit(0.413713f, 6.743663f, 5.470689f);
 }
 
 
@@ -34,7 +34,7 @@ bool Kaleidoscope::Update(shared_ptr<Engine> engine)
 
     t_ += 0.016f;
     OrbitalControl::Update(camera_);
-    OrbitalControl::SetRadius(5.470689 + sin(t_) * 5.0f);
+    OrbitalControl::SetRadius(5.470689f + sin(t_) * 5.0f);
 
     // object rendering to render target
     rt_->BeginRenderToTexture();

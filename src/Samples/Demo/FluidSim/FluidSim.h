@@ -100,11 +100,11 @@ private:
 
     // blur
     float blurScale_;
-    Vec2 fullRes_;
-    Vec2 res_1_2_;
-    Vec2 res_1_4_;
-    Vec2 res_1_8_;
-    Vec2 res_1_16_;
+    glm::uvec2 fullRes_;
+    glm::uvec2 res_1_2_;
+    glm::uvec2 res_1_4_;
+    glm::uvec2 res_1_8_;
+    glm::uvec2 res_1_16_;
 
     shared_ptr<RenderTarget> rt_1_2_down_;
     shared_ptr<RenderTarget> rt_1_4_down_;

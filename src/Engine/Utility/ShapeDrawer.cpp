@@ -131,8 +131,8 @@ void Text(std::string str, Vec2 position, float scale, Vec4 color)
 
 void ShapeDrawer::Text(std::string str, Vec2 position, float scale, Vec4 color)
 {
-    scale = scale * 0.03;
-    float xScale = scale * 0.5;
+    scale = scale * 0.03f;
+    float xScale = scale * 0.5f;
     for(int i = 0; i < str.size(); i++)
         Char(str[i], position + Vec2(xScale * i, 0.0), Vec2(xScale, scale), color);    
 }

@@ -7,3 +7,5 @@ cmake --build .
 
 cd ..
 call CompileShader_Windows.bat
+
+pause
