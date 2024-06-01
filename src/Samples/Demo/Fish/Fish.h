@@ -1,8 +1,8 @@
 #pragma once
 #include "Core/Scene.h"
 
-#include "ComputeShader.h"
-#include "ComputeRenderer.h"
+#include "FishComputeShader.h"
+#include "FishComputeRenderer.h"
 
 struct ComputeUBO : InstancingUniformBufferBase
 {
@@ -11,16 +11,16 @@ struct ComputeUBO : InstancingUniformBufferBase
     alignas(16) glm::vec3 rgb;
 };
 
-class ComputeShaderScene : public Scene
+class Fish : public Scene
 {
 public:
-    ComputeShaderScene():
+    Fish():
         desiredFishCount_(30000),
         fishCount_(desiredFishCount_ - desiredFishCount_ % 256),
         fieldScale_(1.0f)
     {
     }
-    virtual ~ComputeShaderScene() { }
+    virtual ~Fish() { }
 
     void Start(shared_ptr<Engine> engine) override;
     bool Update(shared_ptr<Engine> engine) override;
@@ -28,7 +28,7 @@ public:
 
 private:
 
-    ComputeShader computeShader_;
+    FishComputeShader computeShader_;
     ComputeRenderer computeRenderer_;
     uint32_t desiredFishCount_;
     uint32_t fishCount_;

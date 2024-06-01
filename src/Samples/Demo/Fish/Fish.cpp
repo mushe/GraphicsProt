@@ -1,7 +1,6 @@
-#include "ComputeShaderScene.h"
+#include "Fish.h"
 
-
-void ComputeShaderScene::Start(shared_ptr<Engine> engine)
+void Fish::Start(shared_ptr<Engine> engine)
 {
     computeUBO_.resize(fishCount_);
 
@@ -43,7 +42,7 @@ void ComputeShaderScene::Start(shared_ptr<Engine> engine)
 }
 
 
-bool ComputeShaderScene::Update(shared_ptr<Engine> engine)
+bool Fish::Update(shared_ptr<Engine> engine)
 {
     if (Input::KeyDown(InputCode::Key::Escape)) engine->Quit();
     engine->BeginFrame();
@@ -70,7 +69,7 @@ bool ComputeShaderScene::Update(shared_ptr<Engine> engine)
 }
 
 
-void ComputeShaderScene::Release()
+void Fish::Release()
 {
     computeRenderer_.Release();
     computeShader_.Release();

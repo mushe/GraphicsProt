@@ -33,7 +33,7 @@
 #include "RoomDivision/RoomDivision.h"
 #include "SierpinskiTriangle/SierpinskiTriangle.h"
 #include "WhiteNoiseCPU/WhiteNoiseCPU.h"
-#include "ComputeShader/ComputeShaderScene.h"
+#include "Fish/Fish.h"
 #include "Blur/Blur.h"
 #include "FluidSim/FluidSim.h"
 
@@ -76,7 +76,7 @@ int main()
     auto roomDivisionScene = make_shared<RoomDivision>();
     auto sierpinskiTriangleScene = make_shared<SierpinskiTriangle>();
     auto whiteNoiseCPUScene = make_shared<WhiteNoiseCPU>();
-    auto computeShaderScene = make_shared<ComputeShaderScene>();
+    auto fishScene = make_shared<Fish>();
     auto blurScene = make_shared<Blur>();
     auto fluidSimScene = make_shared<FluidSim>();
     
@@ -172,12 +172,12 @@ int main()
             GUI::SameLine();
             if (GUI::Button(" kaleidoscope (post process) ")) manager.OpenScene(kaleidoscopeScene, "kaleidoscope (post process)");
             GUI::SameLine();
-            if (GUI::Button(" compute shader (fish swarm) ")) manager.OpenScene(computeShaderScene, "compute shader (fish swarm)");
+            if (GUI::Button(" fish swarm (compute shader) ")) manager.OpenScene(fishScene, "fish swarm (compute shader) ");
 
             GUI::Space();
             if (GUI::Button(" blur (post process) ")) manager.OpenScene(blurScene, "blur (post process)");
             GUI::SameLine();
-            if (GUI::Button(" fluid simulation ")) manager.OpenScene(fluidSimScene, "fluid simulation");
+            if (GUI::Button(" fluid simulation (compute shader) ")) manager.OpenScene(fluidSimScene, "fluid simulation (compute shader) ");
 
             rep(i,5) GUI::Space();
             if (GUI::Button(" Exit ")) engine->Quit();

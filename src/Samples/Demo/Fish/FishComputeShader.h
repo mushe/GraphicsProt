@@ -6,14 +6,14 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 
-struct InstanceParameters
+struct FishParameters
 {
     alignas(16) glm::vec3 pos;
     alignas(16) glm::vec3 vel;
     alignas(16) glm::vec3 rgb;
 };
 
-class ComputeShader
+class FishComputeShader
 {
 
 public:

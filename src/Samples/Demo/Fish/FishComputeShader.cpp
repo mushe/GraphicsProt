@@ -1,9 +1,9 @@
-#include "ComputeShader.h"
+#include "FishComputeShader.h"
 #include "Core/VulkanCore.h"
 #include "Core/VulkanUtil.h"
 #include "IO/File.h"
 
-void ComputeShader::Init(int particleCount, VkBuffer storageBuffer)
+void FishComputeShader::Init(int particleCount, VkBuffer storageBuffer)
 {
     particleCount_ = particleCount;
     storageBuffer_ = storageBuffer;
@@ -17,7 +17,7 @@ void ComputeShader::Init(int particleCount, VkBuffer storageBuffer)
 }
 
 
-void ComputeShader::Execute()
+void FishComputeShader::Execute()
 {
     VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
@@ -45,7 +45,7 @@ void ComputeShader::Execute()
 }
 
 
-void ComputeShader::Release()
+void FishComputeShader::Release()
 {
     vkDestroyPipeline(VulkanCore::GetDevice(), pipeline_, nullptr);
     vkDestroyPipelineLayout(VulkanCore::GetDevice(), pipelineLayout_, nullptr);
@@ -59,7 +59,7 @@ void ComputeShader::Release()
 }
 
 
-void ComputeShader::InitDescriptorSetLayout()
+void FishComputeShader::InitDescriptorSetLayout()
 {
     std::array<VkDescriptorSetLayoutBinding, 1> layoutBindings{};
     layoutBindings[0].binding = 0;
@@ -77,7 +77,7 @@ void ComputeShader::InitDescriptorSetLayout()
 }
 
 
-void ComputeShader::InitPipeline()
+void FishComputeShader::InitPipeline()
 {
     auto computeShaderCode = File::ReadShaderFile("../Shaders/spv/FishComp.spv");
 
@@ -107,7 +107,7 @@ void ComputeShader::InitPipeline()
 }
 
 
-void ComputeShader::InitDescriptorPool()
+void FishComputeShader::InitDescriptorPool()
 {
     std::array<VkDescriptorPoolSize, 1> poolSizes{};
     
@@ -124,7 +124,7 @@ void ComputeShader::InitDescriptorPool()
 }
 
 
-void ComputeShader::InitDescriptorSets()
+void FishComputeShader::InitDescriptorSets()
 {
     std::vector<VkDescriptorSetLayout> layouts(1, descriptorSetLayout_);
     VkDescriptorSetAllocateInfo allocInfo{};
@@ -140,7 +140,7 @@ void ComputeShader::InitDescriptorSets()
     VkDescriptorBufferInfo storageBufferInfoCurrentFrame{};
     storageBufferInfoCurrentFrame.buffer = storageBuffer_;
     storageBufferInfoCurrentFrame.offset = 0;
-    storageBufferInfoCurrentFrame.range = sizeof(InstanceParameters) * particleCount_;
+    storageBufferInfoCurrentFrame.range = sizeof(FishParameters) * particleCount_;
 
     descriptorWrites[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
     descriptorWrites[0].dstSet = descriptorSet_;
@@ -154,7 +154,7 @@ void ComputeShader::InitDescriptorSets()
 }
 
 
-void ComputeShader::InitCommandBuffers()
+void FishComputeShader::InitCommandBuffers()
 {
     VkCommandBufferAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -166,7 +166,7 @@ void ComputeShader::InitCommandBuffers()
 }
 
 
-void ComputeShader::InitFenceAndSemaphore()
+void FishComputeShader::InitFenceAndSemaphore()
 {
     VkSemaphoreCreateInfo semaphoreInfo{};
     semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
