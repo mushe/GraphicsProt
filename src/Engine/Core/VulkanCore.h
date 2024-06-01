@@ -16,40 +16,40 @@ public:
     static void Init(bool enableValidation = false);
     void CallInit(bool enableValidation = false);
     
-    static VkInstance GetVulkanInstance()
+    static VkInstance& GetVulkanInstance()
 	{
 		assert(GetInstance()->vulkanInstance_ != nullptr && "VulkanInstance not initialized");
 		return GetInstance()->vulkanInstance_;
 	}
 
-    static VkDevice GetDevice()
+    static VkDevice& GetDevice()
     {
         assert(GetInstance()->device_ != nullptr && "VkDevice not initialized");
         return GetInstance()->device_;
     }
-    static VkPhysicalDevice GetPhysicalDevice()
+    static VkPhysicalDevice& GetPhysicalDevice()
     {
         assert(GetInstance()->physicalDevice_ != nullptr && "VkPhysicalDevice not initialized");
         return GetInstance()->physicalDevice_;
     }
     
-    static VkRenderPass GetRenderPass()
+    static VkRenderPass& GetRenderPass()
     {
         assert(GetInstance()->renderPass_ != nullptr && "VkRenderPass not initialized");
         return GetInstance()->renderPass_;
     }
-    static VkCommandPool GetCommandPool()
+    static VkCommandPool& GetCommandPool()
     {
         assert(GetInstance()->commandPool_ != nullptr && "VkCommandPool not initialized");
         return GetInstance()->commandPool_;
     }
-    static VkQueue GetQueue()
+    static VkQueue& GetQueue()
     {
         assert(GetInstance()->queue_ != nullptr && "VkQueue not initialized");
         return GetInstance()->queue_;
     }
     
-    static VkCommandBuffer GetCurrentCommandBuffer()
+    static VkCommandBuffer& GetCurrentCommandBuffer()
 	{
 		assert(GetInstance()->commandBuffers_.size() > 0 && "VkCommandBuffers not initialized");
 		return GetInstance()->commandBuffers_[GetInstance()->frameIndex_];
