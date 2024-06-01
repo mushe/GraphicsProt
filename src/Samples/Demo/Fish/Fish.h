@@ -2,13 +2,17 @@
 #include "Core/Scene.h"
 
 #include "FishComputeShader.h"
-#include "FishComputeRenderer.h"
 
-struct ComputeUBO : InstancingUniformBufferBase
+struct FishUBO : InstancingUniformBufferBase
 {
     alignas(16) glm::vec3 pos;
     alignas(16) glm::vec3 vel;
     alignas(16) glm::vec3 rgb;
+};
+
+struct FishCustomUBO :public UniformBufferBase
+{
+    float dummy = 5.0f;
 };
 
 class Fish : public Scene
@@ -29,13 +33,19 @@ public:
 private:
 
     FishComputeShader computeShader_;
-    ComputeRenderer computeRenderer_;
     uint32_t desiredFishCount_;
     uint32_t fishCount_;
     float fieldScale_;
-    vector<ComputeUBO> computeUBO_;
+    vector<FishUBO> fishUBO_;
 
     // shareing buffer between compute shader and instancing shader
     VkBuffer sharingBuffer_;
     VkDeviceMemory sharingBufferMemory_;
+
+    Camera camera_;
+    shared_ptr<Mesh> mesh_;
+    shared_ptr<Material> mat_;
+    shared_ptr<Texture> fishTex_;
+
+    FishCustomUBO customUbo_;
 };

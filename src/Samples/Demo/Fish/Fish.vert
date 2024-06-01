@@ -1,34 +1,51 @@
 #version 450
-float FISH_SCALE = 0.035;
 
-
+float FISH_SCALE = 0.015;
 
 layout(binding = 0)
 uniform UniformBufferObject
 {
-    mat4 view;
-    mat4 proj;
+    float scale;
 } ubo;
 
-struct Particle
+layout(binding = 1)
+uniform CommonUniformBufferObject
+{
+    mat4 WVP;
+    mat4 VP;
+    mat4 W;
+    mat4 V;
+    mat4 P;
+    float time;
+} commonUBO;
+
+struct InstancingParameter
 {
     vec3 pos;
     vec3 vel;
-    vec3 rgb;
+    float density;
+    float pressure;
 };
 
-layout(std140, binding = 2) readonly buffer ParticleData
+layout(binding = 2)
+buffer InstancingShaderStorageBufferObject
 {
-    Particle particles[];
-};
+    InstancingParameter params[1];
+} instancingSSBO;
 
 layout(location = 0) in vec3 inPosition;
 layout(location = 1) in vec3 inColor;
-layout(location = 2) in vec2 inTexCoord;
+layout(location = 2) in vec3 inNormal;
+layout(location = 3) in vec3 inTangent;
+layout(location = 4) in vec3 inBiTangent;
+layout(location = 5) in vec2 inTexCoord;
 
-layout(location = 0) out vec3 outFragColor;
-layout(location = 1) out vec2 outFragTexCoord;
-
+layout(location = 0) out vec2 outTexCoord;
+layout(location = 1) out vec3 outNormal;
+layout(location = 2) out vec4 outPosition;
+layout(location = 3) out vec4 outWorldPosition;
+layout(location = 4) out vec3 outTangent;
+layout(location = 5) out vec3 outBiTangent;
 
 
 // q_1q_2  =  (w_1w_2 - v_1・v_2, w_1v_2 + w_2v_1  + v_1×v_2)
@@ -76,15 +93,30 @@ vec4 lookAtQuaternion(vec3 eyePos, vec3 targetPos)
 }
 
 
-
 void main()
 {
     int id = gl_InstanceIndex;
+    vec4 q = lookAtQuaternion(vec3(0,0,0), instancingSSBO.params[id].vel);
+    vec3 vertPos = vec3(inPosition.y, inPosition.x, inPosition.z * 0.25) * FISH_SCALE;
+    vec3 objPos = instancingSSBO.params[id].pos + vec3(-0.5);
+    gl_Position = commonUBO.P * commonUBO.V  * vec4(rotate(vertPos, q) + objPos, 1.0);
+    
+    outPosition = gl_Position;
 
-    vec4 q = lookAtQuaternion(vec3(0,0,0), particles[id].vel);
-    
-    gl_Position = ubo.proj * ubo.view  * vec4(rotate(inPosition * FISH_SCALE, q) * 0.5 + particles[id].pos, 1.0);
-    
-    outFragColor = particles[id].rgb;
-    outFragTexCoord = inTexCoord;
+    vec4 world = (commonUBO.W * vec4(gl_Position.xyz, 1.0));
+    outWorldPosition = world / world.w;
+
+    outTexCoord = inTexCoord;
+
+    vec4 normal = commonUBO.W * vec4(inNormal, 1.0);
+    normal = normalize(normal / normal.w);
+    outNormal = normal.xyz;
+
+    vec4 tangent = commonUBO.W * vec4(inTangent, 1.0);
+    tangent = normalize(tangent / tangent.w);
+    outTangent = tangent.xyz;
+
+    vec4 bitangent = commonUBO.W * vec4(inBiTangent, 1.0);
+    bitangent = normalize(bitangent / bitangent.w);
+    outBiTangent = bitangent.xyz;
 }
