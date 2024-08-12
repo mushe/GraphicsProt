@@ -36,6 +36,7 @@
 #include "Fish/Fish.h"
 #include "Blur/Blur.h"
 #include "FluidSim/FluidSim.h"
+#include "Eratosthenes/Eratosthenes.h"
 
 int main()
 {
@@ -79,6 +80,8 @@ int main()
     auto fishScene = make_shared<Fish>();
     auto blurScene = make_shared<Blur>();
     auto fluidSimScene = make_shared<FluidSim>();
+    auto eratosthenesScene = make_shared<Eratosthenes>();
+
     
     // main rendering loop
     while (engine->Running())
@@ -178,6 +181,8 @@ int main()
             if (GUI::Button(" blur (post process) ")) manager.OpenScene(blurScene, "blur (post process)");
             GUI::SameLine();
             if (GUI::Button(" fluid simulation (compute shader) ")) manager.OpenScene(fluidSimScene, "fluid simulation (compute shader) ");
+            GUI::SameLine();
+            if (GUI::Button(" sieve of eratosthenes ")) manager.OpenScene(eratosthenesScene, "sieve of eratosthenes");
 
             rep(i,5) GUI::Space();
             if (GUI::Button(" Exit ")) engine->Quit();
