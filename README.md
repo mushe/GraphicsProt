@@ -389,6 +389,13 @@ https://developer.download.nvidia.com/presentations/2010/gdc/Direct3D_Effects.pd
 https://www.shoeisha.co.jp/book/detail/9784798177700
 
 
+## Sieve of Eratosthenes
+
+<p align="center"><img src="https://github.com/user-attachments/assets/36583736-7d7e-42e8-9217-f5a32874def5" width="70%"></p>
+
+- Code : https://github.com/mushe/GraphicsProt/tree/main/src/Samples/Demo/Eratosthenes
+
+
 # Usage Examples
 
 ## minimum code
