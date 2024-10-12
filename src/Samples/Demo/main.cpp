@@ -82,6 +82,8 @@ int main()
     auto fluidSimScene = make_shared<FluidSim>();
     auto eratosthenesScene = make_shared<Eratosthenes>();
 
+    manager.OpenScene(eratosthenesScene, "sieve of eratosthenes");
+
     
     // main rendering loop
     while (engine->Running())

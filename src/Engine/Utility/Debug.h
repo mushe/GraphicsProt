@@ -4,6 +4,11 @@
 #include <sstream>
 using namespace std;
 
+
+#ifdef __APPLE__
+#include <mach/mach.h>
+#endif
+
 class Debug {
 
 public:
@@ -14,5 +19,7 @@ public:
     if constexpr(sizeof...(args) > 0) Log(args...);
 	  else  cout << endl;
   }
+
+  static float MemoryUsage();
 
 };

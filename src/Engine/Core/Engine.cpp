@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <cassert>
 #include <thread>
+#include <sstream>
 
 shared_ptr<Engine> Engine::Init(const int windowWidth, const int windowHeight, const int windowPosX, const int windowPosY)
 {
@@ -292,6 +293,14 @@ void Engine::OnGUI(std::function<void()> callback)
         GUI::GetInstance()->parameters_.clear();
 
         GUI::ShowFPS();
+
+        #ifdef __APPLE__
+        // show memory
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(2) << Debug::MemoryUsage();
+        GUI::Label("CPU Memory : " + ss.str() + " MB");
+        #endif
+
         GUI::Space();
         GUI::Space();
         
